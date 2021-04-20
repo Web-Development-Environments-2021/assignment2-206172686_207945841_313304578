@@ -1,720 +1,226 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+/* Set the width of the sidebar to 120px */
+.w3-sidebar {width: 120px;background: #222;}
+/* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+#main {margin-left: 120px}
+/* Remove margins from "page content" on small screens */
+@media only screen and (max-width: 600px) {#main {margin-left: 0}}
+</style>
+<body class="w3-black">
 
-  <head>
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  <img src="/w3images/avatar_smoke.jpg" style="width:100%">
+  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>HOME</p>
+  </a>
+  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-user w3-xxlarge"></i>
+    <p>ABOUT</p>
+  </a>
+  <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-eye w3-xxlarge"></i>
+    <p>PHOTOS</p>
+  </a>
+  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>CONTACT</p>
+  </a>
+</nav>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+    <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
+    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+  </div>
+</div>
 
-    <title>Pacman Game</title>
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small">WELCOME TO</span> PACMAN</h1>
+    <p>Thats your chance to win it BIG!</p>
+    <a href="#about" class="main-stroked-button">Sign Up</a>
+    <img src="https://lh3.googleusercontent.com/GQFtCSfjKHO2WIxRPXVyuXLOO9TxQ5mrDxujJMR3Dhnp_5brXjM2P0_3Utstw8VEwq7G7XneUnRYNBqin5OELPxz0LDTMq-PEaaC55zoz-GYniGLIwNi4nmivHew2oUg4_2G6uVvFw=w600-h315-p-k" alt="boy" class="w3-image" width="992" height="1108">
+  </header>
 
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-
-    <link rel="stylesheet" href="assets/css/templatemo-breezed.css">
-
-    <link rel="stylesheet" href="assets/css/owl-carousel.css">
-
-    <link rel="stylesheet" href="assets/css/lightbox.css">
-
-    </head>
-    
-    <body>
-    
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
-    <!-- ***** Preloader End ***** -->
-    
-    
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area header-sticky">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <nav class="main-nav">
-                        <!-- ***** Logo Start ***** -->
-                        <a href="index.html" class="logo">
-                            .PACMEN
-                        </a>
-                        <!-- ***** Logo End ***** -->
-                        <!-- ***** Menu Start ***** -->
-                        <ul class="nav">
-                            <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
-                            <li class="scroll-to-section"><a href="#about">About</a></li>
-                            <li class="scroll-to-section"><a href="#projects">Projects</a></li>
-                            <li class="submenu">
-                                <a href="javascript:;">Drop Down</a>
-                                <ul>
-                                    <li><a href="">About Us</a></li>
-                                    <li><a href="">Features</a></li>
-                                    <li><a href="">FAQ's</a></li>
-                                    <li><a href="">Blog</a></li>
-                                </ul>
-                            </li>
-                            <li class="scroll-to-section"><a href="#contact-us">Contact Us</a></li> 
-                            <div class="search-icon">
-                                <a href="#search"><i class="fa fa-search"></i></a>
-                            </div>
-                        </ul>        
-                        <a class='menu-trigger'>
-                            <span>Menu</span>
-                        </a>
-                        <!-- ***** Menu End ***** -->
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
-    
-    <!-- ***** Search Area ***** -->
-    <div id="search">
-        <button type="button" class="close">×</button>
-        <form id="contact" action="#" method="get">
-            <fieldset>
-                <input type="search" name="q" placeholder="SEARCH KEYWORD(s)" aria-label="Search through site content">
-            </fieldset>
-            <fieldset>
-                <button type="submit" class="main-button">Search</button>
-            </fieldset>
-        </form>
+  <!-- About Section -->
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+    <h2 class="w3-text-light-grey">My Name</h2>
+    <hr style="width:200px" class="w3-opacity">
+    <p>Some text about me. Some text about me. I am lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+      ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
+      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+    <h3 class="w3-padding-16 w3-text-light-grey">My Skills</h3>
+    <p class="w3-wide">Photography</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:95%"></div>
     </div>
-
-    <!-- ***** Main Banner Area Start ***** -->
-    <div class="main-banner header-text" id="top">
-        <div class="Modern-Slider">
-          <!-- Item -->
-          <div class="item">
-            <div class="img-fill">
-                <img src="assets/images/slide-01.jpg" alt="">
-                <div class="text-content">
-                  <h3>Welcome To Breezed</h3>
-                  <h5>New Bootstrap Template</h5>
-                  <a href="#" class="main-stroked-button">SING UP</a>
-                  <a href="#" class="main-filled-button">Get It Now</a>
-                </div>
-            </div>
-          </div>
-          <!-- // Item -->
-          <!-- Item -->
-          <div class="item">
-            <div class="img-fill">
-                <img src="assets/images/slide-02.jpg" alt="">
-                <div class="text-content">
-                  <h3>Integrated Marketing Media</h3>
-                  <h5>Best Digital Marketing</h5>
-                  <a href="#" class="main-stroked-button">Read More</a>
-                  <a href="#" class="main-filled-button">Take Action</a>
-                </div>
-            </div>
-          </div>
-          <!-- // Item -->
-          <!-- Item -->
-          <div class="item">
-            <div class="img-fill">
-                <img src="assets/images/slide-03.jpg" alt="">
-                <div class="text-content">
-                  <h3>High Performance</h3>
-                  <h5>Robust and Speedy</h5>
-                  <a href="#" class="main-stroked-button">Learn More</a>
-                  <a href="#" class="main-filled-button">Get It Now</a>
-                </div>
-            </div>
-          </div>
-          <!-- // Item -->
-        </div>
+    <p class="w3-wide">Web Design</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:85%"></div>
     </div>
-    <div class="scroll-down scroll-to-section"><a href="#about"><i class="fa fa-arrow-down"></i></a></div>
-    <!-- ***** Main Banner Area End ***** -->
-
-    <!-- ***** About Area Starts ***** -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-xs-12">
-                    <div class="left-text-content">
-                        <div class="section-heading">
-                            <h6>About Us</h6>
-                            <h2>We work with top brands and startups</h2>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 col-sm-6">
-                                <div class="service-item">
-                                    <img src="assets/images/service-item-01.png" alt="">
-                                    <h4>Top Notch</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="service-item">
-                                    <img src="assets/images/service-item-01.png" alt="">
-                                    <h4>Robust</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="service-item">
-                                    <img src="assets/images/contact-info-03.png" alt="">
-                                    <h4>Reliable</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-6 col-sm-6">
-                                <div class="service-item">
-                                    <img src="assets/images/contact-info-03.png" alt="">
-                                    <h4>Up-to-date</h4>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <a href="#" class="main-button-icon">
-                                    Learn More <i class="fa fa-arrow-right"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-xs-12">
-                    <div class="right-text-content">
-                        <p><a rel="nofollow noopener" href="https://templatemo.com/tm-543-breezed" target="_parent">Breezed HTML Template</a> is provided by TemplateMo for absolutely free of charge. You can download, edit and use this for your non-commercial and commercial websites. 
-                        <br><br>Redistributing this template as a downloadable ZIP file on any template collection website is strictly prohibited. You will need to talk to us if you want to redistribute this template. Thank you.
-                      <br><br>This is a Bootstrap v4.3.1 CSS layout. Do you like it? You can feel free to <a rel="nofollow noopener" href="https://templatemo.com/contact" target="_parent">talk to us</a> if you have anything.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** About Area Ends ***** -->
-
-
-    <!-- ***** Features Big Item Start ***** -->
-    <section class="section" id="features">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
-                    <div class="features-item">
-                        <div class="features-icon">
-                            <img src="assets/images/features-icon-1.png" alt="">
-                        </div>
-                        <div class="features-content">
-                            <h4>Initial Work</h4>
-                            <p>Proin euismod sem ut diam ultricies, ut faucibus velit ultricies. Nam eu turpis quam. Duis ac condimentum eros.</p>
-                            <a href="#" class="text-button-icon">
-                                Learn More <i class="fa fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter bottom move 30px over 0.6s after 0.4s">
-                    <div class="features-item">
-                        <div class="features-icon">
-                            <img src="assets/images/features-icon-1.png" alt="">
-                        </div>
-                        <div class="features-content">
-                            <h4>Master Planning</h4>
-                            <p>Proin euismod sem ut diam ultricies, ut faucibus velit ultricies. Nam eu turpis quam. Duis ac condimentum eros.</p>
-                            <a href="#" class="text-button-icon">
-                                Learn More <i class="fa fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12" data-scroll-reveal="enter right move 30px over 0.6s after 0.4s">
-                    <div class="features-item">
-                        <div class="features-icon">
-                            <img src="assets/images/features-icon-1.png" alt="">
-                        </div>
-                        <div class="features-content">
-                            <h4>Smooth Execution</h4>
-                            <p>Proin euismod sem ut diam ultricies, ut faucibus velit ultricies. Nam eu turpis quam. Duis ac condimentum eros.</p>
-                            <a href="#" class="text-button-icon">
-                                Learn More <i class="fa fa-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Features Big Item End ***** -->
-
-    <!-- ***** Features Big Item Start ***** -->
-    <section class="section" id="subscribe">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 offset-lg-2">
-                    <div class="section-heading">
-                        <h6>Subscribe Newsletters</h6>
-                        <h2>Don’t miss this chance!</h2>
-                    </div>
-                    <div class="subscribe-content">
-                        <p>Vivamus suscipit blandit nibh, in cursus mi. Proin vel blandit metus, et auctor elit. Vivamus tincidunt tristique convallis. Ut nec odio vel arcu euismod semper nec ac sem.</p>
-                        <div class="subscribe-form">
-                            <form id="subscribe-now" action="" method="get">
-                                <div class="row">
-                                    <div class="col-md-8 col-sm-12">
-                                      <fieldset>
-                                        <input name="email" type="text" id="email" placeholder="Enter your email..." required="">
-                                      </fieldset>
-                                    </div>
-                                    <div class="col-md-4 col-sm-12">
-                                      <fieldset>
-                                        <button type="submit" id="form-submit" class="main-button">Subscribe Now</button>
-                                      </fieldset>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Features Big Item End ***** -->
-
-     <!-- ***** sign up Area Starts ***** -->
-     <section class="section" id="sign-up">
-        <div class="container">
-            <style>
-                body {font-family: Arial, Helvetica, sans-serif;}
-                * {box-sizing: border-box}
-                
-                
-            /* Full-width input fields */
-            input[type=text], input[type=password] {
-            width: 100%;
-            padding: 15px;
-            margin: 5px 0 22px 0;
-            display: inline-block;
-            border: none;
-            background: #f1f1f1;
-            }
-            
-            input[type=text]:focus, input[type=password]:focus {
-            background-color: #ddd;
-            outline: none;
-            }
-            
-            hr {
-            border: 1px solid #f1f1f1;
-            margin-bottom: 25px;
-            }
-            
-            /* Set a style for all buttons */
-            button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            margin: 8px 0;
-            border: none;
-            cursor: pointer;
-            width: 100%;
-            opacity: 0.9;
-            }
-            
-            button:hover {
-            opacity:1;
-            }
-            
-            /* Extra styles for the cancel button */
-            .cancelbtn {
-            padding: 14px 20px;
-            background-color: #f44336;
-            }
-            
-            /* Float cancel and signup buttons and add an equal width */
-            .cancelbtn, .signupbtn {
-            float: left;
-            width: 50%;
-            }
-            
-            /* Add padding to container elements */
-            .container {
-            padding: 16px;
-            }
-            
-            /* Clear floats */
-            .clearfix::after {
-            content: "";
-            clear: both;
-            display: table;
-            }
-            
-            /* Change styles for cancel button and signup button on extra small screens */
-            @media screen and (max-width: 300px) {
-            .cancelbtn, .signupbtn {
-                width: 100%;
-            }
-            }
-            </style>
-            
-            
-            <form action="/action_page.php" style="border:1px solid #ccc">
-            <div class="container">
-                <h1>Sign Up</h1>
-                <p>Please fill in this form to create an account.</p>
-                <hr>
-            
-                <label for="email"><b>Email</b></label>
-                <input type="text" placeholder="Enter Email" name="email" required>
-            
-                <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
-            
-                <label for="psw-repeat"><b>Repeat Password</b></label>
-                <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
-                
-                <label>
-                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px"> Remember me
-                </label>
-                
-                <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
-            
-                <div class="clearfix">
-                <button type="button" class="cancelbtn">Cancel</button>
-                <button type="submit" class="signupbtn">Sign Up</button>
-                </div>
-            </div>
-            </form>
-        </div>
-    </section>
-    <!-- ***** sign up Area Ends ***** -->
-
-
-
-    <!-- ***** Projects Area Starts ***** -->
-    <section class="section" id="projects">
-      <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <div class="section-heading">
-                    <h6>Our Projects</h6>
-                    <h2>Some of our latest projects</h2>
-                </div>
-                <div class="filters">
-                    <ul>
-                        <li class="active" data-filter="*">All</li>
-                        <li data-filter=".des">Web Design</li>
-                        <li data-filter=".dev">Web Development</li>
-                        <li data-filter=".gra">Graphics</li>
-                        <li data-filter=".tsh">Artworks</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-9">
-                <div class="filters-content">
-                    <div class="row grid">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 all des">
-                          <div class="item">
-                            <a href="assets/images/project-big-item-01.jpg" data-lightbox="image-1" data-title="Our Projects"><img src="assets/images/project-item-01.jpg" alt=""></a>
-                          </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 all dev">
-                          <div class="item">
-                            <a href="assets/images/project-big-item-02.jpg" data-lightbox="image-1" data-title="Our Projects"><img src="assets/images/project-item-02.jpg" alt=""></a>
-                          </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 all gra">
-                          <div class="item">
-                            <a href="assets/images/project-big-item-03.jpg" data-lightbox="image-1" data-title="Our Projects"><img src="assets/images/project-item-03.jpg" alt=""></a>
-                          </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 all tsh">
-                          <div class="item">
-                            <a href="assets/images/project-big-item-04.jpg" data-lightbox="image-1" data-title="Our Projects"><img src="assets/images/project-item-04.jpg" alt=""></a>
-                          </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 all dev">
-                          <div class="item">
-                            <a href="assets/images/project-big-item-05.jpg" data-lightbox="image-1" data-title="Our Projects"><img src="assets/images/project-item-05.jpg" alt=""></a>
-                          </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 all des">
-                          <div class="item">
-                            <a href="assets/images/project-big-item-06.jpg" data-lightbox="image-1" data-title="Our Projects"><img src="assets/images/project-item-06.jpg" alt=""></a>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <p class="w3-wide">Photoshop</p>
+    <div class="w3-white">
+      <div class="w3-dark-grey" style="height:28px;width:80%"></div>
+    </div><br>
+    
+    <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">11+</span><br>
+        Partners
       </div>
-    </section>
-    <!-- ***** Projects Area Ends ***** -->
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">55+</span><br>
+        Projects Done
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">89+</span><br>
+        Happy Clients
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-xlarge">150+</span><br>
+        Meetings
+      </div>
+    </div>
 
-    <!-- ***** Testimonials Starts ***** -->
-    <section class="section" id="testimonials">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-heading">
-                        <h6>Digital Team</h6>
-                        <h2>young and talented members</h2>
-                    </div>
-                </div>
-                <div class="col-lg-12 col-md-12 col-sm-12 mobile-bottom-fix-big" data-scroll-reveal="enter left move 30px over 0.6s after 0.4s">
-                    <div class="owl-carousel owl-theme">
-                        <div class="item author-item">
-                            <div class="member-thumb">
-                                <img src="assets/images/member-item-01.jpg" alt="">
-                                <div class="hover-effect">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4>.01 White Cheese</h4>
-                            <span>Digital Marketer</span>
-                        </div>
-                        <div class="item author-item">
-                            <div class="member-thumb">
-                                <img src="assets/images/member-item-04.jpg" alt="">
-                                <div class="hover-effect">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4>.02 Snow Mary</h4>
-                            <span>Site Analyst</span>
-                        </div>
-                        <div class="item author-item">
-                            <div class="member-thumb">
-                                <img src="assets/images/member-item-02.jpg" alt="">
-                                <div class="hover-effect">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4>.03 Johnny Egg</h4>
-                            <span>Digital Influencer</span>
-                        </div>
-                        <div class="item author-item">
-                            <div class="member-thumb">
-                                <img src="assets/images/member-item-05.jpg" alt="">
-                                <div class="hover-effect">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4>.04 Catherine Phyu</h4>
-                            <span>Co Founder</span>
-                        </div>
-                        <div class="item author-item">
-                            <div class="member-thumb">
-                                <img src="assets/images/member-item-03.jpg" alt="">
-                                <div class="hover-effect">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4>.05 Shao Lynn</h4>
-                            <span>Chief Marketing</span>
-                        </div>
-                        
-                        <div class="item author-item">
-                            <div class="member-thumb">
-                                <img src="assets/images/member-item-04.jpg" alt="">
-                                <div class="hover-effect">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4>.06 Emma Honey</h4>
-                            <span>Digital Influencer</span>
-                        </div>
-                        
-                        <div class="item author-item">
-                            <div class="member-thumb">
-                                <img src="assets/images/member-item-06.jpg" alt="">
-                                <div class="hover-effect">
-                                    <div class="hover-content">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-rss"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <h4>.07 Oliva Sofie</h4>
-                            <span>Website Analyst</span>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Testimonials Ends ***** -->
+    <button class="w3-button w3-light-grey w3-padding-large w3-section">
+      <i class="fa fa-download"></i> Download Resume
+    </button>
     
-    <!-- ***** Contact Us Area Starts ***** -->
-    <section class="section" id="contact-us">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-xs-12">
-                    <div class="left-text-content">
-                        <div class="section-heading">
-                            <h6>Contact Us</h6>
-                            <h2>Feel free to keep in touch with us!</h2>
-                        </div>
-                        <ul class="contact-info">
-                            <li><img src="assets/images/contact-info-01.png" alt="">010-020-0860</li>
-                            <li><img src="assets/images/contact-info-02.png" alt="">info@company.com</li>
-                            <li><img src="assets/images/contact-info-03.png" alt="">www.company.com</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-8 col-md-8 col-xs-12">
-                    <div class="contact-form">
-                        <form id="contact" action="" method="get">
-                          <div class="row">
-                            <div class="col-md-6 col-sm-12">
-                              <fieldset>
-                                <input name="name" type="text" id="name" placeholder="Your Name *" required="">
-                              </fieldset>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                              <fieldset>
-                                <input name="phone" type="text" id="phone" placeholder="Your Phone" required="">
-                              </fieldset>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                              <fieldset>
-                                <input name="email" type="email" id="email" placeholder="Your Email *" required="">
-                              </fieldset>
-                            </div>
-                            <div class="col-md-6 col-sm-12">
-                              <fieldset>
-                                <input name="subject" type="text" id="subject" placeholder="Subject">
-                              </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                              <fieldset>
-                                <textarea name="message" rows="6" id="message" placeholder="Message" required=""></textarea>
-                              </fieldset>
-                            </div>
-                            <div class="col-lg-12">
-                              <fieldset>
-                                <button type="submit" id="form-submit" class="main-button-icon">Send Message Now <i class="fa fa-arrow-right"></i></button>
-                              </fieldset>
-                            </div>
-                          </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Contact Us Area Ends ***** -->
+    <!-- Grid for pricing tables -->
+    <h3 class="w3-padding-16 w3-text-light-grey">My Price</h3>
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-half w3-margin-bottom">
+        <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-dark-grey w3-xlarge w3-padding-32">Basic</li>
+          <li class="w3-padding-16">Web Design</li>
+          <li class="w3-padding-16">Photography</li>
+          <li class="w3-padding-16">5GB Storage</li>
+          <li class="w3-padding-16">Mail Support</li>
+          <li class="w3-padding-16">
+            <h2>$ 10</h2>
+            <span class="w3-opacity">per month</span>
+          </li>
+          <li class="w3-light-grey w3-padding-24">
+            <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="w3-half">
+        <ul class="w3-ul w3-white w3-center w3-opacity w3-hover-opacity-off">
+          <li class="w3-dark-grey w3-xlarge w3-padding-32">Pro</li>
+          <li class="w3-padding-16">Web Design</li>
+          <li class="w3-padding-16">Photography</li>
+          <li class="w3-padding-16">50GB Storage</li>
+          <li class="w3-padding-16">Endless Support</li>
+          <li class="w3-padding-16">
+            <h2>$ 25</h2>
+            <span class="w3-opacity">per month</span>
+          </li>
+          <li class="w3-light-grey w3-padding-24">
+            <button class="w3-button w3-white w3-padding-large w3-hover-black">Sign Up</button>
+          </li>
+        </ul>
+      </div>
+    <!-- End Grid/Pricing tables -->
+    </div>
     
-    <!-- ***** Footer Start ***** -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-xs-12">
-                    <div class="left-text-content">
-                        <p>Copyright &copy; 2020 Breezed Co., Ltd. 
-                        
-                        - Design: <a rel="nofollow noopener" href="https://templatemo.com">TemplateMo</a></p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-xs-12">
-                    <div class="right-text-content">
-                            <ul class="social-icons">
-                                <li><p>Follow Us</p></li>
-                                <li><a rel="nofollow" href="https://fb.com/templatemo"><i class="fa fa-facebook"></i></a></li>
-                                <li><a rel="nofollow" href="https://fb.com/templatemo"><i class="fa fa-twitter"></i></a></li>
-                                <li><a rel="nofollow" href="https://fb.com/templatemo"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a rel="nofollow" href="https://fb.com/templatemo"><i class="fa fa-dribbble"></i></a></li>
-                            </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- Testimonials -->
+    <h3 class="w3-padding-24 w3-text-light-grey">My Reputation</h3>  
+    <img src="/w3images/bandmember.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p><span class="w3-large w3-margin-right">Chris Fox.</span> CEO at Mighty Schools.</p>
+    <p>John Doe saved us from a web disaster.</p><br>
     
+    <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+    <p><span class="w3-large w3-margin-right">Rebecca Flex.</span> CEO at Company.</p>
+    <p>No one is better than John Doe.</p>
+  <!-- End About Section -->
+  </div>
+  
+  <!-- Portfolio Section -->
+  <div class="w3-padding-64 w3-content" id="photos">
+    <h2 class="w3-text-light-grey">My Photos</h2>
+    <hr style="width:200px" class="w3-opacity">
 
-    <!-- jQuery -->
-    <script src="assets/js/jquery-2.1.0.min.js"></script>
+    <!-- Grid for photos -->
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <div class="w3-half">
+        <img src="/w3images/wedding.jpg" style="width:100%">
+        <img src="/w3images/rocks.jpg" style="width:100%">
+        <img src="/w3images/sailboat.jpg" style="width:100%">
+      </div>
 
-    <!-- Bootstrap -->
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+      <div class="w3-half">
+        <img src="/w3images/underwater.jpg" style="width:100%">
+        <img src="/w3images/chef.jpg" style="width:100%">
+        <img src="/w3images/wedding.jpg" style="width:100%">
+        <img src="/w3images/p6.jpg" style="width:100%">
+      </div>
+    <!-- End photo grid -->
+    </div>
+  <!-- End Portfolio Section -->
+  </div>
 
-    <!-- Plugins -->
-    <script src="assets/js/owl-carousel.js"></script>
-    <script src="assets/js/scrollreveal.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/imgfix.min.js"></script> 
-    <script src="assets/js/slick.js"></script> 
-    <script src="assets/js/lightbox.js"></script> 
-    <script src="assets/js/isotope.js"></script> 
-    
-    <!-- Global Init -->
-    <script src="assets/js/custom.js"></script>
+  <!-- Contact Section -->
+  <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
+    <h2 class="w3-text-light-grey">Contact Me</h2>
+    <hr style="width:200px" class="w3-opacity">
 
-    <script>
+    <div class="w3-section">
+      <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Chicago, US</p>
+      <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: +00 151515</p>
+      <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"> </i> Email: mail@mail.com</p>
+    </div><br>
+    <p>Let's get in touch. Send me a message:</p>
 
-        $(function() {
-            var selectedClass = "";
-            $("p").click(function(){
-            selectedClass = $(this).attr("data-rel");
-            $("#portfolio").fadeTo(50, 0.1);
-                $("#portfolio div").not("."+selectedClass).fadeOut();
-            setTimeout(function() {
-              $("."+selectedClass).fadeIn();
-              $("#portfolio").fadeTo(50, 1);
-            }, 500);
-                
-            });
-        });
+    <form action="/action_page.php" target="_blank">
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="Email"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="Subject"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message"></p>
+      <p>
+        <button class="w3-button w3-light-grey w3-padding-large" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </p>
+    </form>
+  <!-- End Contact Section -->
+  </div>
+  
+    <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <i class="fa fa-instagram w3-hover-opacity"></i>
+    <i class="fa fa-snapchat w3-hover-opacity"></i>
+    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+    <i class="fa fa-twitter w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+  <!-- End footer -->
+  </footer>
 
-    </script>
+<!-- END PAGE CONTENT -->
+</div>
 
-  </body>
+</body>
 </html>
+
