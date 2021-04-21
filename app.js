@@ -42,9 +42,12 @@ var MONSTERS_AMOUNT = 2
 $(document).ready(function() {
 	context = canvas.getContext("2d");
 	
+	
 });
+  
 
 document.getElementById("startGameBtn").onclick = function(){
+	audio.play()
 	Start();
 };
 
@@ -279,18 +282,15 @@ function UpdatePosition() {
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	time_remain = ~~(TOTAL_TIME - time_elapsed);
-	if (score >= 20 && time_elapsed <= 10) {
-		pac_color = "green";
-	}
 	if (amount_of_balls_remain == 0) {
 		Draw();
 		window.clearInterval(interval);
-		window.alert("Game completed");
+		window.alert("Winner!!!");
 		
 	} else if(time_remain == 0) {
 		Draw();
 		window.clearInterval(interval);
-		window.alert("Game Over - you lost");
+		window.alert("You are better than " + score + " Points!");
 	} 
 	else {
 		Draw();
