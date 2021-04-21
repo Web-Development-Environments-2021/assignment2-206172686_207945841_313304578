@@ -8,12 +8,14 @@ var start_time;
 var time_remain;
 var interval;
 
+const TIME_BUNOS_SECONDS = 10
 const MIN_BALLS_AMOUNT = 50;
 const MAX_BALLS_AMOUNT = 90;
 const MIN_TIME_SECONDS = 60;
 const MIN_MONSTERS_AMOUNT = 1
 const MAX_MONSTERS_AMOUNT = 4
 const WALL = 4
+const TIME_BUNOS = 201
 const FOOD_5_POINTS = 100
 const FOOD_15_POINTS = 101
 const FOOD_25_POINTS = 102
@@ -154,6 +156,9 @@ function Start() {
 		food_remain--;
 	}
 
+	var emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = TIME_BUNOS;
+
 	keyDown = -1;
 	addEventListener(
 		"keydown",
@@ -250,23 +255,42 @@ function Draw(move = RIGHT_MOVE) {
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = BALL_5_COLOR; //color
 				context.fill();
+
+				context.fillStyle = "white";
+				context.font = "16px Arial";
+				context.fillText("5", center.x - 5 , center.y + 5);
 			} 
 			else if (board[i][j] == FOOD_15_POINTS) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = BALL_15_COLOR; //color
 				context.fill();
+				context.fillStyle = "white";
+				context.font = "16px Arial";
+				context.fillText("15", center.x - 10 , center.y + 5);
 			}
 			else if (board[i][j] == FOOD_25_POINTS) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = BALL_25_COLOR; //color
 				context.fill();
+				context.fillStyle = "white";
+				context.font = "16px Arial";
+				context.fillText("25", center.x - 10 , center.y + 5);
 			} else if (board[i][j] == WALL) {
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
 				context.fill();
+			}
+			else if (board[i][j] == TIME_BUNOS) {
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = 'black'; //color
+				context.fill();
+				context.fillStyle = "white";
+				context.font = "16px Arial";
+				context.fillText("TIME", center.x - 10 , center.y + 5);
 			}
 		}
 	}
@@ -304,6 +328,8 @@ function UpdatePosition() {
 	} else if (board[pacman_position.i][pacman_position.j] == FOOD_25_POINTS) {
 		score += 25;
 		amount_of_balls_remain--;
+	} else if (board[pacman_position.i][pacman_position.j] == TIME_BUNOS) {
+		TOTAL_TIME += TIME_BUNOS_SECONDS
 	}
 
 	board[pacman_position.i][pacman_position.j] = PACMAN;
