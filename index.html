@@ -21,6 +21,14 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <source src="music.mp3">
   Your browser does not support the audio element.
   </audio>
+  <div style="display:none;">
+    <img id="timer"
+         src="timer.png"
+         width="30" height="30">
+      <img id="pill"
+         src="pill.jpg"
+         width="30" height="30">
+  </div>
 
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
@@ -499,6 +507,10 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
             <label for="lblScore">SCORE:</label>
             <input id="lblScore" type="text" />
         </div>
+        <div id="lifes">
+          <label for="lblLifes">LIFES:</label>
+          <input id="lblLifes" type="text" />
+      </div>
         <div id="time">
             <label for="lblTime">REMAINING TIME:</label>
             <input id="lblTime" type="text" />

@@ -16,6 +16,7 @@ const MIN_MONSTERS_AMOUNT = 1
 const MAX_MONSTERS_AMOUNT = 4
 const WALL = 4
 const TIME_BUNOS = 201
+const PILL = 202
 const FOOD_5_POINTS = 100
 const FOOD_15_POINTS = 101
 const FOOD_25_POINTS = 102
@@ -34,6 +35,8 @@ const DOWN_MOVE = 4
 const COLS = 10
 const ROWS = 10 
 
+
+var current_lifes = 5
 var TOTAL_FOOD_AMOUNT = 50
 var BALL_5_COLOR = "#0000ff"
 var BALL_15_COLOR = "#ff0000"
@@ -43,8 +46,8 @@ var MONSTERS_AMOUNT = 2
 
 $(document).ready(function() {
 	context = canvas.getContext("2d");
-	
-	
+	timer = document.getElementById('timer');
+	pill = document.getElementById('pill');
 });
   
 
@@ -159,6 +162,9 @@ function Start() {
 	var emptyCell = findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = TIME_BUNOS;
 
+	var emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = PILL;
+
 	keyDown = -1;
 	addEventListener(
 		"keydown",
@@ -206,6 +212,7 @@ function GetKeyPressed() {
 function Draw(move = RIGHT_MOVE) {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
+	lblLifes.value = current_lifes;
 	lblTime.value = time_remain;
 	for (var i = 0; i < COLS; i++) {
 		for (var j = 0; j < ROWS; j++) {
@@ -237,7 +244,7 @@ function Draw(move = RIGHT_MOVE) {
 				else if (move == LEFT_MOVE) {
 					mouth_angle = 1
 					eye_position = {
-						x: center.x + 10,
+						x: center.x + 5,
 						y: center.y - 15
 					}
 				}
@@ -284,13 +291,10 @@ function Draw(move = RIGHT_MOVE) {
 				context.fill();
 			}
 			else if (board[i][j] == TIME_BUNOS) {
-				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = 'black'; //color
-				context.fill();
-				context.fillStyle = "white";
-				context.font = "16px Arial";
-				context.fillText("TIME", center.x - 10 , center.y + 5);
+				context.drawImage(timer, center.x - 20, center.y - 20, 35, 35);
+			}
+			else if (board[i][j] == PILL) {
+				context.drawImage(pill, center.x - 20, center.y - 20, 35, 35);
 			}
 		}
 	}
@@ -330,6 +334,8 @@ function UpdatePosition() {
 		amount_of_balls_remain--;
 	} else if (board[pacman_position.i][pacman_position.j] == TIME_BUNOS) {
 		TOTAL_TIME += TIME_BUNOS_SECONDS
+	}else if (board[pacman_position.i][pacman_position.j] == PILL) {
+		current_lifes += 1
 	}
 
 	board[pacman_position.i][pacman_position.j] = PACMAN;
