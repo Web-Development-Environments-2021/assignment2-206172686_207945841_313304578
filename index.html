@@ -30,11 +30,11 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <i class="fa fa-user w3-xxlarge"></i>
     <p>ABOUT</p>
   </a>
-  <a href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="#settings" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-eye w3-xxlarge"></i>
     <p>SETTINGS</p>
   </a>
-  <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="#play" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-envelope w3-xxlarge"></i>
     <p>PLAY</p>
   </a>
@@ -360,13 +360,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
           <div class="modal-content">
         
             <h3 class="w3-padding-24 w3-text-light-grey">This is us</h3>  
-            <img src="/w3images/bandmember.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+            <img src="/w3images/bandmember.jpg" class="w3-left w3-circle w3-margin-right" style="width:80px">
             <p><span class="w3-large w3-margin-right">Sarit Hollander</span> CEO at Mighty Schools.</p>
             
-            <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+            <img src="/w3images/avatar_g2.jpg" class="w3-left w3-circle w3-margin-right" style="width:80px">
             <p><span class="w3-large w3-margin-right">Gonen</span> CEO at Company.</p>
 
-            <img src="/w3images/avatar_g2.jpg" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:80px">
+            <img src="/w3images/avatar_g2.jpg" class="w3-left w3-circle w3-margin-right" style="width:80px">
             <p><span class="w3-large w3-margin-right">Tslil Brami</span> CEO at Company.</p>
             
           </div>
@@ -408,13 +408,24 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
     <h2 class="w3-text-light-grey">Settings</h2>
     <hr style="width:200px" class="w3-opacity">
-    
+
 </div>
 <!-- ***** settings Area ends ***** -->
 
 <!-- play Section -->
 <div class="w3-padding-64 w3-content w3-text-grey" id="play">
-    <h2 class="w3-text-light-grey">PLAY</h2>
+
+    <style>
+        body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+        .w3-row-padding img {margin-bottom: 12px}
+        /* Set the width of the sidebar to 120px */
+        .w3-sidebar {width: 120px;background: #d9da9e;}
+        /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+        #main {margin-left: 120px}
+        /* Remove margins from "page content" on small screens */
+        @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+    </style>
+    <h2 class="w3-text-dark-grey">PLAY</h2>
     <hr style="width:200px" class="w3-opacity">
 
     <div id="score">
