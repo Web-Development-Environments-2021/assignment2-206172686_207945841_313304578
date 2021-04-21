@@ -198,7 +198,7 @@ function GetKeyPressed() {
 	}
 }
 
-function Draw() {
+function Draw(move = RIGHT_MOVE) {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblTime.value = time_remain;
@@ -208,13 +208,41 @@ function Draw() {
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
 			if (board[i][j] == PACMAN) {
+				angle = 0
+				if (move == RIGHT_MOVE) {
+					mouth_angle = 0
+					eye_position = {
+						x: center.x + 5,
+						y: center.y - 15
+					}
+				} else if (move == DOWN_MOVE) {
+					mouth_angle = 0.5
+					eye_position = {
+						x: center.x + 20,
+						y: center.y - 5
+					}
+				}
+				else if (move == UP_MOVE) {
+					mouth_angle = -0.5
+					eye_position = {
+						x: center.x + 20,
+						y: center.y + 5
+					}
+				}
+				else if (move == LEFT_MOVE) {
+					mouth_angle = 1
+					eye_position = {
+						x: center.x + 10,
+						y: center.y - 15
+					}
+				}
 				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				context.arc(center.x, center.y, 30, (mouth_angle + 0.15) * Math.PI, (mouth_angle + 1.85) * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+				context.arc(eye_position.x, eye_position.y, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
 			} else if (board[i][j] == FOOD_5_POINTS) {
@@ -283,17 +311,17 @@ function UpdatePosition() {
 	time_elapsed = (currentTime - start_time) / 1000;
 	time_remain = ~~(TOTAL_TIME - time_elapsed);
 	if (amount_of_balls_remain == 0) {
-		Draw();
+		Draw(x);
 		window.clearInterval(interval);
 		window.alert("Winner!!!");
 		
 	} else if(time_remain == 0) {
-		Draw();
+		Draw(x);
 		window.clearInterval(interval);
 		window.alert("You are better than " + score + " Points!");
 	} 
 	else {
-		Draw();
+		Draw(x);
 	}
 }
 
