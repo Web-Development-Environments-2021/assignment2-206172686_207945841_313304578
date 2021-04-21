@@ -65,7 +65,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
     <h3 class="w3-padding-24 w3-text-light-grey">Submitters</h3>  
     <img src="https://lh3.googleusercontent.com/ZZfKWhPT17veJXcDKCzA08SPCbuSY8ORNGEi0rKQe_gWyYQ4jjAplM5rLeLhEMzHqPk_LIzItV59JUOW1KHi5fcpFpdTZXaxAN0hUCZC0mc0FKv8cLPnk6vBPD0zKV2KCEUk0wfHjw=w238-h214-p-k"  class="w3-left w3-circle" style="width:80px">
-    <p><span class="w3-large">Sarit Hollander</span> ID - xxxxxxxxx </p><br>
+    <p><span class="w3-large">Sarit Hollander</span> ID - 206172686 </p><br>
     
     <img src="https://lh3.googleusercontent.com/-xT-_-iLRC5-8xHU7QZQaYMSRBgIbrozVscWtAPKxVRQBiMd0WRtV2d6u4SbVy5jgESGbMtEl2BIo0ezDNBbrB9wSOg_I77bWMfgBPs3_9Gff439qJM-E1YWv7xBK3acanzRoP94wg=w216-h208-p-k" class="w3-left w3-circle" style="width:80px">
     <p><span class="w3-large">Tslil Brami</span> ID - 207945841</p><br>
@@ -75,7 +75,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
     </header>
 
-    <!-- קnd of Header/welcome -->
+    <!-- end of Header/welcome -->
 
 
 
@@ -419,6 +419,50 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <h2 class="w3-text-light-grey">Settings</h2>
     <hr style="width:200px" class="w3-opacity">
 
+    <form id="settings_form">
+
+<!-- TODO: WASD vs arrows -->
+
+      <label for="numOfBalls">Num of balls:</label>
+      <input id="numOfBalls" type="number" min="50" max="90" value="60" />
+
+      <br>
+
+      <label for="ball5color">5 Points ball color:</label>
+      <input type="color" id="ball5color" value="#0000ff"> 
+      
+      <br>
+
+      <label for="ball15color">15 Points ball color:</label>
+      <input type="color" id="ball15color" value="#ff0000">
+    
+      <br>
+
+      <label for="ball25color">25 Points ball color:</label>
+      <input type="color" id="ball25color" value="#00b33c">
+    
+      <br>
+
+      <label for="totalTime">Total Time (seconds):</label>
+      <input id="totalTime" type="number" min="60" value="120" />
+    
+      <br>
+
+      <label for="monstersAmount">How Many Monsters:</label>
+      <input id="monstersAmount" type="number" min="1" max="4" value="2" />
+    
+      <br>
+
+      <button id ="settingsRandomValuesBtn" type="button">Random values</button>
+
+      <br>
+
+      <input type="submit">
+    
+    </form>
+
+    
+
 </div>
 <!-- ***** settings Area ends ***** -->
 
@@ -427,7 +471,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- play Section -->
 <div class="w3-padding-64 w3-content w3-text-grey" id="play">
 
-
+   <button id ="startGameBtn" type="button">Start Game</button>
     <h2 class="w3-text-dark-grey">PLAY</h2>
     <hr style="width:200px" class="w3-opacity">
 
@@ -451,7 +495,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
             <input id="lblScore" type="text" />
         </div>
         <div id="time">
-            <label for="lblTime">TIME:</label>
+            <label for="lblTime">REMAINING TIME:</label>
             <input id="lblTime" type="text" />
         </div>
         <div id="game">
