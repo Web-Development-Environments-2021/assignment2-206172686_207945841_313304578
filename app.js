@@ -1,3 +1,4 @@
+
 var context;
 var pacman_position = new Object();
 var strawberry_position = new Object();

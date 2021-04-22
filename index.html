@@ -42,15 +42,15 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <i class="fa fa-home w3-xxlarge"></i>
     <p>WELCOME</p>
   </a>
-  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="aboutFunction()">
     <i class="fa fa-user w3-xxlarge"></i>
     <p>ABOUT</p>
   </a>
-  <a href="#settings" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="#settings" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="settingsFunction()">
     <i class="fa fa-eye w3-xxlarge"></i>
     <p>SETTINGS</p>
   </a>
-  <a href="#play" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="#play" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="playFunction()">
     <i class="fa fa-computer w3-xxlarge"></i>
     <p>PLAY</p>
   </a>
@@ -59,7 +59,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Navbar on small screens (Hidden on medium and large screens) -->
 <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">WELCOME</a>
+    <a href="#" class="w3-bar-item w3-button"  style="width:25% !important">WELCOME</a>
     <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
     <a href="#settings" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
     <a href="#play" class="w3-bar-item w3-button" style="width:25% !important">PLAY</a>
@@ -75,8 +75,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
     <img src="https://lh3.googleusercontent.com/-4IZv3iphNIqB_lD9fW0z6O23dG4xR8zwhKrjOVr4xVp0o5gNRmtAPzXGTc61VBykV62GKy18OXB9N6yhmiJum62ogDKD1yC7W8Nm_I29PYZlvC4EVC1TZ8pM6nvWtGKmGaemn_l-Q=w354-h315-p-k"  class="w3-image" width="360" height="412">
     <p>
-        <a href="#signup" class="w3-button w3-white w3-border">Sign Up</a>
-        <a href="#signin" class="w3-button w3-white w3-border">Sign In</a>
+        <a href="#signup" class="w3-button w3-white w3-border" onclick="signupFunction()">Sign Up</a>
+        <a href="#signin" class="w3-button w3-white w3-border" onclick="signinFunction()">Sign In</a>
     </p>
 
     <h3 class="w3-padding-24 w3-text-light-grey">Submitters</h3>  
@@ -374,56 +374,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 
 
-    
-        <!-- <html lang="en">
-        <head>
-        <meta charset="utf-8">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-        </head>
 
-        
-
-        <body>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-
-                        <div class="modal fade" id="aboutModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1>About</h1>
-                                    </div>
-                                    <div class="modal-body">
-                                        This is the content
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-
-                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#aboutModal">Open Modal</button>
-
-                    </div>
-                </div>
-            </div>
-
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
-            <script src="https://code.jquery.com/jquery-3.6.0.min.js"   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="   crossorigin="anonymous"></script>
-      
-            <script>
-                $(document).ready(function(){
-                    $(".btn").click(function(){
-                        $("#myModal").modal('show');
-                    });
-                });
-            </script>
-
-        </body> 
-        </html> -->
   </div>
 <!-- About end -->
 
@@ -532,8 +483,64 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   <!-- End footer -->
   </footer>
 
-<!-- END PAGE CONTENT -->
+
 </div>
+
+
+<script>
+    function aboutFunction() {
+      var x = document.getElementById("about");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+</script>
+
+<script>
+    function playFunction() {
+      var x = document.getElementById("play");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+</script>
+
+<script>
+    function signupFunction() {
+      var x = document.getElementById("signup");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+</script>
+
+<script>
+    function signinFunction() {
+      var x = document.getElementById("signin");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+</script>
+
+<script>
+    function settingsFunction() {
+      var x = document.getElementById("signin");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+</script>
 
 </body>
 </html>
