@@ -48,8 +48,7 @@ const COLS = 10
 const ROWS = 10
 
 var current_lifes = 5
-// TODO: set 50
-var TOTAL_FOOD_AMOUNT = 90
+var TOTAL_FOOD_AMOUNT = 50
 var BALL_5_COLOR = "#0000ff"
 var BALL_15_COLOR = "#ff0000"
 var BALL_25_COLOR = "#00b33c"
