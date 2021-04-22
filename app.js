@@ -9,6 +9,7 @@ var pac_color;
 var start_time;
 var time_remain;
 var interval;
+var isShowingFireworks = false
 
 const TIME_BUNOS_SECONDS = 10
 const MIN_BALLS_AMOUNT = 50;
@@ -16,19 +17,23 @@ const MAX_BALLS_AMOUNT = 90;
 const MIN_TIME_SECONDS = 60;
 const MIN_MONSTERS_AMOUNT = 1
 const MAX_MONSTERS_AMOUNT = 4
-const WALL = 4
 
 STRAWBERRY_POINTS_VALUE = 50
 
-const TIME_BUNOS = 201
-const PILL = 202
-const STRAWBERRY = 203
+const cellType = {
+	EMPTY: 'EMPTY',
+	FOOD_5_POINTS: 'FOOD_5_POINTS',
+	FOOD_15_POINTS: 'FOOD_15_POINTS',
+	FOOD_25_POINTS: 'FOOD_25_POINTS',
+	PACMAN: 'PACMAN',
+	TIME_BUNOS: 'TIME_BUNOS',
+	PILL: 'PILL',
+	STRAWBERRY: 'STRAWBERRY',
+	WALL: 'WALL',
+};
 
-const FOOD_5_POINTS = 100
-const FOOD_15_POINTS = 101
-const FOOD_25_POINTS = 102
-const PACMAN = 2
-const EMPTY_CELL = 0
+const FOOD_CELLS = [cellType.FOOD_5_POINTS, cellType.FOOD_15_POINTS, cellType.food_25_points_remain]
+
 const LEFT_ARROW = 37
 const UP_ARROW = 38
 const RIGHT_ARROW = 39
@@ -42,9 +47,9 @@ const DOWN_MOVE = 4
 const COLS = 10
 const ROWS = 10
 
-
 var current_lifes = 5
-var TOTAL_FOOD_AMOUNT = 50
+// TODO: set 50
+var TOTAL_FOOD_AMOUNT = 90
 var BALL_5_COLOR = "#0000ff"
 var BALL_15_COLOR = "#ff0000"
 var BALL_25_COLOR = "#00b33c"
@@ -57,6 +62,7 @@ $(document).ready(function () {
 	pill = document.getElementById('pill');
 	strawberry = document.getElementById('strawberry');
 
+	// Relvant for fireworks:
 	// now we will setup our basic variables for the demo
 	// canvas2 = document.getElementById('canvas2');
 	ctx = context
@@ -116,6 +122,7 @@ window.addEventListener("keydown", function (e) {
 }, false);
 
 function Start() {
+	stopFireworks()
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -140,7 +147,7 @@ function Start() {
 				(i == 6 && j == 1) ||
 				(i == 6 && j == 2)
 			) {
-				board[i][j] = WALL;
+				board[i][j] = cellType.WALL;
 			} else {
 				var randomNum = Math.random();
 				// Where to put food
@@ -150,13 +157,13 @@ function Start() {
 					// Random which food type based on amount of each type remain
 					food_type_index = ~~(Math.random() * (food_5_points_remain + food_15_points_remain + food_25_points_remain))
 					if (food_type_index < food_5_points_remain) {
-						board[i][j] = FOOD_5_POINTS;
+						board[i][j] = cellType.FOOD_5_POINTS;
 						food_5_points_remain--;
 					} else if (food_type_index < food_5_points_remain + food_15_points_remain) {
-						board[i][j] = FOOD_15_POINTS;
+						board[i][j] = cellType.FOOD_15_POINTS;
 						food_15_points_remain--;
 					} else {
-						board[i][j] = FOOD_25_POINTS;
+						board[i][j] = cellType.FOOD_25_POINTS;
 						food_25_points_remain--;
 					}
 					// There to put pacman
@@ -164,9 +171,9 @@ function Start() {
 					pacman_position.i = i;
 					pacman_position.j = j;
 					pacman_remain--;
-					board[i][j] = PACMAN;
+					board[i][j] = cellType.PACMAN;
 				} else {
-					board[i][j] = EMPTY_CELL;
+					board[i][j] = cellType.EMPTY;
 				}
 				cnt--;
 			}
@@ -175,30 +182,30 @@ function Start() {
 	while (food_remain > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		if (food_5_points_remain > 0) {
-			board[emptyCell[0]][emptyCell[1]] = FOOD_5_POINTS;
+			board[emptyCell[0]][emptyCell[1]] = cellType.FOOD_5_POINTS;
 			food_5_points_remain--;
 		} else if (food_15_points_remain > 0) {
-			board[emptyCell[0]][emptyCell[1]] = FOOD_15_POINTS;
+			board[emptyCell[0]][emptyCell[1]] = cellType.FOOD_15_POINTS;
 			food_15_points_remain--
 		} else {
-			board[emptyCell[0]][emptyCell[1]] = FOOD_25_POINTS;
+			board[emptyCell[0]][emptyCell[1]] = cellType.FOOD_25_POINTS;
 			food_25_points_remain--;
 		}
 		food_remain--;
 	}
 
 	var emptyCell = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = TIME_BUNOS;
+	board[emptyCell[0]][emptyCell[1]] = cellType.TIME_BUNOS;
 
 	emptyCell = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = PILL;
+	board[emptyCell[0]][emptyCell[1]] = cellType.PILL;
 
 	emptyCell = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = STRAWBERRY;
+	board[emptyCell[0]][emptyCell[1]] = cellType.STRAWBERRY;
 
 	strawberry_position.i = emptyCell[0];
 	strawberry_position.j = emptyCell[1];
-	strawberry_position.prev_value = EMPTY_CELL
+	strawberry_position.prev_value = cellType.EMPTY
 	strawberry_position.is_alive = true
 
 	keyDown = -1;
@@ -209,21 +216,15 @@ function Start() {
 		},
 		false
 	);
-	// addEventListener(
-	// 	"keyup",
-	// 	function(e) {
-	// 		keysDown[e.keyCode] = false;
-	// 	},
-	// 	false
-	// );
 
-	interval = setInterval(UpdatePosition, 250);
+	// TODO: 250
+	interval = setInterval(UpdatePosition, 50);
 }
 
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * ROWS);
 	var j = Math.floor(Math.random() * COLS);
-	while (board[i][j] != EMPTY_CELL) {
+	while (board[i][j] != cellType.EMPTY) {
 		i = Math.floor(Math.random() * ROWS);
 		j = Math.floor(Math.random() * COLS);
 	}
@@ -255,7 +256,7 @@ function Draw(move = RIGHT_MOVE) {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
-			if (board[i][j] == PACMAN) {
+			if (board[i][j] == cellType.PACMAN) {
 				angle = 0
 				if (move == RIGHT_MOVE) {
 					mouth_angle = 0
@@ -293,7 +294,7 @@ function Draw(move = RIGHT_MOVE) {
 				context.arc(eye_position.x, eye_position.y, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
-			} else if (board[i][j] == FOOD_5_POINTS) {
+			} else if (board[i][j] == cellType.FOOD_5_POINTS) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = BALL_5_COLOR; //color
@@ -303,7 +304,7 @@ function Draw(move = RIGHT_MOVE) {
 				context.font = "16px Arial";
 				context.fillText("5", center.x - 5, center.y + 5);
 			}
-			else if (board[i][j] == FOOD_15_POINTS) {
+			else if (board[i][j] == cellType.FOOD_15_POINTS) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = BALL_15_COLOR; //color
@@ -312,7 +313,7 @@ function Draw(move = RIGHT_MOVE) {
 				context.font = "16px Arial";
 				context.fillText("15", center.x - 10, center.y + 5);
 			}
-			else if (board[i][j] == FOOD_25_POINTS) {
+			else if (board[i][j] == cellType.FOOD_25_POINTS) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = BALL_25_COLOR; //color
@@ -320,19 +321,19 @@ function Draw(move = RIGHT_MOVE) {
 				context.fillStyle = "white";
 				context.font = "16px Arial";
 				context.fillText("25", center.x - 10, center.y + 5);
-			} else if (board[i][j] == WALL) {
+			} else if (board[i][j] == cellType.WALL) {
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
-			else if (board[i][j] == TIME_BUNOS) {
+			else if (board[i][j] == cellType.TIME_BUNOS) {
 				context.drawImage(timer, center.x - 20, center.y - 20, 35, 35);
 			}
-			else if (board[i][j] == PILL) {
+			else if (board[i][j] == cellType.PILL) {
 				context.drawImage(pill, center.x - 20, center.y - 20, 35, 35);
 			}
-			else if (board[i][j] == STRAWBERRY && strawberry_position.is_alive) {
+			else if (board[i][j] == cellType.STRAWBERRY && strawberry_position.is_alive) {
 				context.drawImage(strawberry, center.x - 20, center.y - 20, 35, 35);
 			}
 		}
@@ -340,7 +341,7 @@ function Draw(move = RIGHT_MOVE) {
 }
 
 function UpdatePosition() {
-	board[pacman_position.i][pacman_position.j] = EMPTY_CELL;
+	board[pacman_position.i][pacman_position.j] = cellType.EMPTY;
 	curr_move = GetKeyPressed()
 
 	movePosition(pacman_position, curr_move);
@@ -349,45 +350,43 @@ function UpdatePosition() {
 		board[strawberry_position.i][strawberry_position.j] = strawberry_position.prev_value;
 		movePosition(strawberry_position, getRandomInt(1, 4));
 		strawberry_position.prev_value = board[strawberry_position.i][strawberry_position.j]
-		board[strawberry_position.i][strawberry_position.j] = STRAWBERRY;
+		board[strawberry_position.i][strawberry_position.j] = cellType.STRAWBERRY;
 	}
-	if (board[pacman_position.i][pacman_position.j] == FOOD_5_POINTS) {
+	if (board[pacman_position.i][pacman_position.j] == cellType.FOOD_5_POINTS) {
 		score += 5;
 		amount_of_balls_remain--;
-	} else if (board[pacman_position.i][pacman_position.j] == FOOD_15_POINTS) {
+	} else if (board[pacman_position.i][pacman_position.j] == cellType.FOOD_15_POINTS) {
 		score += 15;
 		amount_of_balls_remain--;
-	} else if (board[pacman_position.i][pacman_position.j] == FOOD_25_POINTS) {
+	} else if (board[pacman_position.i][pacman_position.j] == cellType.FOOD_25_POINTS) {
 		score += 25;
 		amount_of_balls_remain--;
-	} else if (board[pacman_position.i][pacman_position.j] == TIME_BUNOS) {
+	} else if (board[pacman_position.i][pacman_position.j] == cellType.TIME_BUNOS) {
 		TOTAL_TIME += TIME_BUNOS_SECONDS
-	} else if (board[pacman_position.i][pacman_position.j] == PILL) {
+	} else if (board[pacman_position.i][pacman_position.j] == cellType.PILL) {
 		current_lifes += 1
-	} else if (board[pacman_position.i][pacman_position.j] == STRAWBERRY) {
+	} else if (board[pacman_position.i][pacman_position.j] == cellType.STRAWBERRY) {
 		score += STRAWBERRY_POINTS_VALUE
 		strawberry_position.is_alive = false
+
+		if (FOOD_CELLS.includes(strawberry_position.prev_value)) {
+			amount_of_balls_remain--;
+		}
 	}
 
-	board[pacman_position.i][pacman_position.j] = PACMAN;
+	board[pacman_position.i][pacman_position.j] = cellType.PACMAN;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	time_remain = ~~(TOTAL_TIME - time_elapsed);
 	if (amount_of_balls_remain == 0) {
 		Draw(curr_move);
 		window.clearInterval(interval);
-		setTimeout(function () {
-			window.alert("Winner!!!");
-			showFireworks()
-		}, 500);
-
-
+		window.alert("Winner!!!");
+		showFireworks()
 	} else if (time_remain == 0) {
 		Draw(curr_move);
 		window.clearInterval(interval);
-		setTimeout(function () {
-			window.alert("You are better than " + score + " Points!");
-		}, 500);
+		window.alert("You are better than " + score + " Points!");
 	}
 	else {
 		Draw(curr_move);
@@ -406,39 +405,44 @@ document.getElementById("settings_form").onsubmit = function () {
 };
 function movePosition(position, direction) {
 	if (direction == UP_MOVE) {
-		if (position.j > 0 && board[position.i][position.j - 1] != WALL) {
+		if (position.j > 0 && board[position.i][position.j - 1] != cellType.WALL) {
 			position.j--;
 		}
 	}
 	else if (direction == DOWN_MOVE) {
-		if (position.j < ROWS - 1 && board[position.i][position.j + 1] != WALL) {
+		if (position.j < ROWS - 1 && board[position.i][position.j + 1] != cellType.WALL) {
 			position.j++;
 		}
 	}
 	else if (direction == LEFT_MOVE) {
-		if (position.i > 0 && board[position.i - 1][position.j] != WALL) {
+		if (position.i > 0 && board[position.i - 1][position.j] != cellType.WALL) {
 			position.i--;
 		}
 	}
 	else if (direction == RIGHT_MOVE) {
-		if (position.i < COLS - 1 && board[position.i + 1][position.j] != WALL) {
+		if (position.i < COLS - 1 && board[position.i + 1][position.j] != cellType.WALL) {
 			position.i++;
 		}
 	}
 }
 
-// when animating on canvas, it is best to use requestAnimationFrame instead of setTimeout or setInterval
-// not supported in all browsers though and sometimes needs a prefix, so we need a shim
-window.requestAnimFrame = (function () {
-	return window.requestAnimationFrame ||
-		window.webkitRequestAnimationFrame ||
-		window.mozRequestAnimationFrame ||
-		function (callback) {
-			window.setTimeout(callback, 1000 / 60);
-		};
-})();
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// --------------------------------------------------------------------- FIREWORKS ----------------------------------------------------
 // when animating on canvas, it is best to use requestAnimationFrame instead of setTimeout or setInterval
 // not supported in all browsers though and sometimes needs a prefix, so we need a shim
 window.requestAnimFrame = (function () {
@@ -608,10 +612,21 @@ function createParticles(x, y) {
 	}
 }
 
-// main demo loop
+function stopFireworks() {
+	isShowingFireworks = false
+}
+
 function showFireworks() {
+	isShowingFireworks = true
+	displayFireworks()
+}
+// main demo loop
+function displayFireworks() {
+	if (!isShowingFireworks) {
+		return
+	}
 	// this function will run endlessly with requestAnimationFrame
-	requestAnimFrame(showFireworks);
+	requestAnimFrame(displayFireworks);
 
 	// increase the hue to get different colored fireworks over time
 	//hue += 0.5;
