@@ -131,6 +131,7 @@ $(document).ready(function () {
 
 
 document.getElementById("startGameBtn").onclick = function () {
+	// TODO: should start game settings screen
 	audio.play()
 	Start();
 };
@@ -142,7 +143,7 @@ document.getElementById("settingsRandomValuesBtn").onclick = function () {
 	ball25color.value = getRandomColor()
 	totalTime.value = getRandomInt(MIN_TIME_SECONDS, MIN_TIME_SECONDS * 10)
 	monstersAmount.value = getRandomInt(MIN_MONSTERS_AMOUNT, MAX_MONSTERS_AMOUNT)
-	// TODO: default keys of
+	// TODO: default keys of arrows...
 };
 
 function getRandomInt(min, max) {
@@ -499,10 +500,16 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.alert("Winner!!!");
 		showFireworks()
-	} else if (time_remain == 0 || current_lifes == 0) {
+	} else if (time_remain == 0) {
 		Draw(curr_move);
 		window.clearInterval(interval);
 		window.alert("You are better than " + score + " Points!");
+		showLost()
+	}
+	else if (current_lifes == 0) {
+		Draw(curr_move);
+		window.clearInterval(interval);
+		window.alert("Loser!");
 		showLost()
 	}
 	else {
