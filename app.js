@@ -32,7 +32,7 @@ const MIN_MONSTERS_AMOUNT = 1
 const MAX_MONSTERS_AMOUNT = 4
 const MONSTER_EAT_PENALTY = 10
 
-STRAWBERRY_POINTS_VALUE = 50
+const STRAWBERRY_POINTS_VALUE = 50
 
 const cellType = {
 	EMPTY: 'EMPTY',
@@ -91,7 +91,8 @@ const RIGHT_MOVE = 2
 const UP_MOVE = 3
 const DOWN_MOVE = 4
 
-const INITIAL_LIFES = 5
+// TODO: 5
+const INITIAL_LIFES = 1
 var current_lifes = INITIAL_LIFES
 var TOTAL_FOOD_AMOUNT = 50
 var BALL_5_COLOR = "#0000ff"
@@ -502,6 +503,7 @@ function UpdatePosition() {
 		Draw(curr_move);
 		window.clearInterval(interval);
 		window.alert("You are better than " + score + " Points!");
+		showLost()
 	}
 	else {
 		Draw(curr_move);
@@ -562,7 +564,9 @@ function moveMonster(monster_position) {
 	}
 }
 
-
+function showLost() {
+	context.drawImage(lost, 50, 50, 500, 500);
+}
 
 
 
@@ -746,6 +750,7 @@ function createParticles(x, y) {
 		particles.push(new Particle(x, y));
 	}
 }
+
 
 function stopFireworks() {
 	isShowingFireworks = false
