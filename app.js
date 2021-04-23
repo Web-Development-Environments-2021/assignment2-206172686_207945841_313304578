@@ -2,6 +2,16 @@
 var context;
 var pacman_position = new Object();
 var strawberry_position = new Object();
+
+var monster1_position = new Object();
+monster1_position.is_alive = false
+var monster2_position = new Object();
+monster2_position.is_alive = false
+var monster3_position = new Object();
+monster3_position.is_alive = false
+var monster4_position = new Object();
+monster4_position.is_alive = false
+
 var board;
 var score;
 var amount_of_balls_remain;
@@ -11,12 +21,16 @@ var time_remain;
 var interval;
 var isShowingFireworks = false
 
+const COLS = 10
+const ROWS = 10
+
 const TIME_BUNOS_SECONDS = 10
 const MIN_BALLS_AMOUNT = 50;
 const MAX_BALLS_AMOUNT = 90;
 const MIN_TIME_SECONDS = 60;
 const MIN_MONSTERS_AMOUNT = 1
 const MAX_MONSTERS_AMOUNT = 4
+const MONSTER_EAT_PENALTY = 10
 
 STRAWBERRY_POINTS_VALUE = 50
 
@@ -30,9 +44,42 @@ const cellType = {
 	PILL: 'PILL',
 	STRAWBERRY: 'STRAWBERRY',
 	WALL: 'WALL',
+	MONSTER1: 'MONSTER1',
+	MONSTER2: 'MONSTER2',
+	MONSTER3: 'MONSTER3',
+	MONSTER4: 'MONSTER4',
 };
 
 const FOOD_CELLS = [cellType.FOOD_5_POINTS, cellType.FOOD_15_POINTS, cellType.food_25_points_remain]
+const MONSTER_CELLS = [cellType.MONSTER1, cellType.MONSTER2, cellType.MONSTER3, cellType.MONSTER4]
+const NON_ACCESS_CELLS = [cellType.STRAWBERRY, cellType.WALL].concat(MONSTER_CELLS)
+
+const monsters = [
+	{
+		position: monster1_position,
+		cellType: cellType.MONSTER1,
+		initial_i: 0,
+		initial_j: 0,
+	},
+	{
+		position: monster2_position,
+		cellType: cellType.MONSTER2,
+		initial_i: ROWS - 1,
+		initial_j: COLS - 1,
+	},
+	{
+		position: monster3_position,
+		cellType: cellType.MONSTER3,
+		initial_i: ROWS - 1,
+		initial_j: 0,
+	},
+	{
+		position: monster4_position,
+		cellType: cellType.MONSTER4,
+		initial_i: 0,
+		initial_j: COLS - 1,
+	},
+];
 
 const LEFT_ARROW = 37
 const UP_ARROW = 38
@@ -44,10 +91,8 @@ const RIGHT_MOVE = 2
 const UP_MOVE = 3
 const DOWN_MOVE = 4
 
-const COLS = 10
-const ROWS = 10
-
-var current_lifes = 5
+const INITIAL_LIFES = 5
+var current_lifes = INITIAL_LIFES
 var TOTAL_FOOD_AMOUNT = 50
 var BALL_5_COLOR = "#0000ff"
 var BALL_15_COLOR = "#ff0000"
@@ -125,87 +170,15 @@ function Start() {
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
-	var cnt = ROWS * COLS;
-	var food_remain = TOTAL_FOOD_AMOUNT;
-	var pacman_remain = 1;
 	start_time = new Date();
 	amount_of_balls_remain = TOTAL_FOOD_AMOUNT
+	current_lifes = INITIAL_LIFES
 
 	food_5_points_remain = ~~(TOTAL_FOOD_AMOUNT * 0.6)
 	food_15_points_remain = ~~(TOTAL_FOOD_AMOUNT * 0.3)
 	food_25_points_remain = TOTAL_FOOD_AMOUNT - food_5_points_remain - food_15_points_remain
 
-	for (var i = 0; i < ROWS; i++) {
-		board[i] = new Array();
-		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < COLS; j++) {
-			if (
-				(i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
-			) {
-				board[i][j] = cellType.WALL;
-			} else {
-				var randomNum = Math.random();
-				// Where to put food
-				if (randomNum <= (1.0 * food_remain) / cnt) {
-					food_remain--;
-
-					// Random which food type based on amount of each type remain
-					food_type_index = ~~(Math.random() * (food_5_points_remain + food_15_points_remain + food_25_points_remain))
-					if (food_type_index < food_5_points_remain) {
-						board[i][j] = cellType.FOOD_5_POINTS;
-						food_5_points_remain--;
-					} else if (food_type_index < food_5_points_remain + food_15_points_remain) {
-						board[i][j] = cellType.FOOD_15_POINTS;
-						food_15_points_remain--;
-					} else {
-						board[i][j] = cellType.FOOD_25_POINTS;
-						food_25_points_remain--;
-					}
-					// There to put pacman
-				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-					pacman_position.i = i;
-					pacman_position.j = j;
-					pacman_remain--;
-					board[i][j] = cellType.PACMAN;
-				} else {
-					board[i][j] = cellType.EMPTY;
-				}
-				cnt--;
-			}
-		}
-	}
-	while (food_remain > 0) {
-		var emptyCell = findRandomEmptyCell(board);
-		if (food_5_points_remain > 0) {
-			board[emptyCell[0]][emptyCell[1]] = cellType.FOOD_5_POINTS;
-			food_5_points_remain--;
-		} else if (food_15_points_remain > 0) {
-			board[emptyCell[0]][emptyCell[1]] = cellType.FOOD_15_POINTS;
-			food_15_points_remain--
-		} else {
-			board[emptyCell[0]][emptyCell[1]] = cellType.FOOD_25_POINTS;
-			food_25_points_remain--;
-		}
-		food_remain--;
-	}
-
-	var emptyCell = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = cellType.TIME_BUNOS;
-
-	emptyCell = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = cellType.PILL;
-
-	emptyCell = findRandomEmptyCell(board);
-	board[emptyCell[0]][emptyCell[1]] = cellType.STRAWBERRY;
-
-	strawberry_position.i = emptyCell[0];
-	strawberry_position.j = emptyCell[1];
-	strawberry_position.prev_value = cellType.EMPTY
-	strawberry_position.is_alive = true
+	init_board();
 
 	keyDown = -1;
 	addEventListener(
@@ -217,7 +190,116 @@ function Start() {
 	);
 
 	// TODO: 250
-	interval = setInterval(UpdatePosition, 50);
+	interval = setInterval(UpdatePosition, 250);
+}
+
+function init_board(food_remain, cnt, pacman_remain) {
+	var cnt = ROWS * COLS;
+
+	var food_remain = TOTAL_FOOD_AMOUNT;
+
+	// Init empty board
+	for (var i = 0; i < ROWS; i++) {
+		board[i] = new Array();
+	}
+
+	// init monsters
+	init_monsters();
+
+	for (var i = 0; i < ROWS; i++) {
+		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
+		for (var j = 0; j < COLS; j++) {
+			if ((i == 3 && j == 3) ||
+				(i == 3 && j == 4) ||
+				(i == 3 && j == 5) ||
+				(i == 6 && j == 1) ||
+				(i == 6 && j == 2)) {
+				board[i][j] = cellType.WALL;
+			} else if (!board[i][j]) {
+				var randomNum = Math.random();
+				// Where to put food
+				if (randomNum <= (1.0 * food_remain) / cnt) {
+					food_remain--;
+
+					// Random which food type based on amount of each type remain
+					food_type_index = ~~(Math.random() * (food_5_points_remain + food_15_points_remain + food_25_points_remain));
+					if (food_type_index < food_5_points_remain) {
+						board[i][j] = cellType.FOOD_5_POINTS;
+						food_5_points_remain--;
+					} else if (food_type_index < food_5_points_remain + food_15_points_remain) {
+						board[i][j] = cellType.FOOD_15_POINTS;
+						food_15_points_remain--;
+					} else {
+						board[i][j] = cellType.FOOD_25_POINTS;
+						food_25_points_remain--;
+					}
+					// There to put pacman
+				} else {
+					board[i][j] = cellType.EMPTY;
+				}
+				cnt--;
+			}
+		}
+	}
+
+	// Put food remains
+	while (food_remain > 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		if (food_5_points_remain > 0) {
+			board[emptyCell[0]][emptyCell[1]] = cellType.FOOD_5_POINTS;
+			food_5_points_remain--;
+		} else if (food_15_points_remain > 0) {
+			board[emptyCell[0]][emptyCell[1]] = cellType.FOOD_15_POINTS;
+			food_15_points_remain--;
+		} else {
+			board[emptyCell[0]][emptyCell[1]] = cellType.FOOD_25_POINTS;
+			food_25_points_remain--;
+		}
+		food_remain--;
+	}
+
+	// Put pacman
+	init_pacman();
+
+	// Put timer bonus
+	emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = cellType.TIME_BUNOS;
+
+	// Put pill bunos
+	emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = cellType.PILL;
+
+	// Put strawberry
+	emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = cellType.STRAWBERRY;
+
+	strawberry_position.i = emptyCell[0];
+	strawberry_position.j = emptyCell[1];
+	strawberry_position.prev_value = cellType.EMPTY;
+	strawberry_position.is_alive = true;
+}
+
+function init_pacman(emptyCell) {
+	emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = cellType.PACMAN;
+	pacman_position.i = emptyCell[0]
+	pacman_position.j = emptyCell[1]
+}
+
+function init_monsters() {
+
+	for (i = 0; i < MONSTERS_AMOUNT; i++) {
+		curr_monster = monsters[i]
+		if (curr_monster.position.prev_value) {
+			board[curr_monster.position.i][curr_monster.position.j] = curr_monster.position.prev_value;
+		}
+
+		board[curr_monster.initial_i][curr_monster.initial_i] = curr_monster.cellType;
+		curr_monster.position.i = curr_monster.initial_i;
+		curr_monster.position.j = curr_monster.initial_j;
+		curr_monster.position.prev_value = cellType.EMPTY;
+		curr_monster.position.is_alive = true;
+	}
 }
 
 function findRandomEmptyCell(board) {
@@ -245,7 +327,7 @@ function GetKeyPressed() {
 	}
 }
 
-function Draw(move = RIGHT_MOVE) {
+function Draw(pacman_direction = RIGHT_MOVE) {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblLifes.value = current_lifes;
@@ -256,34 +338,7 @@ function Draw(move = RIGHT_MOVE) {
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
 			if (board[i][j] == cellType.PACMAN) {
-				angle = 0
-				if (move == RIGHT_MOVE) {
-					mouth_angle = 0
-					eye_position = {
-						x: center.x + 5,
-						y: center.y - 15
-					}
-				} else if (move == DOWN_MOVE) {
-					mouth_angle = 0.5
-					eye_position = {
-						x: center.x + 20,
-						y: center.y - 5
-					}
-				}
-				else if (move == UP_MOVE) {
-					mouth_angle = -0.5
-					eye_position = {
-						x: center.x + 20,
-						y: center.y + 5
-					}
-				}
-				else if (move == LEFT_MOVE) {
-					mouth_angle = 1
-					eye_position = {
-						x: center.x + 5,
-						y: center.y - 15
-					}
-				}
+				const { mouth_angle, eye_position } = get_pacman_view_props(pacman_direction, center);
 				context.beginPath();
 				context.arc(center.x, center.y, 30, (mouth_angle + 0.15) * Math.PI, (mouth_angle + 1.85) * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
@@ -335,22 +390,75 @@ function Draw(move = RIGHT_MOVE) {
 			else if (board[i][j] == cellType.STRAWBERRY && strawberry_position.is_alive) {
 				context.drawImage(strawberry, center.x - 20, center.y - 20, 35, 35);
 			}
+
+			monsters.forEach(monster => {
+				if (board[i][j] == monster.cellType && monster.position.is_alive) {
+					context.drawImage(monster1, center.x - 20, center.y - 20, 35, 35);
+				}
+			})
 		}
 	}
+}
+
+function get_pacman_view_props(move, center) {
+	angle = 0;
+	if (move == RIGHT_MOVE) {
+		mouth_angle = 0;
+		eye_position = {
+			x: center.x + 5,
+			y: center.y - 15
+		};
+	} else if (move == DOWN_MOVE) {
+		mouth_angle = 0.5;
+		eye_position = {
+			x: center.x + 20,
+			y: center.y - 5
+		};
+	}
+	else if (move == UP_MOVE) {
+		mouth_angle = -0.5;
+		eye_position = {
+			x: center.x + 20,
+			y: center.y + 5
+		};
+	}
+	else if (move == LEFT_MOVE) {
+		mouth_angle = 1;
+		eye_position = {
+			x: center.x + 5,
+			y: center.y - 15
+		};
+	}
+
+	return {
+		mouth_angle,
+		eye_position
+	};
 }
 
 function UpdatePosition() {
 	board[pacman_position.i][pacman_position.j] = cellType.EMPTY;
 	curr_move = GetKeyPressed()
 
-	movePosition(pacman_position, curr_move);
+	movePosition(pacman_position, curr_move, true);
 
 	if (strawberry_position.is_alive) {
 		board[strawberry_position.i][strawberry_position.j] = strawberry_position.prev_value;
-		movePosition(strawberry_position, getRandomInt(1, 4));
+		movePosition(strawberry_position, getRandomInt(1, 4), false);
 		strawberry_position.prev_value = board[strawberry_position.i][strawberry_position.j]
 		board[strawberry_position.i][strawberry_position.j] = cellType.STRAWBERRY;
 	}
+
+	monsters.forEach(monster => {
+		if (monster.position.is_alive) {
+			board[monster.position.i][monster.position.j] = monster.position.prev_value;
+			moveMonster(monster.position);
+			monster.position.prev_value = board[monster.position.i][monster.position.j]
+			board[monster.position.i][monster.position.j] = monster.cellType;
+		}
+	})
+
+
 	if (board[pacman_position.i][pacman_position.j] == cellType.FOOD_5_POINTS) {
 		score += 5;
 		amount_of_balls_remain--;
@@ -371,6 +479,14 @@ function UpdatePosition() {
 		if (FOOD_CELLS.includes(strawberry_position.prev_value)) {
 			amount_of_balls_remain--;
 		}
+		// If pacman on monster
+	} else if (MONSTER_CELLS.includes(board[pacman_position.i][pacman_position.j])) {
+		current_lifes -= 1
+		score -= MONSTER_EAT_PENALTY
+		if (current_lifes > 0) {
+			init_monsters()
+			init_pacman()
+		}
 	}
 
 	board[pacman_position.i][pacman_position.j] = cellType.PACMAN;
@@ -382,7 +498,7 @@ function UpdatePosition() {
 		window.clearInterval(interval);
 		window.alert("Winner!!!");
 		showFireworks()
-	} else if (time_remain == 0) {
+	} else if (time_remain == 0 || current_lifes == 0) {
 		Draw(curr_move);
 		window.clearInterval(interval);
 		window.alert("You are better than " + score + " Points!");
@@ -402,29 +518,49 @@ document.getElementById("settings_form").onsubmit = function () {
 
 	alert("Let's play!")
 };
-function movePosition(position, direction) {
-	if (direction == UP_MOVE) {
-		if (position.j > 0 && board[position.i][position.j - 1] != cellType.WALL) {
-			position.j--;
-		}
+function movePosition(position, direction, is_pacman_move) {
+
+	maybe_new_place =
+	{
+		i: position.i,
+		j: position.j
 	}
-	else if (direction == DOWN_MOVE) {
-		if (position.j < ROWS - 1 && board[position.i][position.j + 1] != cellType.WALL) {
-			position.j++;
-		}
+
+	if (direction == UP_MOVE && position.j > 0) {
+		maybe_new_place.j -= 1
 	}
-	else if (direction == LEFT_MOVE) {
-		if (position.i > 0 && board[position.i - 1][position.j] != cellType.WALL) {
-			position.i--;
-		}
+	else if (direction == DOWN_MOVE && position.j < ROWS - 1) {
+		maybe_new_place.j += 1
 	}
-	else if (direction == RIGHT_MOVE) {
-		if (position.i < COLS - 1 && board[position.i + 1][position.j] != cellType.WALL) {
-			position.i++;
+	else if (direction == LEFT_MOVE && position.i > 0) {
+		maybe_new_place.i--;
+	}
+	else if (direction == RIGHT_MOVE && position.i < COLS - 1) {
+		maybe_new_place.i++;
+	}
+
+	new_place_cell_type = board[maybe_new_place.i][maybe_new_place.j]
+
+	if (new_place_cell_type != cellType.WALL) {
+		if (!NON_ACCESS_CELLS.includes(new_place_cell_type) || is_pacman_move) {
+			position.i = maybe_new_place.i
+			position.j = maybe_new_place.j
 		}
 	}
 }
 
+function moveMonster(monster_position) {
+
+	if (monster_position.i > pacman_position.i && !NON_ACCESS_CELLS.includes(board[monster_position.i - 1][monster_position.j])) {
+		monster_position.i -= 1
+	} else if (monster_position.i < pacman_position.i && !NON_ACCESS_CELLS.includes(board[monster_position.i + 1][monster_position.j])) {
+		monster_position.i += 1
+	} else if (monster_position.j > pacman_position.j && !NON_ACCESS_CELLS.includes(board[monster_position.i][monster_position.j - 1])) {
+		monster_position.j -= 1
+	} else if (monster_position.j < pacman_position.j && !NON_ACCESS_CELLS.includes(board[monster_position.i][monster_position.j + 1])) {
+		monster_position.j += 1
+	}
+}
 
 
 
