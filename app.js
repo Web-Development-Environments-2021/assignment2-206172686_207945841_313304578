@@ -150,21 +150,22 @@ const isUserExists = (users, key) => {
 	
 };
 
-function menu(nav) {
-    hide();
-    $('#' + nav).show();
-};
+// function menu(nav) {
+//     hide();
+//     $('#' + nav).show();
+// };
 
-function hide() {
-	// $('#welcome').hide();
-	$('#signup').hide();
-	$('#signin').hide();
-	$('#play').hide();
-	$('#settings').hide();
-	$('#about').hide();
+// function hide() {
 
-	// resetGame();
-};
+// 	$('#welcome').hide();
+// 	$('#signup').hide();
+// 	$('#signin').hide();
+// 	$('#play').hide();
+// 	$('#settings').hide();
+// 	$('#about').hide();
+
+// 	// resetGame();
+// };
 
 const register = () => {
 

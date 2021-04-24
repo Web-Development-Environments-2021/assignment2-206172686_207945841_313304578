@@ -219,7 +219,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         
             <div class="clearfix">
             <button type="button" class="cancelbtn">Cancel</button>
-            <button type="submit" class="signupbtn">Sign Up</button>
+            <button 
+            type="submit" class="signupbtn">Sign Up</button>
             </div>
         </div>
         </form>
@@ -543,6 +544,28 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       }
     }
 </script> -->
+<script>
+function menu(nav) {
+    hide();
+    $('#' + nav).show();
+};
+</script>
+
+<script>
+
+function hide() {
+	
+	$('#welcome').hide();
+	$('#signup').hide();
+	$('#signin').hide();
+	$('#play').hide();
+	$('#settings').hide();
+	$('#about').hide();
+
+	// resetGame();
+};
+
+</script>
 
 </body>
 </html>
