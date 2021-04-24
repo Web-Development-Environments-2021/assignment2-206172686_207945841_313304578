@@ -148,6 +148,22 @@ const isUserExists = (users, key) => {
 	
 };
 
+function menu(nav) {
+    hide();
+    $('#' + nav).show();
+};
+
+function hide() {
+	// $('#welcome').hide();
+	$('#signup').hide();
+	$('#signin').hide();
+	$('#play').hide();
+	$('#settings').hide();
+	$('#about').hide();
+
+	// resetGame();
+};
+
 const register = () => {
 
 	//get elements
