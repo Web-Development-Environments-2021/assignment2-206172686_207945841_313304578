@@ -1,242 +1,3 @@
-// <------------WEBSITE---------->
-
-
-// $(document).ready(function () {
-// 	localStorage.setItem('p', 'p');
-
-// 	//LOGIN
-// 	$("#sign_in_form").validate({
-// 		rules: {
-// 			login_uname: {
-// 				required: true,
-// 			},
-// 			login_psw: {
-// 				required: true,
-// 				validateUser: true
-// 			}
-// 		},
-// 		messages: {
-// 			login_uname: {
-// 				required: "Enter your username."
-// 			},
-// 			login_psw: {
-// 				required: "Enter your password",
-// 				validateUser: "Username or Password is not valid."
-// 			}
-// 		},
-	
-// 		submitHandler: function () {
-
-// 			login();
-
-// 			//reset form details
-// 			let form = $("#sign_in_form");
-// 			form[0].reset();
-// 		},
-// 	});
-
-// 	//REGISTER
-// 	$("#sign_up_form").validate({
-// 		rules: {
-// 			singup_username: {
-// 				required: true,
-// 				validateUsername: true
-// 			},
-// 			signup_psw: {
-// 				required: true,
-// 				strongPassword: true
-// 			},
-// 			singup_name: {
-// 				required: true,
-// 				lettersonly: true
-// 			},
-// 			signup_email: {
-// 				required: true,
-// 				email: true
-// 			},
-// 			signup_bday: {
-// 				required: true
-// 			}
-// 		},
-// 		messages: {
-// 			singup_username: {
-// 				required: "Enter different username",
-// 				validateUsername: "Username already taken."
-// 			},
-// 			signup_psw: {
-// 				required: "Enter password",
-// 				strongPassword: "Password must contain 6 charcters. at least one number and one letter"
-// 			},
-// 			singup_name: {
-// 				required: "Enter your full name",
-// 				lettersonly: "Full name only contain letters."
-// 			},
-// 			signup_email: {
-// 				required: "Enter your e-mail",
-// 				email: "Please enter a valid e-mail address."
-// 			},
-// 			signup_bday: {
-// 				required: "Enter a birth day."
-// 			}
-// 		},
-// 		submitHandler: function () {
-
-// 			register();
-
-// 			//reset form details
-// 			let form = $("#sign_up_form");
-// 			form[0].reset();
-// 		},
-// 	});
-// });
-
-// $(function() {
-
-// 		//Registration
-	
-// 		//Password must contain 6 charcters. at least one number and one letter
-// 		$.validator.addMethod('strongPassword', function (value, element) {
-// 			return this.optional(element) ||
-// 				value.length >= 6 &&
-// 				/\d/.test(value) &&
-// 				/[a-z]/i.test(value);
-// 		});
-	
-	
-// 		//check if username already exists
-// 		$.validator.addMethod('validateUsername', function (value, element) {
-// 			return !isUserExists(value);
-// 		});
-	
-// 		//Login
-	
-// 		//check if password match user
-// 		$.validator.addMethod('validateUser', function (password, element) {
-	
-// 			let user_input_username = document.getElementById("login_uname").value;
-	
-// 			let localstorage_password = localStorage.getItem(user_input_username);
-	
-// 			if(localstorage_password === null) {
-// 				return false;
-// 			}
-// 			else if(localstorage_password === password) {
-// 				return true;
-// 			}
-	
-// 			return false;
-// 		});
-
-// 			//check if password match user
-// 		$.validator.addMethod('greaterOrEqual', function (value, element, param) {
-// 			return value >= param;
-// 		});
-
-// 		$.validator.addMethod("notEqualTo", function(value, element, param) {
-// 			return value != $(param).val();
-// 		});
-// });
-
-// const isUserExists = (users, key) => {
-
-// 	let result = localStorage.getItem(key);
-
-// 	if(result == null) {
-// 		return false;
-// 	}
-// 	else {
-// 		return true;
-// 	}
-	
-// };
-
-// function menu(nav) {
-//     hide();
-//     $('#' + nav).show();
-// };
-
-// function hide() {
-
-// 	$('#welcome').hide();
-// 	$('#signup').hide();
-// 	$('#signin').hide();
-// 	$('#play').hide();
-// 	$('#settings').hide();
-// 	$('#about').hide();
-
-// 	// resetGame();
-// };
-
-// const register = () => {
-
-// 	//get elements
-// 	let username = document.getElementById("singup_username").value;
-// 	let password = document.getElementById("signup_psw").value;
-
-// 	//insert to storage
-// 	localStorage.setItem(username, password);
-
-// 	//go to login page
-// 	menu('singin')
-// };
-
-// function login() {
-
-// 	game_username = document.getElementById("login_uname").value;
-// 	//go to configuration page
-// 	menu('settings')
-// };
-
-
-// function resetSections(){
-
-// 	document.getElementById("welcome").style.display="none";
-// 	document.getElementById("signup").style.display="none";
-// 	document.getElementById("signin").style.display="none";
-// 	document.getElementById("about").style.display="none";
-// 	document.getElementById("settings").style.display="none";
-// 	document.getElementById("play").style.display="none";
-// }
-
-
-function showWelcome(){
-
-	resetSections();
-	document.getElementById("welcome").style.display="block";
-}
-
-function showSignin(){
-
-	resetSections();
-	document.getElementById("signin").style.display="block";
-}
-
-function showSignup(){
-
-	resetSections();
-	document.getElementById("signup").style.display="block";
-}
-
-function showAbout(){
-
-	resetSections();
-	document.getElementById("about").style.display="block";
-}
-
-function showSettings(){
-
-	resetSections();
-	document.getElementById("settings").style.display="block";
-}
-
-function showPlay(){
-
-	resetSections();
-	document.getElementById("signup").style.display="block";
-}
-
-
-
 
 // <------------GAME---------->
 
@@ -1158,4 +919,248 @@ function displayFireworks() {
 	} else {
 		limiterTick++;
 	}
+}
+
+
+// <------------WEBSITE---------->
+
+$(document).ready(function () {
+	localStorage.setItem('p', 'p');
+
+	//LOGIN
+	$("#sign_in_form").validate({
+		rules: {
+			login_uname: {
+				required: true,
+			},
+			login_psw: {
+				required: true,
+				validateUser: true
+			}
+		},
+		messages: {
+			login_uname: {
+				required: "Enter your username."
+			},
+			login_psw: {
+				required: "Enter your password",
+				validateUser: "Username or Password is not valid."
+			}
+		},
+	
+		submitHandler: function () {
+
+			//login();
+
+			//reset form details
+			let form = $("#sign_in_form");
+			form[0].reset();
+		},
+	});
+
+	//REGISTER
+	$("#sign_up_form").validate({
+		rules: {
+			singup_username: {
+				required: true,
+				validateUsername: true
+			},
+			signup_psw: {
+				required: true,
+				strongPassword: true
+			},
+			singup_name: {
+				required: true,
+				lettersonly: true
+			},
+			signup_email: {
+				required: true,
+				email: true
+			},
+			signup_bday: {
+				required: true
+			}
+		},
+		messages: {
+			singup_username: {
+				required: "Enter different username",
+				validateUsername: "Username already taken."
+			},
+			signup_psw: {
+				required: "Enter password",
+				strongPassword: "Password must contain 6 charcters. at least one number and one letter"
+			},
+			singup_name: {
+				required: "Enter your full name",
+				lettersonly: "Full name only contain letters."
+			},
+			signup_email: {
+				required: "Enter your e-mail",
+				email: "Please enter a valid e-mail address."
+			},
+			signup_bday: {
+				required: "Enter a birth day."
+			}
+		},
+		submitHandler: function () {
+
+			register();
+
+			//reset form details
+			let form = $("#sign_up_form");
+			form[0].reset();
+		},
+	});
+});
+
+
+$(function() {
+
+		//Registration
+	
+		//Password must contain 6 charcters. at least one number and one letter
+		$.validator.addMethod('strongPassword', function (value, element) {
+			return this.optional(element) ||
+				value.length >= 6 &&
+				/\d/.test(value) &&
+				/[a-z]/i.test(value);
+		});
+	
+	
+		//check if username already exists
+		$.validator.addMethod('validateUsername', function (value, element) {
+			return !isUserExists(value);
+		});
+	
+		//Login
+	
+		//check if password match user
+		$.validator.addMethod('validateUser', function (password, element) {
+	
+			let user_input_username = document.getElementById("login_uname").value;
+	
+			let storaged_password = useres_list[user_input_username];
+	
+			if(storaged_password === null) {
+				return false;
+			}
+			else if(storaged_password === password) {
+				return true;
+			}
+	
+			return false;
+		});
+
+			//check if password match user
+		$.validator.addMethod('greaterOrEqual', function (value, element, param) {
+			return value >= param;
+		});
+
+		$.validator.addMethod("notEqualTo", function(value, element, param) {
+			return value != $(param).val();
+		});
+});
+
+
+const isUserExists = (users, key) => {
+
+	let result = users_list[key];
+
+	if(result == null) {
+		return false;
+	}
+	else {
+		return true;
+	}
+	
+};
+
+function menu(nav) {
+    hide();
+    $('#' + nav).show();
+};
+
+
+function hide() {
+	
+	$('#welcome').hide();
+	$('#signup').hide();
+	$('#signin').hide();
+	$('#play').hide();
+	$('#settings').hide();
+	$('#about').hide();
+
+	// start();
+};
+
+
+const register = () => {
+
+	//get elements
+	let username = document.getElementById("singup_username").value;
+	let password = document.getElementById("signup_psw").value;
+
+	//insert to storage
+	users_list[username]=password;
+
+	//go to login page
+	menu('singin');
+};
+
+function login() {
+
+	game_username = document.getElementById("login_uname").value;
+
+    
+
+
+	//go to settings page
+	menu('settings');
+};
+
+function resetSections(){
+
+	document.getElementById("welcome").style.display="none";
+	document.getElementById("signup").style.display="none";
+	document.getElementById("signin").style.display="none";
+	document.getElementById("about").style.display="none";
+	document.getElementById("settings").style.display="none";
+	document.getElementById("play").style.display="none";
+}
+
+
+function showWelcome(){
+
+	resetSections();
+	document.getElementById("welcome").style.display="block";
+}
+
+function showSignin(){
+
+	resetSections();
+	document.getElementById("signin").style.display="block";
+}
+
+function showSignup(){
+
+	resetSections();
+	document.getElementById("signup").style.display="block";
+}
+
+function showAbout(){
+
+	resetSections();
+	document.getElementById("about").style.display="block";
+}
+
+function showSettings(){
+
+	resetSections();
+	document.getElementById("settings").style.display="block";
+}
+
+function showPlay(){
+
+	resetSections();
+	document.getElementById("signup").style.display="block";
 }
