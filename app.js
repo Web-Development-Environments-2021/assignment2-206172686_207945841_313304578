@@ -5,7 +5,7 @@ $(document).ready(function () {
 	localStorage.setItem('p', 'p');
 
 	//LOGIN
-	$("#signin").validate({
+	$("#sign_in_form").validate({
 		rules: {
 			login_uname: {
 				required: true,
@@ -30,13 +30,13 @@ $(document).ready(function () {
 			login();
 
 			//reset form details
-			let form = $("#singin");
+			let form = $("#sign_in_form");
 			form[0].reset();
 		},
 	});
 
 	//REGISTER
-	$("#signup").validate({
+	$("#sign_up_form").validate({
 		rules: {
 			singup_username: {
 				required: true,
@@ -84,13 +84,13 @@ $(document).ready(function () {
 			register();
 
 			//reset form details
-			let form = $("#signup");
+			let form = $("#sign_up_form");
 			form[0].reset();
 		},
 	});
 });
 
-	$(function() {
+$(function() {
 
 		//Registration
 	

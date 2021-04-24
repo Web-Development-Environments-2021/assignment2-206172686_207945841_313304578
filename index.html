@@ -44,7 +44,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
   <!-- Avatar image in top left corner -->
   <img src="https://lh3.googleusercontent.com/-4IZv3iphNIqB_lD9fW0z6O23dG4xR8zwhKrjOVr4xVp0o5gNRmtAPzXGTc61VBykV62GKy18OXB9N6yhmiJum62ogDKD1yC7W8Nm_I29PYZlvC4EVC1TZ8pM6nvWtGKmGaemn_l-Q=w354-h315-p-k" style="width:100%">
-  <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="#welcome" class="w3-bar-item w3-button w3-padding-large w3-black" onclick="menu('welcome')"">
     <i class="fa fa-home w3-xxlarge"></i>
     <p>WELCOME</p>
   </a>
@@ -65,7 +65,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- Navbar on small screens (Hidden on medium and large screens) -->
 <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="#" class="w3-bar-item w3-button"  style="width:25% !important">WELCOME</a>
+    <a href="#welcome" class="w3-bar-item w3-button"  style="width:25% !important">WELCOME</a>
     <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
     <a href="#settings" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
     <a href="#play" class="w3-bar-item w3-button" style="width:25% !important">PLAY</a>
@@ -73,7 +73,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </div>
 
 <!-- Page Content -->
-<div class="w3-padding-large" id="main">
+<div class="w3-padding-large" id="welcome">
   <!-- Header/welcome -->
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
     <h1 class="w3-jumbo"><span class="w3-hide-small">WELCOME TO</span> PACMAN</h1>
@@ -81,8 +81,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
     <img src="https://lh3.googleusercontent.com/-4IZv3iphNIqB_lD9fW0z6O23dG4xR8zwhKrjOVr4xVp0o5gNRmtAPzXGTc61VBykV62GKy18OXB9N6yhmiJum62ogDKD1yC7W8Nm_I29PYZlvC4EVC1TZ8pM6nvWtGKmGaemn_l-Q=w354-h315-p-k"  class="w3-image" width="360" height="412">
     <p>
-        <a href="#signup" class="w3-button w3-white w3-border" onclick="menu('signup')">Sign Up</a>
-        <a href="#signin" class="w3-button w3-white w3-border" onclick="menu('signin')">Sign In</a>
+        <input type="submit" value="Sign Up" onclick="menu('signup')"/>
+        <input type="submit" value="Sign In" onclick="menu('signin')"/>
     </p>
 
     <h3 class="w3-padding-24 w3-text-light-grey">Submitters</h3>  
@@ -178,7 +178,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         </style>
         
         
-        <form action="/action_page.php" style="border:1px solid #ccc">
+        <form id="sign_up_form"action="/action_page.php" style="border:1px solid #ccc">
         <div class="container">
             <h1>Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
@@ -300,7 +300,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         
         <h2>Login Form</h2>
         
-        <form action="/action_page.php" method="post">
+        <form id="sign_in_form"action="/action_page.php" method="post">
           <div class="imgcontainer">
             <img src="https://lh3.googleusercontent.com/cPxm_w82t_77iTgZ5tyvs6TN_xf5sqFHkR2IepoIKNUIk4gXbxRYwXCoX9-nvOi_N1MEW1_QfbQlnmWKSRJYtYvztEWfbYFA8tl0MbCE50lgWAR07ovRRYVtmHekARcrqut5dym7sA=w600-h315-p-k" alt="Avatar" class="avatar">
           </div>
