@@ -377,12 +377,23 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 				context.fillStyle = "white";
 				context.font = "16px Arial";
 				context.fillText("25", center.x - 10, center.y + 5);
+
 			} else if (board[i][j] == cellType.WALL) {
-				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
-				context.fillStyle = "grey"; //color
-				context.fill();
+				// context.beginPath();
+				// context.rect(center.x - 30, center.y - 30, 60, 60);
+				// context.fillStyle = "grey"; //color
+				// context.fill();
+
+				let image = new Image(cell_size_width, cell_size_height);
+				image.src = images + "walls.png";
+				context.drawImage(image, center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
 			}
+			else if(board[i][j] == cellType.Empty)
+			{
+				context.fillStyle = 'black';
+				context.fillRect(center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
+			}
+
 			else if (board[i][j] == cellType.TIME_BUNOS) {
 				context.drawImage(timer, center.x - 20, center.y - 20, 35, 35);
 			}
