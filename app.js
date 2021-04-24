@@ -338,7 +338,7 @@ function init_board(food_remain, cnt, pacman_remain) {
 	init_pacman();
 
 	//put walls
-	InitialBricks();
+	// InitialBricks();
 
 	// Put timer bonus
 	emptyCell = findRandomEmptyCell(board);
@@ -461,15 +461,15 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 				context.fillStyle = "grey"; //color
 				context.fill();
 
-				let image = new Image(cell_size_width, cell_size_height);
-				image.src = images + "wall_1.jpeg";
-				context.drawImage(image, center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
+				// let image = new Image(cell_size_width, cell_size_height);
+				// image.src = images + "wall_1.jpeg";
+				// context.drawImage(image, center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
 			}
-			else if(board[i][j] == cellType.Empty)
-			{
-				context.fillStyle = 'black';
-				context.fillRect(center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
-			}
+			// else if(board[i][j] == cellType.Empty)
+			// {
+			// 	context.fillStyle = 'black';
+			// 	context.fillRect(center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
+			// }
 
 			else if (board[i][j] == cellType.TIME_BUNOS) {
 				context.drawImage(timer, center.x - 20, center.y - 20, 35, 35);
