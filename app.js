@@ -388,11 +388,11 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 				image.src = images + "wall_1.jpeg";
 				context.drawImage(image, center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
 			}
-			else if(board[i][j] == cellType.Empty)
-			{
-				context.fillStyle = 'black';
-				context.fillRect(center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
-			}
+			// else if(board[i][j] == cellType.Empty)
+			// {
+			// 	context.fillStyle = 'black';
+			// 	context.fillRect(center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
+			// }
 
 			else if (board[i][j] == cellType.TIME_BUNOS) {
 				context.drawImage(timer, center.x - 20, center.y - 20, 35, 35);
