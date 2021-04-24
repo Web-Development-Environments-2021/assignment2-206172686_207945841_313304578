@@ -385,7 +385,7 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 				// context.fill();
 
 				let image = new Image(cell_size_width, cell_size_height);
-				image.src = images + "walls.png";
+				image.src = images + "wall_1.jpeg";
 				context.drawImage(image, center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
 			}
 			else if(board[i][j] == cellType.Empty)
