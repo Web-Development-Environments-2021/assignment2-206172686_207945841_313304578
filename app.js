@@ -188,15 +188,15 @@
 // };
 
 
-function resetSections(){
+// function resetSections(){
 
-	document.getElementById("welcome").style.display="none";
-	document.getElementById("signup").style.display="none";
-	document.getElementById("signin").style.display="none";
-	document.getElementById("about").style.display="none";
-	document.getElementById("settings").style.display="none";
-	document.getElementById("play").style.display="none";
-}
+// 	document.getElementById("welcome").style.display="none";
+// 	document.getElementById("signup").style.display="none";
+// 	document.getElementById("signin").style.display="none";
+// 	document.getElementById("about").style.display="none";
+// 	document.getElementById("settings").style.display="none";
+// 	document.getElementById("play").style.display="none";
+// }
 
 
 function showWelcome(){

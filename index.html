@@ -540,6 +540,19 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 </script>
 
 <script>
+
+function resetSections(){
+
+document.getElementById("welcome").style.display="none";
+document.getElementById("signup").style.display="none";
+document.getElementById("signin").style.display="none";
+document.getElementById("about").style.display="none";
+document.getElementById("settings").style.display="none";
+document.getElementById("play").style.display="none";
+}
+</script>
+
+<script>
     function settingsFunction() {
       var x = document.getElementById("settings");
       if (x.style.display === "none") {
