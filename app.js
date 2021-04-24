@@ -167,25 +167,25 @@ const isUserExists = (users, key) => {
 // 	// resetGame();
 // };
 
-const register = () => {
+// const register = () => {
 
-	//get elements
-	let username = document.getElementById("singup_username").value;
-	let password = document.getElementById("signup_psw").value;
+// 	//get elements
+// 	let username = document.getElementById("singup_username").value;
+// 	let password = document.getElementById("signup_psw").value;
 
-	//insert to storage
-	localStorage.setItem(username, password);
+// 	//insert to storage
+// 	localStorage.setItem(username, password);
 
-	//go to login page
-	menu('singin')
-};
+// 	//go to login page
+// 	menu('singin')
+// };
 
-function login() {
+// function login() {
 
-	game_username = document.getElementById("login_uname").value;
-	//go to configuration page
-	menu('settings')
-};
+// 	game_username = document.getElementById("login_uname").value;
+// 	//go to configuration page
+// 	menu('settings')
+// };
 
 
 
