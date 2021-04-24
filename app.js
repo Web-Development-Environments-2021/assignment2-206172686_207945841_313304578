@@ -1,154 +1,154 @@
 // <------------WEBSITE---------->
 
 
-$(document).ready(function () {
-	localStorage.setItem('p', 'p');
+// $(document).ready(function () {
+// 	localStorage.setItem('p', 'p');
 
-	//LOGIN
-	$("#sign_in_form").validate({
-		rules: {
-			login_uname: {
-				required: true,
-			},
-			login_psw: {
-				required: true,
-				validateUser: true
-			}
-		},
-		messages: {
-			login_uname: {
-				required: "Enter your username."
-			},
-			login_psw: {
-				required: "Enter your password",
-				validateUser: "Username or Password is not valid."
-			}
-		},
+// 	//LOGIN
+// 	$("#sign_in_form").validate({
+// 		rules: {
+// 			login_uname: {
+// 				required: true,
+// 			},
+// 			login_psw: {
+// 				required: true,
+// 				validateUser: true
+// 			}
+// 		},
+// 		messages: {
+// 			login_uname: {
+// 				required: "Enter your username."
+// 			},
+// 			login_psw: {
+// 				required: "Enter your password",
+// 				validateUser: "Username or Password is not valid."
+// 			}
+// 		},
 	
-		submitHandler: function () {
+// 		submitHandler: function () {
 
-			login();
+// 			login();
 
-			//reset form details
-			let form = $("#sign_in_form");
-			form[0].reset();
-		},
-	});
+// 			//reset form details
+// 			let form = $("#sign_in_form");
+// 			form[0].reset();
+// 		},
+// 	});
 
-	//REGISTER
-	$("#sign_up_form").validate({
-		rules: {
-			singup_username: {
-				required: true,
-				validateUsername: true
-			},
-			signup_psw: {
-				required: true,
-				strongPassword: true
-			},
-			singup_name: {
-				required: true,
-				lettersonly: true
-			},
-			signup_email: {
-				required: true,
-				email: true
-			},
-			signup_bday: {
-				required: true
-			}
-		},
-		messages: {
-			singup_username: {
-				required: "Enter different username",
-				validateUsername: "Username already taken."
-			},
-			signup_psw: {
-				required: "Enter password",
-				strongPassword: "Password must contain 6 charcters. at least one number and one letter"
-			},
-			singup_name: {
-				required: "Enter your full name",
-				lettersonly: "Full name only contain letters."
-			},
-			signup_email: {
-				required: "Enter your e-mail",
-				email: "Please enter a valid e-mail address."
-			},
-			signup_bday: {
-				required: "Enter a birth day."
-			}
-		},
-		submitHandler: function () {
+// 	//REGISTER
+// 	$("#sign_up_form").validate({
+// 		rules: {
+// 			singup_username: {
+// 				required: true,
+// 				validateUsername: true
+// 			},
+// 			signup_psw: {
+// 				required: true,
+// 				strongPassword: true
+// 			},
+// 			singup_name: {
+// 				required: true,
+// 				lettersonly: true
+// 			},
+// 			signup_email: {
+// 				required: true,
+// 				email: true
+// 			},
+// 			signup_bday: {
+// 				required: true
+// 			}
+// 		},
+// 		messages: {
+// 			singup_username: {
+// 				required: "Enter different username",
+// 				validateUsername: "Username already taken."
+// 			},
+// 			signup_psw: {
+// 				required: "Enter password",
+// 				strongPassword: "Password must contain 6 charcters. at least one number and one letter"
+// 			},
+// 			singup_name: {
+// 				required: "Enter your full name",
+// 				lettersonly: "Full name only contain letters."
+// 			},
+// 			signup_email: {
+// 				required: "Enter your e-mail",
+// 				email: "Please enter a valid e-mail address."
+// 			},
+// 			signup_bday: {
+// 				required: "Enter a birth day."
+// 			}
+// 		},
+// 		submitHandler: function () {
 
-			register();
+// 			register();
 
-			//reset form details
-			let form = $("#sign_up_form");
-			form[0].reset();
-		},
-	});
-});
+// 			//reset form details
+// 			let form = $("#sign_up_form");
+// 			form[0].reset();
+// 		},
+// 	});
+// });
 
-$(function() {
+// $(function() {
 
-		//Registration
+// 		//Registration
 	
-		//Password must contain 6 charcters. at least one number and one letter
-		$.validator.addMethod('strongPassword', function (value, element) {
-			return this.optional(element) ||
-				value.length >= 6 &&
-				/\d/.test(value) &&
-				/[a-z]/i.test(value);
-		});
+// 		//Password must contain 6 charcters. at least one number and one letter
+// 		$.validator.addMethod('strongPassword', function (value, element) {
+// 			return this.optional(element) ||
+// 				value.length >= 6 &&
+// 				/\d/.test(value) &&
+// 				/[a-z]/i.test(value);
+// 		});
 	
 	
-		//check if username already exists
-		$.validator.addMethod('validateUsername', function (value, element) {
-			return !isUserExists(value);
-		});
+// 		//check if username already exists
+// 		$.validator.addMethod('validateUsername', function (value, element) {
+// 			return !isUserExists(value);
+// 		});
 	
-		//Login
+// 		//Login
 	
-		//check if password match user
-		$.validator.addMethod('validateUser', function (password, element) {
+// 		//check if password match user
+// 		$.validator.addMethod('validateUser', function (password, element) {
 	
-			let user_input_username = document.getElementById("login_uname").value;
+// 			let user_input_username = document.getElementById("login_uname").value;
 	
-			let localstorage_password = localStorage.getItem(user_input_username);
+// 			let localstorage_password = localStorage.getItem(user_input_username);
 	
-			if(localstorage_password === null) {
-				return false;
-			}
-			else if(localstorage_password === password) {
-				return true;
-			}
+// 			if(localstorage_password === null) {
+// 				return false;
+// 			}
+// 			else if(localstorage_password === password) {
+// 				return true;
+// 			}
 	
-			return false;
-		});
+// 			return false;
+// 		});
 
-			//check if password match user
-		$.validator.addMethod('greaterOrEqual', function (value, element, param) {
-			return value >= param;
-		});
+// 			//check if password match user
+// 		$.validator.addMethod('greaterOrEqual', function (value, element, param) {
+// 			return value >= param;
+// 		});
 
-		$.validator.addMethod("notEqualTo", function(value, element, param) {
-			return value != $(param).val();
-		});
-});
+// 		$.validator.addMethod("notEqualTo", function(value, element, param) {
+// 			return value != $(param).val();
+// 		});
+// });
 
-const isUserExists = (users, key) => {
+// const isUserExists = (users, key) => {
 
-	let result = localStorage.getItem(key);
+// 	let result = localStorage.getItem(key);
 
-	if(result == null) {
-		return false;
-	}
-	else {
-		return true;
-	}
+// 	if(result == null) {
+// 		return false;
+// 	}
+// 	else {
+// 		return true;
+// 	}
 	
-};
+// };
 
 // function menu(nav) {
 //     hide();
@@ -188,7 +188,52 @@ const isUserExists = (users, key) => {
 // };
 
 
+function resetSections(){
 
+	document.getElementById("welcome").style.display="none";
+	document.getElementById("signup").style.display="none";
+	document.getElementById("signin").style.display="none";
+	document.getElementById("about").style.display="none";
+	document.getElementById("settings").style.display="none";
+	document.getElementById("play").style.display="none";
+}
+
+
+function showWelcome(){
+
+	resetSections();
+	document.getElementById("welcome").style.display="block";
+}
+
+function showSignin(){
+
+	resetSections();
+	document.getElementById("signin").style.display="block";
+}
+
+function showSignup(){
+
+	resetSections();
+	document.getElementById("signup").style.display="block";
+}
+
+function showAbout(){
+
+	resetSections();
+	document.getElementById("about").style.display="block";
+}
+
+function showSettings(){
+
+	resetSections();
+	document.getElementById("settings").style.display="block";
+}
+
+function showPlay(){
+
+	resetSections();
+	document.getElementById("signup").style.display="block";
+}
 
 
 
@@ -198,6 +243,8 @@ const isUserExists = (users, key) => {
 var context;
 var pacman_position = new Object();
 var strawberry_position = new Object();
+var users_list={};
+users_list[k]=k;
 
 var monster1_position = new Object();
 monster1_position.is_alive = false

@@ -44,19 +44,19 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
   <!-- Avatar image in top left corner -->
   <img src="https://lh3.googleusercontent.com/-4IZv3iphNIqB_lD9fW0z6O23dG4xR8zwhKrjOVr4xVp0o5gNRmtAPzXGTc61VBykV62GKy18OXB9N6yhmiJum62ogDKD1yC7W8Nm_I29PYZlvC4EVC1TZ8pM6nvWtGKmGaemn_l-Q=w354-h315-p-k" style="width:100%">
-  <a href="#welcome" class="w3-bar-item w3-button w3-padding-large w3-black" onclick="menu('welcome')"">
+  <a href="#welcome" class="w3-bar-item w3-button w3-padding-large w3-black" onclick="showWelcome()"">
     <i class="fa fa-home w3-xxlarge"></i>
     <p>WELCOME</p>
   </a>
-  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="menu('about')">
+  <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="showAbout()">
     <i class="fa fa-user w3-xxlarge"></i>
     <p>ABOUT</p>
   </a>
-  <a href="#settings" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="menu('settings')">
+  <a href="#settings" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="showSettings()">
     <i class="fa fa-eye w3-xxlarge"></i>
     <p>SETTINGS</p>
   </a>
-  <a href="#play" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="menu('play')">
+  <a href="#play" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="showPlay()">
     <i class="fa fa-computer w3-xxlarge"></i>
     <p>PLAY</p>
   </a>
@@ -81,8 +81,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
     <img src="https://lh3.googleusercontent.com/-4IZv3iphNIqB_lD9fW0z6O23dG4xR8zwhKrjOVr4xVp0o5gNRmtAPzXGTc61VBykV62GKy18OXB9N6yhmiJum62ogDKD1yC7W8Nm_I29PYZlvC4EVC1TZ8pM6nvWtGKmGaemn_l-Q=w354-h315-p-k"  class="w3-image" width="360" height="412">
     <p>
-        <input href="#signup" type="submit" value="Sign Up" onclick="menu('signup')"/>
-        <input type="submit" value="Sign In" onclick="menu('signin')"/>
+        <a href="#signup" class="w3-button w3-white w3-border" onclick="showSignup()">Sign Up</a>
+        <a href="#signin" class="w3-button w3-white w3-border" onclick="showSignin()">Sign In</a>
     </p>
 
     <h3 class="w3-padding-24 w3-text-light-grey">Submitters</h3>  
@@ -102,7 +102,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 
    <!-- ***** sign up Area Starts ***** -->
-   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="signup">
+   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="signup" style="display: none;">
     
         <style>
             body {font-family: Arial, Helvetica, sans-serif;}
@@ -231,7 +231,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 
 <!-- ***** sign in Area Starts ***** -->
-<div class="w3-content w3-justify w3-text-grey w3-padding-64" id="signin">
+<div class="w3-content w3-justify w3-text-grey w3-padding-64" id="signin" style="display: none;">
 
     <style>
         body {font-family: Arial, Helvetica, sans-serif;}
@@ -327,7 +327,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- ***** sign in Area Ends ***** -->
 
 <!-- About Section -->
-  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+  <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about" style="display: none;">
 
     <h2 class="w3-text-light-grey">ABOUT</h2>
     <hr style="width:200px" class="w3-opacity">
@@ -382,7 +382,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <!-- About end -->
 
 <!-- ***** settings Area Starts ***** -->
-<div class="w3-content w3-justify w3-text-grey w3-padding-64" id="settings">
+<div class="w3-content w3-justify w3-text-grey w3-padding-64" id="settings" style="display: none;">
 
     <h2 class="w3-text-light-grey">Settings</h2>
     <hr style="width:200px" class="w3-opacity">
@@ -437,7 +437,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
 
 <!-- play Section -->
-<div class="w3-padding-64 w3-content w3-text-grey" id="play">
+<div class="w3-padding-64 w3-content w3-text-grey" id="play" style="display: none;">
 
    <button id ="startGameBtn" type="button">Start Game</button>
     <h2 class="w3-text-dark-grey">PLAY</h2>
@@ -547,8 +547,8 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       }
     }
 </script> -->
-
-<script>
+<!-- // <------------------------------------------------------------------------------------------->
+<!-- <script>
 
 $(document).ready(function () {
 	localStorage.setItem('p', 'p');
@@ -576,7 +576,7 @@ $(document).ready(function () {
 	
 		submitHandler: function () {
 
-			login();
+			//login();
 
 			//reset form details
 			let form = $("#sign_in_form");
@@ -734,7 +734,7 @@ const register = () => {
 	let password = document.getElementById("signup_psw").value;
 
 	//insert to storage
-	localStorage.setItem(username, password);
+	users_list[username]=password;
 
 	//go to login page
 	menu('singin')
@@ -745,11 +745,15 @@ const register = () => {
 function login() {
 
 	game_username = document.getElementById("login_uname").value;
-	//go to configuration page
-	menu('settings')
+
+    
+
+
+	//go to settings page
+	menu('settings');
 };
 
-</script>
+</script> -->
 
 </body>
 </html>
