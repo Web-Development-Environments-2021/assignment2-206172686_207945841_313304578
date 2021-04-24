@@ -24,6 +24,7 @@ $(document).ready(function () {
 				validateUser: "Username or Password is not valid."
 			}
 		},
+	
 		submitHandler: function () {
 
 			login();
@@ -87,6 +88,7 @@ $(document).ready(function () {
 			form[0].reset();
 		},
 	});
+});
 
 	$(function() {
 
