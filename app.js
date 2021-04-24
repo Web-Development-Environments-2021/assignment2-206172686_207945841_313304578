@@ -252,7 +252,7 @@ function Start() {
 
 	init_board();
 
-	InitialBricks();
+	
 
 	keyDown = -1;
 	addEventListener(
@@ -334,6 +334,9 @@ function init_board(food_remain, cnt, pacman_remain) {
 
 	// Put pacman
 	init_pacman();
+
+	//put walls
+	InitialBricks();
 
 	// Put timer bonus
 	emptyCell = findRandomEmptyCell(board);
@@ -451,10 +454,10 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 				context.fillText("25", center.x - 10, center.y + 5);
 
 			} else if (board[i][j] == cellType.WALL) {
-				// context.beginPath();
-				// context.rect(center.x - 30, center.y - 30, 60, 60);
-				// context.fillStyle = "grey"; //color
-				// context.fill();
+				context.beginPath();
+				context.rect(center.x - 30, center.y - 30, 60, 60);
+				context.fillStyle = "grey"; //color
+				context.fill();
 
 				let image = new Image(cell_size_width, cell_size_height);
 				image.src = images + "wall_1.jpeg";
