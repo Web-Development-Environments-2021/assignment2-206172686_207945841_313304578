@@ -336,7 +336,7 @@ function init_board(food_remain, cnt, pacman_remain) {
 	init_pacman();
 
 	//put walls
-	InitialBricks();
+	// InitialBricks();
 
 	// Put timer bonus
 	emptyCell = findRandomEmptyCell(board);
