@@ -533,11 +533,12 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
       var x = document.getElementById("signin");
       if (x.style.display === "none") {
         x.style.display = "block";
+        document.getElementById("welcome").style.display="none";
       } else {
         x.style.display = "none";
       }
 
-      document.getElementById("welcome").style.display="none";
+      
 
     }
 </script>
