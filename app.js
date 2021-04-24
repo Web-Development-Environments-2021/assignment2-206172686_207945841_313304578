@@ -161,6 +161,76 @@ function getRandomColor() {
 	return color;
 }
 
+function InitialBricks() {
+
+	//drawing frame
+	walls_amount = 0;
+
+	for(let a = 0; a < board_size; a++) {
+		for(let b = 0; b < board_size; b++) {
+			if(a == 0 || a == board_size - 1
+			|| b == 0 || b == board_size - 1) {
+				board[a][b] = cellType.Wall;
+				walls_amount++;
+			}
+		}	
+	}
+
+	//draw second quarter
+	board[1][6] = cellType.Wall;
+	board[2][2] = cellType.Wall;
+	board[2][3] = cellType.Wall;
+	board[2][4] = cellType.Wall;
+	board[2][6] = cellType.Wall;
+	board[2][8] = cellType.Wall;
+	board[3][2] = cellType.Wall;
+	board[3][6] = cellType.Wall;
+	board[3][8] = cellType.Wall;
+	board[4][2] = cellType.Wall;
+	board[4][4] = cellType.Wall;
+	board[4][6] = cellType.Wall;
+	board[4][8] = cellType.Wall;
+	board[4][9] = cellType.Wall;
+	board[5][4] = cellType.Wall;
+	board[6][2] = cellType.Wall;
+	board[6][3] = cellType.Wall;
+	board[6][4] = cellType.Wall;
+	board[6][5] = cellType.Wall;
+	board[6][7] = cellType.Wall;
+	board[6][8] = cellType.Wall;
+	board[6][9] = cellType.Wall;
+	board[7][5] = cellType.Wall;
+	board[8][1] = cellType.Wall;
+	board[8][2] = cellType.Wall;
+	
+	board[8][7] = cellType.Wall;
+	board[8][8] = cellType.Wall;
+	
+	board[9][5] = cellType.Wall;
+
+	walls_amount = walls_amount + 28;
+
+	/*third quarter*/
+	for(let i = 10; i < board_size; i++)
+	{
+		for(let j = 0; j < 10; j++)
+		{
+			board[i][j] = board[board_size - i - 1][j];
+			walls_amount++;
+		}
+	}
+
+	//draw first and fourth quarter
+	for(let i = 0; i < board_size; i++)
+	{
+		for(let j = 10; j < board_size; j++)
+		{
+			board[i][j] = board[i][board_size - j - 1];
+			walls_amount++;
+		}
+	}
+}
+
 window.addEventListener("keydown", function (e) {
 	if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
 		e.preventDefault();
@@ -181,6 +251,8 @@ function Start() {
 	food_25_points_remain = TOTAL_FOOD_AMOUNT - food_5_points_remain - food_15_points_remain
 
 	init_board();
+
+	InitialBricks();
 
 	keyDown = -1;
 	addEventListener(
@@ -388,11 +460,11 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 				image.src = images + "wall_1.jpeg";
 				context.drawImage(image, center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
 			}
-			// else if(board[i][j] == cellType.Empty)
-			// {
-			// 	context.fillStyle = 'black';
-			// 	context.fillRect(center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
-			// }
+			else if(board[i][j] == cellType.Empty)
+			{
+				context.fillStyle = 'black';
+				context.fillRect(center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
+			}
 
 			else if (board[i][j] == cellType.TIME_BUNOS) {
 				context.drawImage(timer, center.x - 20, center.y - 20, 35, 35);
