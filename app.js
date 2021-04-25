@@ -1,11 +1,183 @@
+// website
 
-// <------------GAME---------->
+//users storage 
+var users_list ={};
+users_list[k]=k;
+
+$(document).ready(function () {
+	localStorage.setItem('p', 'p');
+
+	//LOGIN
+	$("#sign_in_form").validate({
+		rules: {
+			login_uname: {
+				required: true,
+			},
+			login_psw: {
+				required: true,
+				validateUser: true
+			}
+		},
+		messages: {
+			login_uname: {
+				required: "Enter your username."
+			},
+			login_psw: {
+				required: "Enter your password",
+				validateUser: "Username or Password is not valid."
+			}
+		},
+	
+		submitHandler: function () {
+
+			login();
+
+			//reset form details
+			let form = $("#sign_in_form");
+			form[0].reset();
+		},
+	});
+
+	//SIGN UP
+	$("#sign_up_form").validate({
+		rules: {
+			singup_username: {
+				required: true,
+				validateUsername: true
+			},
+			signup_psw: {
+				required: true,
+				strongPassword: true
+			},
+			singup_name: {
+				required: true,
+				lettersonly: true
+			},
+			signup_email: {
+				required: true,
+				email: true
+			},
+			signup_bday: {
+				required: true
+			}
+		},
+		messages: {
+			singup_username: {
+				required: "Enter different username",
+				validateUsername: "Username already taken."
+			},
+			signup_psw: {
+				required: "Enter password",
+				strongPassword: "Password must contain 6 charcters. at least one number and one letter"
+			},
+			singup_name: {
+				required: "Enter your full name",
+				lettersonly: "Full name only contain letters."
+			},
+			signup_email: {
+				required: "Enter your e-mail",
+				email: "Please enter a valid e-mail address."
+			},
+			signup_bday: {
+				required: "Enter a birth day."
+			}
+		},
+		submitHandler: function () {
+
+			register();
+
+			//reset form details
+			let form = $("#sign_up_form");
+			form[0].reset();
+		},
+	});
+});
+
+$(function() {
+
+    //SIGN UP
+
+    //Password must contain 6 charcters. at least one number and one letter
+    $.validator.addMethod('strongPassword', function (value, element) {
+        return this.optional(element) ||
+            value.length >= 6 &&
+            /\d/.test(value) &&
+            /[a-z]/i.test(value);
+    });
+
+
+    //check if username already exists
+    $.validator.addMethod('validateUsername', function (value, element) {
+        return !isUserExists(value);
+    });
+
+    //Login
+
+    //check if password match user
+    $.validator.addMethod('validateUser', function (password, element) {
+
+        let user_input_username = document.getElementById("login_uname").value;
+
+        let storaged_password = useres_list[user_input_username];
+
+        if(storaged_password === null) {
+            return false;
+        }
+        else if(storaged_password === password) {
+            return true;
+        }
+
+        return false;
+    });
+
+        //check if password match user
+    $.validator.addMethod('greaterOrEqual', function (value, element, param) {
+        return value >= param;
+    });
+
+    $.validator.addMethod("notEqualTo", function(value, element, param) {
+        return value != $(param).val();
+    });
+});
+
+
+const isUserExists = (users, key) => {
+
+    return (key in users_list);
+};
+
+const register = () => {
+
+    //get elements
+    let username = document.getElementById("singup_username").value;
+    let password = document.getElementById("signup_psw").value;
+
+    //insert to storage
+    users_list[username]=password;
+
+    //go to SIGN IN
+    showSignin();
+};
+
+function login() {
+
+	//go to settings
+    showSettings();
+};
+
+
+
+
+
+
+
+
+
+// game
 
 var context;
 var pacman_position = new Object();
 var strawberry_position = new Object();
-var users_list={};
-users_list[k]=k;
 
 var monster1_position = new Object();
 monster1_position.is_alive = false
@@ -24,6 +196,8 @@ var start_time;
 var time_remain;
 var interval;
 var isShowingFireworks = false
+
+
 
 const COLS = 10
 const ROWS = 10
@@ -105,6 +279,8 @@ var BALL_25_COLOR = "#00b33c"
 var TOTAL_TIME = 120
 var MONSTERS_AMOUNT = 2
 
+
+
 $(document).ready(function () {
 	context = canvas.getContext("2d");
 	timer = document.getElementById('timer');
@@ -165,83 +341,13 @@ function getRandomColor() {
 	return color;
 }
 
-const cellType = {Wall='7'}
-
-function InitialBricks() {
-
-	//drawing frame
-	walls_amount = 0;
-
-	for(let a = 0; a < board_size; a++) {
-		for(let b = 0; b < board_size; b++) {
-			if(a == 0 || a == board_size - 1
-			|| b == 0 || b == board_size - 1) {
-				board[a][b] = cellType.Wall;
-				walls_amount++;
-			}
-		}	
-	}
-
-	//draw second quarter
-	board[1][6] = cellType.Wall;
-	board[2][2] = cellType.Wall;
-	board[2][3] = cellType.Wall;
-	board[2][4] = cellType.Wall;
-	board[2][6] = cellType.Wall;
-	board[2][8] = cellType.Wall;
-	board[3][2] = cellType.Wall;
-	board[3][6] = cellType.Wall;
-	board[3][8] = cellType.Wall;
-	board[4][2] = cellType.Wall;
-	board[4][4] = cellType.Wall;
-	board[4][6] = cellType.Wall;
-	board[4][8] = cellType.Wall;
-	board[4][9] = cellType.Wall;
-	board[5][4] = cellType.Wall;
-	board[6][2] = cellType.Wall;
-	board[6][3] = cellType.Wall;
-	board[6][4] = cellType.Wall;
-	board[6][5] = cellType.Wall;
-	board[6][7] = cellType.Wall;
-	board[6][8] = cellType.Wall;
-	board[6][9] = cellType.Wall;
-	board[7][5] = cellType.Wall;
-	board[8][1] = cellType.Wall;
-	board[8][2] = cellType.Wall;
-	
-	board[8][7] = cellType.Wall;
-	board[8][8] = cellType.Wall;
-	
-	board[9][5] = cellType.Wall;
-
-	walls_amount = walls_amount + 28;
-
-	/*third quarter*/
-	for(let i = 10; i < board_size; i++)
-	{
-		for(let j = 0; j < 10; j++)
-		{
-			board[i][j] = board[board_size - i - 1][j];
-			walls_amount++;
-		}
-	}
-
-	//draw first and fourth quarter
-	for(let i = 0; i < board_size; i++)
-	{
-		for(let j = 10; j < board_size; j++)
-		{
-			board[i][j] = board[i][board_size - j - 1];
-			walls_amount++;
-		}
-	}
-}
-
 window.addEventListener("keydown", function (e) {
 	if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
 		e.preventDefault();
 	}
 }, false);
+
+
 
 function Start() {
 	stopFireworks()
@@ -257,8 +363,6 @@ function Start() {
 	food_25_points_remain = TOTAL_FOOD_AMOUNT - food_5_points_remain - food_15_points_remain
 
 	init_board();
-
-	
 
 	keyDown = -1;
 	addEventListener(
@@ -340,9 +444,6 @@ function init_board(food_remain, cnt, pacman_remain) {
 
 	// Put pacman
 	init_pacman();
-
-	//put walls
-	// InitialBricks();
 
 	// Put timer bonus
 	emptyCell = findRandomEmptyCell(board);
@@ -458,23 +559,12 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 				context.fillStyle = "white";
 				context.font = "16px Arial";
 				context.fillText("25", center.x - 10, center.y + 5);
-
 			} else if (board[i][j] == cellType.WALL) {
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
 				context.fill();
-
-				// let image = new Image(cell_size_width, cell_size_height);
-				// image.src = images + "wall_1.jpeg";
-				// context.drawImage(image, center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
 			}
-			// else if(board[i][j] == cellType.Empty)
-			// {
-			// 	context.fillStyle = 'black';
-			// 	context.fillRect(center.x - cell_size_width / 2, center.y - cell_size_height / 2, cell_size_height, cell_size_height);
-			// }
-
 			else if (board[i][j] == cellType.TIME_BUNOS) {
 				context.drawImage(timer, center.x - 20, center.y - 20, 35, 35);
 			}
@@ -921,246 +1011,3 @@ function displayFireworks() {
 	}
 }
 
-
-// <------------WEBSITE---------->
-
-$(document).ready(function () {
-	localStorage.setItem('p', 'p');
-
-	//LOGIN
-	$("#sign_in_form").validate({
-		rules: {
-			login_uname: {
-				required: true,
-			},
-			login_psw: {
-				required: true,
-				validateUser: true
-			}
-		},
-		messages: {
-			login_uname: {
-				required: "Enter your username."
-			},
-			login_psw: {
-				required: "Enter your password",
-				validateUser: "Username or Password is not valid."
-			}
-		},
-	
-		submitHandler: function () {
-
-			//login();
-
-			//reset form details
-			let form = $("#sign_in_form");
-			form[0].reset();
-		},
-	});
-
-	//REGISTER
-	$("#sign_up_form").validate({
-		rules: {
-			singup_username: {
-				required: true,
-				validateUsername: true
-			},
-			signup_psw: {
-				required: true,
-				strongPassword: true
-			},
-			singup_name: {
-				required: true,
-				lettersonly: true
-			},
-			signup_email: {
-				required: true,
-				email: true
-			},
-			signup_bday: {
-				required: true
-			}
-		},
-		messages: {
-			singup_username: {
-				required: "Enter different username",
-				validateUsername: "Username already taken."
-			},
-			signup_psw: {
-				required: "Enter password",
-				strongPassword: "Password must contain 6 charcters. at least one number and one letter"
-			},
-			singup_name: {
-				required: "Enter your full name",
-				lettersonly: "Full name only contain letters."
-			},
-			signup_email: {
-				required: "Enter your e-mail",
-				email: "Please enter a valid e-mail address."
-			},
-			signup_bday: {
-				required: "Enter a birth day."
-			}
-		},
-		submitHandler: function () {
-
-			register();
-
-			//reset form details
-			let form = $("#sign_up_form");
-			form[0].reset();
-		},
-	});
-});
-
-
-$(function() {
-
-		//Registration
-	
-		//Password must contain 6 charcters. at least one number and one letter
-		$.validator.addMethod('strongPassword', function (value, element) {
-			return this.optional(element) ||
-				value.length >= 6 &&
-				/\d/.test(value) &&
-				/[a-z]/i.test(value);
-		});
-	
-	
-		//check if username already exists
-		$.validator.addMethod('validateUsername', function (value, element) {
-			return !isUserExists(value);
-		});
-	
-		//Login
-	
-		//check if password match user
-		$.validator.addMethod('validateUser', function (password, element) {
-	
-			let user_input_username = document.getElementById("login_uname").value;
-	
-			let storaged_password = useres_list[user_input_username];
-	
-			if(storaged_password === null) {
-				return false;
-			}
-			else if(storaged_password === password) {
-				return true;
-			}
-	
-			return false;
-		});
-
-			//check if password match user
-		$.validator.addMethod('greaterOrEqual', function (value, element, param) {
-			return value >= param;
-		});
-
-		$.validator.addMethod("notEqualTo", function(value, element, param) {
-			return value != $(param).val();
-		});
-});
-
-
-const isUserExists = (users, key) => {
-
-	let result = users_list[key];
-
-	if(result == null) {
-		return false;
-	}
-	else {
-		return true;
-	}
-	
-};
-
-function menu(nav) {
-    hide();
-    $('#' + nav).show();
-};
-
-
-function hide() {
-	
-	$('#welcome').hide();
-	$('#signup').hide();
-	$('#signin').hide();
-	$('#play').hide();
-	$('#settings').hide();
-	$('#about').hide();
-
-	// start();
-};
-
-
-const register = () => {
-
-	//get elements
-	let username = document.getElementById("singup_username").value;
-	let password = document.getElementById("signup_psw").value;
-
-	//insert to storage
-	users_list[username]=password;
-
-	//go to login page
-	menu('singin');
-};
-
-function login() {
-
-	game_username = document.getElementById("login_uname").value;
-
-    
-
-
-	//go to settings page
-	menu('settings');
-};
-
-function resetSections(){
-
-	document.getElementById("welcome").style.display="none";
-	document.getElementById("signup").style.display="none";
-	document.getElementById("signin").style.display="none";
-	document.getElementById("about").style.display="none";
-	document.getElementById("settings").style.display="none";
-	document.getElementById("play").style.display="none";
-}
-
-
-function showWelcome(){
-
-	resetSections();
-	document.getElementById("welcome").style.display="block";
-}
-
-function showSignin(){
-
-	resetSections();
-	document.getElementById("signin").style.display="block";
-}
-
-function showSignup(){
-
-	resetSections();
-	document.getElementById("signup").style.display="block";
-}
-
-function showAbout(){
-
-	resetSections();
-	document.getElementById("about").style.display="block";
-}
-
-function showSettings(){
-
-	resetSections();
-	document.getElementById("settings").style.display="block";
-}
-
-function showPlay(){
-
-	resetSections();
-	document.getElementById("signup").style.display="block";
-}
