@@ -1,8 +1,113 @@
 // website
 
+var context;
+var pacman_position = new Object();
+var strawberry_position = new Object();
+
+var monster1_position = new Object();
+monster1_position.is_alive = false
+var monster2_position = new Object();
+monster2_position.is_alive = false
+var monster3_position = new Object();
+monster3_position.is_alive = false
+var monster4_position = new Object();
+monster4_position.is_alive = false
+
+var board;
+var score;
+var amount_of_balls_remain;
+var pac_color;
+var start_time;
+var time_remain;
+var interval;
+var isShowingFireworks = false;
+var k = "k";
+
+
+
+const COLS = 10
+const ROWS = 10
+
+const TIME_BUNOS_SECONDS = 10
+const MIN_BALLS_AMOUNT = 50;
+const MAX_BALLS_AMOUNT = 90;
+const MIN_TIME_SECONDS = 60;
+const MIN_MONSTERS_AMOUNT = 1
+const MAX_MONSTERS_AMOUNT = 4
+const MONSTER_EAT_PENALTY = 10
+
+const STRAWBERRY_POINTS_VALUE = 50
+
+const cellType = {
+	EMPTY: 'EMPTY',
+	FOOD_5_POINTS: 'FOOD_5_POINTS',
+	FOOD_15_POINTS: 'FOOD_15_POINTS',
+	FOOD_25_POINTS: 'FOOD_25_POINTS',
+	PACMAN: 'PACMAN',
+	TIME_BUNOS: 'TIME_BUNOS',
+	PILL: 'PILL',
+	STRAWBERRY: 'STRAWBERRY',
+	WALL: 'WALL',
+	MONSTER1: 'MONSTER1',
+	MONSTER2: 'MONSTER2',
+	MONSTER3: 'MONSTER3',
+	MONSTER4: 'MONSTER4',
+};
+
+const FOOD_CELLS = [cellType.FOOD_5_POINTS, cellType.FOOD_15_POINTS, cellType.food_25_points_remain]
+const MONSTER_CELLS = [cellType.MONSTER1, cellType.MONSTER2, cellType.MONSTER3, cellType.MONSTER4]
+const NON_ACCESS_CELLS = [cellType.STRAWBERRY, cellType.WALL].concat(MONSTER_CELLS)
+
+const monsters = [
+	{
+		position: monster1_position,
+		cellType: cellType.MONSTER1,
+		initial_i: 0,
+		initial_j: 0,
+	},
+	{
+		position: monster2_position,
+		cellType: cellType.MONSTER2,
+		initial_i: ROWS - 1,
+		initial_j: COLS - 1,
+	},
+	{
+		position: monster3_position,
+		cellType: cellType.MONSTER3,
+		initial_i: ROWS - 1,
+		initial_j: 0,
+	},
+	{
+		position: monster4_position,
+		cellType: cellType.MONSTER4,
+		initial_i: 0,
+		initial_j: COLS - 1,
+	},
+];
+
+const LEFT_ARROW = 37
+const UP_ARROW = 38
+const RIGHT_ARROW = 39
+const DOWN_ARROW = 40
+
+const LEFT_MOVE = 1
+const RIGHT_MOVE = 2
+const UP_MOVE = 3
+const DOWN_MOVE = 4
+
+// TODO: 5
+const INITIAL_LIFES = 1
+var current_lifes = INITIAL_LIFES
+var TOTAL_FOOD_AMOUNT = 50
+var BALL_5_COLOR = "#0000ff"
+var BALL_15_COLOR = "#ff0000"
+var BALL_25_COLOR = "#00b33c"
+var TOTAL_TIME = 120
+var MONSTERS_AMOUNT = 2
+
 //users storage 
 var users_list ={};
-users_list[k]=k;
+users_list[k] = k;
 
 $(document).ready(function () {
 	localStorage.setItem('p', 'p');
@@ -165,119 +270,79 @@ function login() {
     showSettings();
 };
 
+function showAbout() {
+    var T = document.getElementById("about");
+    T.style.display = "block";
+    
+    document.getElementById("welcome").style.display="none";
+    document.getElementById("signup").style.display="none";
+    document.getElementById("signin").style.display="none";
+    document.getElementById("play").style.display="none";
+    document.getElementById("settings").style.display="none";
+};
 
+function showWelcome() {
+    var T = document.getElementById("welcome");
+    T.style.display = "block";
+    
+    document.getElementById("about").style.display="none";
+    document.getElementById("signup").style.display="none";
+    document.getElementById("signin").style.display="none";
+    document.getElementById("play").style.display="none";
+    document.getElementById("settings").style.display="none";
+};
 
-
-
+function showSignup() {
+    var T = document.getElementById("signup");
+    T.style.display = "block";
+    
+    document.getElementById("welcome").style.display="none";
+    document.getElementById("about").style.display="none";
+    document.getElementById("signin").style.display="none";
+    document.getElementById("play").style.display="none";
+    document.getElementById("settings").style.display="none";
+};
+function showSignin() {
+    var T = document.getElementById("signin");
+    T.style.display = "block";
+    
+    document.getElementById("welcome").style.display="none";
+    document.getElementById("about").style.display="none";
+    document.getElementById("signup").style.display="none";
+    document.getElementById("play").style.display="none";
+    document.getElementById("settings").style.display="none";
+};
+function showSettings() {
+    var T = document.getElementById("settings");
+    T.style.display = "block";
+    var N = document.getElementById("secondNavbar");
+    T.style.display = "block";
+    
+    document.getElementById("welcome").style.display="none";
+    document.getElementById("about").style.display="none";
+    document.getElementById("signup").style.display="none";
+    document.getElementById("play").style.display="none";
+    document.getElementById("signin").style.display="none";
+    document.getElementById("mainNavbar").style.display="none";
+    
+};
+function showPlay() {
+    var T = document.getElementById("play");
+    T.style.display = "block";
+    
+    document.getElementById("welcome").style.display="none";
+    document.getElementById("about").style.display="none";
+    document.getElementById("signup").style.display="none";
+    document.getElementById("signin").style.display="none";
+    document.getElementById("settings").style.display="none";
+};
 
 
 
 
 // game
 
-var context;
-var pacman_position = new Object();
-var strawberry_position = new Object();
 
-var monster1_position = new Object();
-monster1_position.is_alive = false
-var monster2_position = new Object();
-monster2_position.is_alive = false
-var monster3_position = new Object();
-monster3_position.is_alive = false
-var monster4_position = new Object();
-monster4_position.is_alive = false
-
-var board;
-var score;
-var amount_of_balls_remain;
-var pac_color;
-var start_time;
-var time_remain;
-var interval;
-var isShowingFireworks = false
-
-
-
-const COLS = 10
-const ROWS = 10
-
-const TIME_BUNOS_SECONDS = 10
-const MIN_BALLS_AMOUNT = 50;
-const MAX_BALLS_AMOUNT = 90;
-const MIN_TIME_SECONDS = 60;
-const MIN_MONSTERS_AMOUNT = 1
-const MAX_MONSTERS_AMOUNT = 4
-const MONSTER_EAT_PENALTY = 10
-
-const STRAWBERRY_POINTS_VALUE = 50
-
-const cellType = {
-	EMPTY: 'EMPTY',
-	FOOD_5_POINTS: 'FOOD_5_POINTS',
-	FOOD_15_POINTS: 'FOOD_15_POINTS',
-	FOOD_25_POINTS: 'FOOD_25_POINTS',
-	PACMAN: 'PACMAN',
-	TIME_BUNOS: 'TIME_BUNOS',
-	PILL: 'PILL',
-	STRAWBERRY: 'STRAWBERRY',
-	WALL: 'WALL',
-	MONSTER1: 'MONSTER1',
-	MONSTER2: 'MONSTER2',
-	MONSTER3: 'MONSTER3',
-	MONSTER4: 'MONSTER4',
-};
-
-const FOOD_CELLS = [cellType.FOOD_5_POINTS, cellType.FOOD_15_POINTS, cellType.food_25_points_remain]
-const MONSTER_CELLS = [cellType.MONSTER1, cellType.MONSTER2, cellType.MONSTER3, cellType.MONSTER4]
-const NON_ACCESS_CELLS = [cellType.STRAWBERRY, cellType.WALL].concat(MONSTER_CELLS)
-
-const monsters = [
-	{
-		position: monster1_position,
-		cellType: cellType.MONSTER1,
-		initial_i: 0,
-		initial_j: 0,
-	},
-	{
-		position: monster2_position,
-		cellType: cellType.MONSTER2,
-		initial_i: ROWS - 1,
-		initial_j: COLS - 1,
-	},
-	{
-		position: monster3_position,
-		cellType: cellType.MONSTER3,
-		initial_i: ROWS - 1,
-		initial_j: 0,
-	},
-	{
-		position: monster4_position,
-		cellType: cellType.MONSTER4,
-		initial_i: 0,
-		initial_j: COLS - 1,
-	},
-];
-
-const LEFT_ARROW = 37
-const UP_ARROW = 38
-const RIGHT_ARROW = 39
-const DOWN_ARROW = 40
-
-const LEFT_MOVE = 1
-const RIGHT_MOVE = 2
-const UP_MOVE = 3
-const DOWN_MOVE = 4
-
-// TODO: 5
-const INITIAL_LIFES = 1
-var current_lifes = INITIAL_LIFES
-var TOTAL_FOOD_AMOUNT = 50
-var BALL_5_COLOR = "#0000ff"
-var BALL_15_COLOR = "#ff0000"
-var BALL_25_COLOR = "#00b33c"
-var TOTAL_TIME = 120
-var MONSTERS_AMOUNT = 2
 
 
 
