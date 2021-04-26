@@ -395,13 +395,12 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 
     <form id="settings_form">
 
-<!-- TODO: WASD vs arrows -->
       <label for="movementKeys">Movement kyes:</label>
       <div>
-        Down: <input type="button" id="down_key" onclick="keySettings('down')" value="ArrowDown"/>
-        Up: <input type="button" id="up_key" onclick="keySettings('up')" value="ArrowUp"/>
-        Left: <input type="button" id="left_key" onclick="keySettings('left')" value="ArrowLeft"/>
-        Right: <input type="button" id="right_key" onclick="keySettings('right')" value="ArrowRight"/>
+        Down: <input type="button" id="down_key" value="ArrowDown"/>
+        Up: <input type="button" id="up_key" value="ArrowUp"/>
+        Left: <input type="button" id="left_key" value="ArrowLeft"/>
+        Right: <input type="button" id="right_key" value="ArrowRight"/>
       </div>
 
       <br>
@@ -487,6 +486,47 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         </div>
         <div id="game">
             <canvas id="canvas" height="600" width="600"></canvas>
+            <div>
+              <label for="movementKeys">Movement kyes:</label>
+              <div>
+                Down: <input disabled type="button" id="down_key_show"/>
+                Up: <input disabled type="button" id="up_key_show" />
+                Left: <input disabled type="button" id="left_key_show"/>
+                Right: <input disabled type="button" id="right_key_show"/>
+              </div>
+
+              <br>
+
+              <label for="numOfBalls_show">Number of balls:</label>
+              <input disabled id="numOfBalls_show" />
+
+              <br>
+
+              <label for="ball5color_show">5 Points ball color:</label>
+              <input disabled type="color" id="ball5color_show"> 
+              
+              <br>
+
+              <label for="ball15color_show">15 Points ball color:</label>
+              <input disabled type="color" id="ball15color_show" >
+            
+              <br>
+
+              <label for="ball25color_show">25 Points ball color:</label>
+              <input disabled type="color" id="ball25color_show">
+            
+              <br>
+
+              <label for="totalTime_show">Total Time (seconds):</label>
+              <input disabled id="totalTime_show" />
+            
+              <br>
+
+              <label for="monstersAmount_show">How Many Monsters:</label>
+              <input disabled id="monstersAmount_show" />
+            
+              <br>
+            </div>
         </div>
     </body>
   

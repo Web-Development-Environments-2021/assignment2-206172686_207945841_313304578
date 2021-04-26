@@ -262,8 +262,24 @@ function Start() {
 		false
 	);
 
+	showGameSettings()
+
 	// TODO: 250
 	interval = setInterval(UpdatePosition, 250);
+}
+
+function showGameSettings() {
+	down_key_show.value = down_key.value
+	right_key_show.value = right_key.value
+	up_key_show.value = up_key.value
+	left_key_show.value = left_key.value
+
+	numOfBalls_show.value = numOfBalls.value
+	ball5color_show.value = ball5color.value
+	ball15color_show.value = ball15color.value
+	ball25color_show.value = ball25color.value
+	totalTime_show.value = totalTime.value
+	monstersAmount_show.value = monstersAmount.value
 }
 
 function init_board(food_remain, cnt, pacman_remain) {
