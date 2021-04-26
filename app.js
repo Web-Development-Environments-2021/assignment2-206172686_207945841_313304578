@@ -86,15 +86,62 @@ const monsters = [
 	},
 ];
 
-const LEFT_ARROW = 37
-const UP_ARROW = 38
-const RIGHT_ARROW = 39
-const DOWN_ARROW = 40
-
 const LEFT_MOVE = 1
 const RIGHT_MOVE = 2
 const UP_MOVE = 3
 const DOWN_MOVE = 4
+
+const DEFAULT_DOWN_KEY = 40
+const DEFAULT_UP_KEY = 38
+const DEFAULT_LEFT_KEY = 37
+const DEFAULT_RIGHT_KEY = 39
+
+KEYS_DATA = {
+	"down": {
+		keyCode: DEFAULT_DOWN_KEY,
+		move: DOWN_MOVE,
+	},
+	"up": {
+		keyCode: DEFAULT_UP_KEY,
+		move: UP_MOVE,
+	},
+	"left": {
+		keyCode: DEFAULT_LEFT_KEY,
+		move: LEFT_MOVE,
+	},
+	"right": {
+		keyCode: DEFAULT_RIGHT_KEY,
+		move: RIGHT_MOVE,
+	}
+}
+
+const TEMP_KEYS_DATA = {
+	"down": {
+		keyCode: DEFAULT_DOWN_KEY,
+		is_waiting_for_key: false,
+		move: DOWN_MOVE,
+		button_id: "down_key"
+	},
+	"up": {
+		keyCode: DEFAULT_UP_KEY,
+		is_waiting_for_key: false,
+		move: UP_MOVE,
+		button_id: "up_key"
+	},
+	"left": {
+		keyCode: DEFAULT_LEFT_KEY,
+		is_waiting_for_key: false,
+		move: LEFT_MOVE,
+		button_id: "left_key"
+	},
+	"right": {
+		keyCode: DEFAULT_RIGHT_KEY,
+		is_waiting_for_key: false,
+		move: RIGHT_MOVE,
+		button_id: "right_key"
+	}
+}
+
 
 const INITIAL_LIFES = 5
 var current_lifes = INITIAL_LIFES
@@ -103,7 +150,8 @@ var BALL_5_COLOR = "#0000ff"
 var BALL_15_COLOR = "#ff0000"
 var BALL_25_COLOR = "#00b33c"
 var TOTAL_TIME = 120
-var MONSTERS_AMOUNT = 2
+// todo: 2
+var MONSTERS_AMOUNT = 0
 
 $(document).ready(function () {
 	context = canvas.getContext("2d");
@@ -148,7 +196,17 @@ document.getElementById("settingsRandomValuesBtn").onclick = function () {
 	ball25color.value = getRandomColor()
 	totalTime.value = getRandomInt(MIN_TIME_SECONDS, MIN_TIME_SECONDS * 10)
 	monstersAmount.value = getRandomInt(MIN_MONSTERS_AMOUNT, MAX_MONSTERS_AMOUNT)
-	// TODO: default keys of arrows...
+	// TODO: default keys of arrows... - revert the UI changes
+	TEMP_KEYS_DATA.down.keyCode = DEFAULT_DOWN_KEY
+	TEMP_KEYS_DATA.up.keyCode = DEFAULT_UP_KEY
+	TEMP_KEYS_DATA.left.keyCode = DEFAULT_LEFT_KEY
+	TEMP_KEYS_DATA.right.keyCode = DEFAULT_RIGHT_KEY
+
+	document.getElementById(TEMP_KEYS_DATA.down.button_id).value = "ArrowDown"
+	document.getElementById(TEMP_KEYS_DATA.up.button_id).value = "ArrowUp"
+	document.getElementById(TEMP_KEYS_DATA.left.button_id).value = "ArrowLeft"
+	document.getElementById(TEMP_KEYS_DATA.right.button_id).value = "ArrowRight"
+
 };
 
 function getRandomInt(min, max) {
@@ -191,7 +249,15 @@ function Start() {
 	addEventListener(
 		"keydown",
 		function (e) {
-			keyDown = e.keyCode
+			for (let k in KEYS_DATA) {
+
+				// Change keyDown only if valid movement
+				if (KEYS_DATA[k].keyCode == e.keyCode) {
+					keyDown = e.keyCode
+				}
+			}
+
+
 		},
 		false
 	);
@@ -326,19 +392,50 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keyDown == UP_ARROW) {
-		return UP_MOVE;
-	}
-	if (keyDown == DOWN_ARROW) {
-		return DOWN_MOVE;
-	}
-	if (keyDown == LEFT_ARROW) {
-		return LEFT_MOVE;
-	}
-	if (keyDown == RIGHT_ARROW) {
-		return RIGHT_MOVE;
+	for (const [key, value] of Object.entries(KEYS_DATA)) {
+		if (keyDown == value.keyCode) {
+			return value.move 
+		}
 	}
 }
+
+document.getElementById("down_key").onclick = function () {
+	reset_key_downs()
+	TEMP_KEYS_DATA.down.is_waiting_for_key = true
+};
+
+document.getElementById("up_key").onclick = function () {
+	reset_key_downs()
+	TEMP_KEYS_DATA.up.is_waiting_for_key = true
+};
+
+document.getElementById("right_key").onclick = function () {
+	reset_key_downs()
+	TEMP_KEYS_DATA.right.is_waiting_for_key = true
+};
+
+document.getElementById("left_key").onclick = function () {
+	reset_key_downs()
+	TEMP_KEYS_DATA.left.is_waiting_for_key = true
+};
+
+function reset_key_downs() {
+	for (const [key, value] of Object.entries(TEMP_KEYS_DATA)) {
+		value.is_waiting_for_key = false
+	}
+}
+
+document.addEventListener("keydown", event => {
+
+	for (const [key, value] of Object.entries(TEMP_KEYS_DATA)) {
+		if (value.is_waiting_for_key) {
+			value.keyCode = event.keyCode
+			document.getElementById(value.button_id).value = event.key
+		}
+
+		value.is_waiting_for_key = false
+	}
+});
 
 function Draw(pacman_direction = RIGHT_MOVE) {
 	canvas.width = canvas.width; //clean board
@@ -500,13 +597,12 @@ function UpdatePosition() {
 		current_lifes += 1
 	} else if (board[pacman_position.i][pacman_position.j] == cellType.SLOW_MOTION) {
 		is_slow_motion = true
-		setTimeout(() => 
-		{ 
+		setTimeout(() => {
 			is_slow_motion = false
 			emptyCell = findRandomEmptyCell(board);
 			board[emptyCell[0]][emptyCell[1]] = cellType.SLOW_MOTION;
-			
-		 }, SLOW_MOTION_TIMEOUT)
+
+		}, SLOW_MOTION_TIMEOUT)
 	} else if (board[pacman_position.i][pacman_position.j] == cellType.STRAWBERRY) {
 		score += STRAWBERRY_POINTS_VALUE
 		strawberry_position.is_alive = false
@@ -559,7 +655,12 @@ document.getElementById("settings_form").onsubmit = function () {
 	BALL_15_COLOR = ball15color.value
 	BALL_25_COLOR = ball25color.value
 	TOTAL_TIME = ~~totalTime.value
-	MONSTERS_AMOUNT = ~~monstersAmount.value
+
+	// todo:
+	MONSTERS_AMOUNT = 0
+	// MONSTERS_AMOUNT = ~~monstersAmount.value
+	
+	KEYS_DATA = JSON.parse(JSON.stringify(TEMP_KEYS_DATA))
 
 	alert("Let's play!")
 };
