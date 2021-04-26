@@ -12,6 +12,7 @@ monster3_position.is_alive = false
 var monster4_position = new Object();
 monster4_position.is_alive = false
 
+
 var board;
 var score;
 var amount_of_balls_remain;
@@ -19,7 +20,9 @@ var pac_color;
 var start_time;
 var time_remain;
 var interval;
-var isShowingFireworks = false
+var isShowingFireworks = false;
+var is_slow_motion = false;
+var count_steps = 0;
 
 const COLS = 10
 const ROWS = 10
@@ -31,6 +34,7 @@ const MIN_TIME_SECONDS = 60;
 const MIN_MONSTERS_AMOUNT = 1
 const MAX_MONSTERS_AMOUNT = 4
 const MONSTER_EAT_PENALTY = 10
+const SLOW_MOTION_TIMEOUT = 3000
 
 const STRAWBERRY_POINTS_VALUE = 50
 
@@ -48,6 +52,7 @@ const cellType = {
 	MONSTER2: 'MONSTER2',
 	MONSTER3: 'MONSTER3',
 	MONSTER4: 'MONSTER4',
+	SLOW_MOTION: 'SLOW_MOTION'
 };
 
 const FOOD_CELLS = [cellType.FOOD_5_POINTS, cellType.FOOD_15_POINTS, cellType.food_25_points_remain]
@@ -91,8 +96,7 @@ const RIGHT_MOVE = 2
 const UP_MOVE = 3
 const DOWN_MOVE = 4
 
-// TODO: 5
-const INITIAL_LIFES = 1
+const INITIAL_LIFES = 5
 var current_lifes = INITIAL_LIFES
 var TOTAL_FOOD_AMOUNT = 50
 var BALL_5_COLOR = "#0000ff"
@@ -106,6 +110,7 @@ $(document).ready(function () {
 	timer = document.getElementById('timer');
 	pill = document.getElementById('pill');
 	strawberry = document.getElementById('strawberry');
+	slow_motion = document.getElementById('slow_motion')
 
 	// Relvant for fireworks:
 	// now we will setup our basic variables for the demo
@@ -271,6 +276,10 @@ function init_board(food_remain, cnt, pacman_remain) {
 	emptyCell = findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = cellType.PILL;
 
+	// Put slow motion pill
+	emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = cellType.SLOW_MOTION;
+
 	// Put strawberry
 	emptyCell = findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = cellType.STRAWBERRY;
@@ -290,6 +299,8 @@ function init_pacman(emptyCell) {
 
 function init_monsters() {
 
+	monsters.forEach(monster => monster.is_alive = false)
+
 	for (i = 0; i < MONSTERS_AMOUNT; i++) {
 		curr_monster = monsters[i]
 		if (curr_monster.position.prev_value) {
@@ -300,7 +311,7 @@ function init_monsters() {
 		curr_monster.position.i = curr_monster.initial_i;
 		curr_monster.position.j = curr_monster.initial_j;
 		curr_monster.position.prev_value = cellType.EMPTY;
-		curr_monster.position.is_alive = true;
+		curr_monster.is_alive = true;
 	}
 }
 
@@ -392,9 +403,12 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 			else if (board[i][j] == cellType.STRAWBERRY && strawberry_position.is_alive) {
 				context.drawImage(strawberry, center.x - 20, center.y - 20, 35, 35);
 			}
+			else if (board[i][j] == cellType.SLOW_MOTION) {
+				context.drawImage(slow_motion, center.x - 20, center.y - 20, 35, 35);
+			}
 
 			monsters.forEach(monster => {
-				if (board[i][j] == monster.cellType && monster.position.is_alive) {
+				if (board[i][j] == monster.cellType && monster.is_alive) {
 					context.drawImage(monster1, center.x - 20, center.y - 20, 35, 35);
 				}
 			})
@@ -438,13 +452,21 @@ function get_pacman_view_props(move, center) {
 	};
 }
 
+function same_positions(x, y) {
+	if (x.i == y.i && x.j == y.j) {
+		return true
+	}
+	return false
+}
+
 function UpdatePosition() {
+	count_steps += 1;
 	board[pacman_position.i][pacman_position.j] = cellType.EMPTY;
 	curr_move = GetKeyPressed()
 
 	movePosition(pacman_position, curr_move, true);
 
-	if (strawberry_position.is_alive) {
+	if (!(same_positions(pacman_position, strawberry_position)) && strawberry_position.is_alive) {
 		board[strawberry_position.i][strawberry_position.j] = strawberry_position.prev_value;
 		movePosition(strawberry_position, getRandomInt(1, 4), false);
 		strawberry_position.prev_value = board[strawberry_position.i][strawberry_position.j]
@@ -452,11 +474,13 @@ function UpdatePosition() {
 	}
 
 	monsters.forEach(monster => {
-		if (monster.position.is_alive) {
-			board[monster.position.i][monster.position.j] = monster.position.prev_value;
-			moveMonster(monster.position);
-			monster.position.prev_value = board[monster.position.i][monster.position.j]
-			board[monster.position.i][monster.position.j] = monster.cellType;
+		if (!is_slow_motion || count_steps % 3 == 0) {
+			if (monster.is_alive) {
+				board[monster.position.i][monster.position.j] = monster.position.prev_value;
+				moveMonster(monster.position);
+				monster.position.prev_value = board[monster.position.i][monster.position.j]
+				board[monster.position.i][monster.position.j] = monster.cellType;
+			}
 		}
 	})
 
@@ -474,6 +498,15 @@ function UpdatePosition() {
 		TOTAL_TIME += TIME_BUNOS_SECONDS
 	} else if (board[pacman_position.i][pacman_position.j] == cellType.PILL) {
 		current_lifes += 1
+	} else if (board[pacman_position.i][pacman_position.j] == cellType.SLOW_MOTION) {
+		is_slow_motion = true
+		setTimeout(() => 
+		{ 
+			is_slow_motion = false
+			emptyCell = findRandomEmptyCell(board);
+			board[emptyCell[0]][emptyCell[1]] = cellType.SLOW_MOTION;
+			
+		 }, SLOW_MOTION_TIMEOUT)
 	} else if (board[pacman_position.i][pacman_position.j] == cellType.STRAWBERRY) {
 		score += STRAWBERRY_POINTS_VALUE
 		strawberry_position.is_alive = false
@@ -498,19 +531,22 @@ function UpdatePosition() {
 	if (amount_of_balls_remain == 0) {
 		Draw(curr_move);
 		window.clearInterval(interval);
-		window.alert("Winner!!!");
 		showFireworks()
+		setTimeout(() => window.alert("Winner!!!"), 100);
+
 	} else if (time_remain == 0) {
 		Draw(curr_move);
 		window.clearInterval(interval);
-		window.alert("You are better than " + score + " Points!");
 		showLost()
+		setTimeout(() => window.alert("You are better than " + score + " Points!"), 100);
+
 	}
 	else if (current_lifes == 0) {
 		Draw(curr_move);
 		window.clearInterval(interval);
-		window.alert("Loser!");
 		showLost()
+		setTimeout(() => window.alert("Loser!"), 100);
+
 	}
 	else {
 		Draw(curr_move);
@@ -518,12 +554,12 @@ function UpdatePosition() {
 }
 
 document.getElementById("settings_form").onsubmit = function () {
-	TOTAL_FOOD_AMOUNT = numOfBalls.value
+	TOTAL_FOOD_AMOUNT = ~~numOfBalls.value
 	BALL_5_COLOR = ball5color.value
 	BALL_15_COLOR = ball15color.value
 	BALL_25_COLOR = ball25color.value
 	TOTAL_TIME = ~~totalTime.value
-	MONSTERS_AMOUNT = monstersAmount.value
+	MONSTERS_AMOUNT = ~~monstersAmount.value
 
 	alert("Let's play!")
 };
