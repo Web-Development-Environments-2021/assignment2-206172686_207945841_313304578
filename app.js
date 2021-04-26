@@ -22,6 +22,10 @@ var time_remain;
 var interval;
 var isShowingFireworks = false;
 var k = "k";
+var username_input;
+var storaged_password;
+var username;
+var pass;
 
 
 
@@ -129,7 +133,7 @@ $(document).ready(function () {
 			},
 			login_psw: {
 				required: "Enter your password",
-				validateUser: "Username or Password is not valid."
+				validateUser: "Username or Password is not exist."
 			}
 		},
 	
@@ -162,14 +166,14 @@ $(document).ready(function () {
 				required: true,
 				email: true
 			},
-			signup_bday: {
-				required: true
-			}
+			// signup_bday: {
+			// 	required: true
+			// }
 		},
 		messages: {
 			singup_username: {
 				required: "Enter different username",
-				validateUsername: "Username already taken."
+				validateUniqUname: "Username already exist."
 			},
 			signup_psw: {
 				required: "Enter password",
@@ -183,9 +187,9 @@ $(document).ready(function () {
 				required: "Enter your e-mail",
 				email: "Please enter a valid e-mail address."
 			},
-			signup_bday: {
-				required: "Enter a birth day."
-			}
+			// signup_bday: {
+			// 	required: "Enter a birth day."
+			// }
 		},
 		submitHandler: function () {
 
@@ -212,8 +216,8 @@ $(function() {
 
 
     //check if username already exists
-    $.validator.addMethod('validateUsername', function (value, element) {
-        return !isUserExists(value);
+    $.validator.addMethod('validateUniqUname', function (value, element) {
+        return !(value in useres_list);
     });
 
     //Login
@@ -221,11 +225,11 @@ $(function() {
     //check if password match user
     $.validator.addMethod('validateUser', function (password, element) {
 
-        let user_input_username = document.getElementById("login_uname").value;
+        let username_input = document.getElementById("login_uname").value;
 
-        let storaged_password = useres_list[user_input_username];
+        let storaged_password = useres_list[username_input];
 
-        if(storaged_password === null) {
+        if(storaged_password === null||!(username_input in useres_list)) {
             return false;
         }
         else if(storaged_password === password) {
@@ -246,19 +250,19 @@ $(function() {
 });
 
 
-const isUserExists = (users, key) => {
+// const isUserExists = (users, key) => {
 
-    return (key in users_list);
-};
+//     return (key in users_list);
+// };
 
 const register = () => {
 
     //get elements
     let username = document.getElementById("singup_username").value;
-    let password = document.getElementById("signup_psw").value;
+    let pass = document.getElementById("signup_psw").value;
 
     //insert to storage
-    users_list[username]=password;
+    users_list[username]=pass;
 
     //go to SIGN IN
     showSignin();
