@@ -169,7 +169,7 @@ users_list[k] = k;
 
 $(document).ready(function () {
 	
-
+	// context=canvas.getContext("2d");
 	//LOGIN
 	$("#signInForm").validate({
 		rules: {
