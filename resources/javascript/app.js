@@ -272,7 +272,7 @@ $(function () {
 
 	//check if username already exists
 	$.validator.addMethod('validateUniqUname', function (value, element) {
-		return !(value in useres_list);
+		return !(value in users_list);
 	});
 
 	//Login
@@ -284,10 +284,10 @@ $(function () {
 
 
 
-		if (!(username_input in useres_list)) {
+		if (!(username_input in users_list)) {
 			return false;
 		}
-		else if (useres_list[username_input] == password) {
+		else if (users_list[username_input] == password) {
 			return true;
 		}
 
