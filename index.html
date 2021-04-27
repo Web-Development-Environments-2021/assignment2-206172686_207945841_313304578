@@ -1,61 +1,61 @@
-
 <!DOCTYPE html>
 <html>
 
 <title>pacman</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
-<script type="text/javascript" src="jquery.js"></script>
-<script src="./jquery-3.4.1.slim.min.js"></script>
-<script type="text/javascript" src="./app.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
-<script src="resource/javascript/jquery-3.4.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC">
+  <!-- <script type="text/javascript" src="jquery.js"></script>
+  <script src="./jquery-3.4.1.slim.min.js"></script>
+  <script type="text/javascript" src="./app.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+  <script src="resource/javascript/jquery-3.4.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script> -->
+  
 <style>
-body, html {height: 100%}
-body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
-.menu {display: none}
-.bgimg { 
-
-  background-color: black;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url("https://lh3.googleusercontent.com/DEkhMX12O2FobE1vphaezMT_qdRrEXb8YXGi8dWoaO1gO65Ony01SuneFRwnEvjgOjjtvDcpy4uax29fM61VfdO6tSBH_ozFzzO9CLSz58zcYOKSL-WhtT-pnNIfUF_e7H3PybVMhQ=w600-h315-p-k");
-  min-height: 90%;
-}
+  body, html {height: 100%}
+  body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
+  .menu {display: none}
+  .bgimg { 
+  
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("https://lh3.googleusercontent.com/DEkhMX12O2FobE1vphaezMT_qdRrEXb8YXGi8dWoaO1gO65Ony01SuneFRwnEvjgOjjtvDcpy4uax29fM61VfdO6tSBH_ozFzzO9CLSz58zcYOKSL-WhtT-pnNIfUF_e7H3PybVMhQ=w600-h315-p-k");
+    min-height: 90%;
+  }
 </style>
-<body>
-<!-- holly add a comment -->
-    <audio id="audio" autoplay hidden>
-        <source src="resources/music/music.mp3">
-      Your browser does not support the audio element.
-    </audio>
-    <div style="display:none;">
-        <img id="timer"
-             src="resources/images/timer.png"
-             width="30" height="30">
-        <img id="pill"
-             src="resources/images/pill.jpg"
-             width="30" height="30">
-        <img id="strawberry"
-             src="resources/images/strawberry.png"
-             width="30" height="30">
-        <img id="monster1"
-             src="resources/images/monster1.png"
-             width="30" height="30">
-          <img id="lost"
-             src="resources/images/lost.jpg"
-             width="30" height="30">
-          <img id="slow_motion"
-             src="resources/images/slowPill.png"
-             width="30" height="30">
-    </div>
+
+<body >
+  <audio id="audio" autoplay hidden>
+    <source src="resources/music/music.mp3">
+  Your browser does not support the audio element.
+  </audio>
+  <div style="display:none;">
+    <img id="timer"
+         src="resources/images/timer.png"
+         width="30" height="30">
+    <img id="pill"
+         src="resources/images/pill.jpg"
+         width="30" height="30">
+    <img id="strawberry"
+         src="resources/images/strawberry.png"
+         width="30" height="30">
+    <img id="monster1"
+         src="resources/images/monster1.png"
+         width="30" height="30">
+      <img id="lost"
+         src="resources/images/lost.jpg"
+         width="30" height="30">
+      <img id="slow_motion"
+         src="resources/images/slowPill.png"
+         width="30" height="30">
+  </div>
+
 
 <!-- before login Navbar (sit on top) -->
 <div class="w3-top w3-hide-small">
@@ -77,8 +77,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
 
 
 
-  
-<!-- Header with image -->
 <header class="bgimg w3-display-container w3-grayscale-min" id="welcome">
   <div class="w3-display-bottomleft w3-padding">
     <!-- <span class="w3-tag w3-xlarge">Open from 10am to 12pm</span> -->
@@ -93,220 +91,218 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
   </div>
 </header>
 
-<!-- ABOUT -->
 <div class="w3-container w3-padding-64 w3-red w3-grayscale w3-xxlarge" id="about" style="display:none">
-    <div class="w3-content w3-center">
+  <div class="w3-content w3-center">
 
-      <!-- <img src="/w3images/onepage_restaurant.jpg" style="width:100%" class="w3-margin-top w3-margin-bottom" alt="Restaurant"> -->
-      <h1><b>about</b></h1>
-      <br>
-      <br>
-      <br>
-      <br>
-      <style>
-      .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-      }
+    <!-- <img src="/w3images/onepage_restaurant.jpg" style="width:100%" class="w3-margin-top w3-margin-bottom" alt="Restaurant"> -->
+    <h1><b>about</b></h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <style>
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
 
-      .modal-content {
-      background-color: #da8181;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid rgb(80, 78, 78);
-      width: 80%;
-      }
+    .modal-content {
+    background-color: #da8181;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid rgb(80, 78, 78);
+    width: 80%;
+    }
 
+    
+    </style>
+
+    <body>
       
-      </style>
-
-      <body>
-        
-        <!-- Trigger/Open The Modal -->
-        <button id="myBtn">for information</button>
-        
-        <!-- The Modal -->
-        <div id="myModal" class="modal" >
-        
-          <!-- Modal content -->
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
-          </div>
-        
+      <!-- Trigger/Open The Modal -->
+      <button id="myBtn">for information</button>
+      
+      <!-- The Modal -->
+      <div id="myModal" class="modal" >
+      
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>Some text in the Modal..</p>
         </div>
-        
-        <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
-        
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-        
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-        
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-          modal.style.display = "block";
-        }
-        
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+      
+      </div>
+      
+      <script>
+      // Get the modal
+      var modal = document.getElementById("myModal");
+      
+      // Get the button that opens the modal
+      var btn = document.getElementById("myBtn");
+      
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+      
+      // When the user clicks the button, open the modal 
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+      
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+      
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function(event) {
+        if (event.target == modal) {
           modal.style.display = "none";
         }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-        </script>
-        
-      </body>
-
-    <br>
-    <br>
-    <br>
-    <br>
-
+      }
+      </script>
       
-    </div>
+    </body>
+
+  <br>
+  <br>
+  <br>
+  <br>
+
+    
+  </div>
 </div>
 <!-- About end -->
 
 
 <!-- SIGN UP -->
 <div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge" id="signup" style="display:none">
-    <div class="w3-content">
-      <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">JOIN US</h1>
+  <div class="w3-content">
+    <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">JOIN US</h1>
 
-    <!-- SIGN UP FORM -->
-      <form id="sign_up_form" class ="cmxform" action="/action_page.php" style="border:1px solid #ccc">
-        <div class="container">
-            <h1>Sign Up</h1>
-            <p>Please fill in this form to create an account.</p>
-            <hr>
+  <!-- SIGN UP FORM -->
+    <form id="sign_up_form" action="/action_page.php" style="border:1px solid #ccc">
+      <div class="container">
+          <h1>Sign Up</h1>
+          <p>Please fill in this form to create an account.</p>
+          <hr>
 
-            <label for="singup_username"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="singup_username" required>
-            <br>
-            <br>
-            
-
-            <label for="singup_name"><b>Full Name</b></label>
-            <input type="text" placeholder="Example : Israel Israeli" name="singup_name" required>
-            <br>
-            <br>
-            
-            <label for="signup_email"><b>Email</b></label>
-            <input type="text" placeholder="Example:Israel@BGU.com" name="signup_email" required>
-            <br>
-            <br>
-            
-            <label for="signup_psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="signup_psw" required>
-            <br>
-            <br>
-            
-            <label for="signup_bday">Birthday</label>
-
-                <select name="month">
-                    <option value="january">January</option>
-                    <option value="february">February</option>
-                </select>
-
-                <select name="day">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
-
-                <select name="year">
-                    <option value="1">1995</option>
-                    <option value="2">1996</option>
-                </select>
-            </label>
-            <br>
-            <br>
-            
-            <div class="clearfix">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <button 
-            type="submit" class="signupbtn">Sign Up</button>
-            </div>
-            
-        </div>
-        </form>
-        <br>
-        <br>
-        <br>
-        <br>
-
-    <a class="w3-button w3-xxlarge w3-black w3-center" onclick="showSignin()">already have an account</a>
-
-
-    </div>
-</div>
-
-<!-- SIGN IN -->
-<div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge" id="signin" style="display:none">
-    <div class="w3-content">
-      <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Let's start</h1>
-
-    <!-- SIGN IN FORM -->
-      <form id="signInForm" class ="cmxform" action="/action_page.php" method="post">
-      
-        <div class="container">
-          <label for="login_uname"><b>Username</b></label>
-          <input id ="login_uname_id" type="text" placeholder="Enter Username" name="login_uname" required>
+          <label for="singup_username"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" name="singup_username" required>
           <br>
           <br>
-          <label for="login_psw"><b>Password</b></label>
-          <input id ="login_psw_id" type="password" placeholder="Enter Password" name="login_psw" required>
+          
+
+          <label for="singup_name"><b>Full Name</b></label>
+          <input type="text" placeholder="Example : Israel Israeli" name="singup_name" required>
           <br>
-          <br>   
-          <button type="submit">Login</button>
+          <br>
+          
+          <label for="signup_email"><b>Email</b></label>
+          <input type="text" placeholder="Example:Israel@BGU.com" name="signup_email" required>
+          <br>
+          <br>
+          
+          <label for="signup_psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="signup_psw" required>
+          <br>
+          <br>
+          
+          <label for="signup_bday">Birthday</label>
+
+              <select name="month">
+                  <option value="january">January</option>
+                  <option value="february">February</option>
+              </select>
+
+              <select name="day">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+              </select>
+
+              <select name="year">
+                  <option value="1">1995</option>
+                  <option value="2">1996</option>
+              </select>
+          </label>
+          <br>
+          <br>
+          
+          <div class="clearfix">
           <button type="button" class="cancelbtn">Cancel</button>
-        </div>       
-        
+          <button 
+          type="submit" class="signupbtn">Sign Up</button>
+          </div>
+          
+      </div>
       </form>
       <br>
       <br>
       <br>
       <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
 
-    </div>
+  <a class="w3-button w3-xxlarge w3-black w3-center" onclick="showSignin()">already have an account</a>
+
+
+  </div>
 </div>
 
-<!-- SETTINGS -->
+<!-- SIGN IN -->
+<div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge" id="signin" style="display:none">
+  <div class="w3-content">
+    <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Let's start</h1>
+
+  <!-- SIGN IN FORM -->
+    <form id="sign_in_form" action="/action_page.php" method="post">
+    
+      <div class="container">
+        <label for="login_uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="login_uname" required>
+        <br>
+        <br>
+        <label for="login_psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="login_psw" required>
+        <br>
+        <br>   
+        <button type="submit">Login</button>
+        <button type="button" class="cancelbtn">Cancel</button>
+      </div>       
+      
+    </form>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+  </div>
+</div>
 
 
 <!-- ***** settings Area Starts ***** -->
-<div class="w3-container w3-padding-64 w3-theme-l4 w3-grayscale-min w3-xlarge" id="settings" style="display:none">
+<div class="w3-content w3-justify w3-text-grey w3-padding-64" id="settings">
 
-  <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">settings</h1>
+    <h2 class="w3-text-light-grey">Settings</h2>
+    <hr style="width:200px" class="w3-opacity">
 
-  <form id="settings_form" class ="cmxform">
+    <form id="settings_form">
 
-    <label for="movementKeys">Movement kyes:</label>
+      <label for="movementKeys">Movement kyes:</label>
       <div>
         Down: <input type="button" id="down_key" value="ArrowDown"/>
         Up: <input type="button" id="up_key" value="ArrowUp"/>
@@ -354,113 +350,113 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
     
     </form>
 
-
-
-</div>
-
-
-
-<!-- play -->
-<div class="w3-container w3-padding-64 w3-theme-l4 w3-grayscale-min w3-xlarge" id="play" >
-
-  <button id ="startGameBtn" type="button">Start Game</button>
- 
-
-  <head>
-      <script src="./jquery-3.4.1.slim.min.js"></script>
-      <script type="text/javascript" src="./app.js"></script>
-  </head>
-
-  <body>
-
-      <style>
-
-          canvas{
-              background-color: lightblue;
-          }
-          
-      
-      </style>
-      <div id="score">
-          <label for="lblScore">SCORE:</label>
-          <input id="lblScore" type="text" />
-      </div>
-      <div id="lifes">
-        <label for="lblLifes">LIFES:</label>
-        <input id="lblLifes" type="text" />
-    </div>
-      <div id="time">
-          <label for="lblTime">REMAINING TIME:</label>
-          <input id="lblTime" type="text" />
-      </div>
-      <div id="game">
-          <canvas id="canvas" height="600" width="600"></canvas>
-          <div>
-            <label for="movementKeys">Movement kyes:</label>
-            <div>
-              Down: <input disabled type="button" id="down_key_show"/>
-              Up: <input disabled type="button" id="up_key_show" />
-              Left: <input disabled type="button" id="left_key_show"/>
-              Right: <input disabled type="button" id="right_key_show"/>
-            </div>
-
-            <br>
-
-            <label for="numOfBalls_show">Number of balls:</label>
-            <input disabled id="numOfBalls_show" />
-
-            <br>
-
-            <label for="ball5color_show">5 Points ball color:</label>
-            <input disabled type="color" id="ball5color_show"> 
-            
-            <br>
-
-            <label for="ball15color_show">15 Points ball color:</label>
-            <input disabled type="color" id="ball15color_show" >
-          
-            <br>
-
-            <label for="ball25color_show">25 Points ball color:</label>
-            <input disabled type="color" id="ball25color_show">
-          
-            <br>
-
-            <label for="totalTime_show">Total Time (seconds):</label>
-            <input disabled id="totalTime_show" />
-          
-            <br>
-
-            <label for="monstersAmount_show">How Many Monsters:</label>
-            <input disabled id="monstersAmount_show" />
-          
-            <br>
-          </div>
-      </div>
-  </body>
-
     
 
-
-
 </div>
+<!-- ***** settings Area ends ***** -->
+
+
+
+<!-- play Section -->
+<div class="w3-padding-64 w3-content w3-text-grey" id="play">
+
+   <button id ="startGameBtn" type="button">Start Game</button>
+    <h2 class="w3-text-dark-grey">PLAY</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <head>
+        <script src="./jquery-3.4.1.slim.min.js"></script>
+        <script type="text/javascript" src="./app.js"></script>
+    </head>
+
+    <body>
+
+        <style>
+
+            canvas{
+                background-color: lightblue;
+            }
+            
+        
+        </style>
+        <div id="score">
+            <label for="lblScore">SCORE:</label>
+            <input id="lblScore" type="text" />
+        </div>
+        <div id="lifes">
+          <label for="lblLifes">LIFES:</label>
+          <input id="lblLifes" type="text" />
+      </div>
+        <div id="time">
+            <label for="lblTime">REMAINING TIME:</label>
+            <input id="lblTime" type="text" />
+        </div>
+        <div id="game">
+            <canvas id="canvas" height="600" width="600"></canvas>
+            <div>
+              <label for="movementKeys">Movement kyes:</label>
+              <div>
+                Down: <input disabled type="button" id="down_key_show"/>
+                Up: <input disabled type="button" id="up_key_show" />
+                Left: <input disabled type="button" id="left_key_show"/>
+                Right: <input disabled type="button" id="right_key_show"/>
+              </div>
+
+              <br>
+
+              <label for="numOfBalls_show">Number of balls:</label>
+              <input disabled id="numOfBalls_show" />
+
+              <br>
+
+              <label for="ball5color_show">5 Points ball color:</label>
+              <input disabled type="color" id="ball5color_show"> 
+              
+              <br>
+
+              <label for="ball15color_show">15 Points ball color:</label>
+              <input disabled type="color" id="ball15color_show" >
+            
+              <br>
+
+              <label for="ball25color_show">25 Points ball color:</label>
+              <input disabled type="color" id="ball25color_show">
+            
+              <br>
+
+              <label for="totalTime_show">Total Time (seconds):</label>
+              <input disabled id="totalTime_show" />
+            
+              <br>
+
+              <label for="monstersAmount_show">How Many Monsters:</label>
+              <input disabled id="monstersAmount_show" />
+            
+              <br>
+            </div>
+        </div>
+    </body>
+  
+</div>
+<!-- !-- play Section  ends -->
 
 
 <!-- Footer -->
 <footer class="w3-center w3-black w3-padding-48 w3-xxlarge">
 
-    <!-- <img src="pacman_gif.gif" width="128" height="128"> -->
-    
-    <p>
-        made by - Sarit Hollander, Gonen Davidi, Tslil Brami 
-        <br>
-        contact us at - tslilbr@post.bgu.ac.il
-        <br>
-        for more information go to about.
-    </p>
+  <!-- <img src="pacman_gif.gif" width="128" height="128"> -->
+  
+  <p>
+      made by - Sarit Hollander, Gonen Davidi, Tslil Brami 
+      <br>
+      contact us at - tslilbr@post.bgu.ac.il
+      <br>
+      for more information go to about.
+  </p>
 </footer>
 
 
 
 </body>
 </html>
+
