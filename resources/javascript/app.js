@@ -196,8 +196,8 @@ $(document).ready(function () {
 			login();
 
 			//reset form details
-			let form = $("#sign_in_form");
-			form[0].reset();
+			// let form = $("#sign_in_form");
+			// form[0].reset();
 		},
 	});
 
@@ -321,7 +321,7 @@ const register = () => {
 	showSignin();
 };
 
-function login() {
+const login = () => {
 
 	//go to settings
 	showSettings();
