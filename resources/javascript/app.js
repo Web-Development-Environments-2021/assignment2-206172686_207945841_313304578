@@ -282,8 +282,6 @@ $(function () {
 
 		let username_input = document.getElementById("login_uname_id").value;
 
-
-
 		if (!(username_input in users_list)) {
 			return false;
 		}
