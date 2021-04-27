@@ -13,6 +13,7 @@ monster3_position.is_alive = false
 var monster4_position = new Object();
 monster4_position.is_alive = false
 
+
 var board;
 var score;
 var amount_of_balls_remain;
@@ -28,6 +29,8 @@ var username;
 var pass;
 
 
+var is_slow_motion = false;
+var count_steps = 0;
 
 const COLS = 10
 const ROWS = 10
@@ -39,6 +42,7 @@ const MIN_TIME_SECONDS = 60;
 const MIN_MONSTERS_AMOUNT = 1
 const MAX_MONSTERS_AMOUNT = 4
 const MONSTER_EAT_PENALTY = 10
+const SLOW_MOTION_TIMEOUT = 3000
 
 const STRAWBERRY_POINTS_VALUE = 50
 
@@ -56,6 +60,7 @@ const cellType = {
 	MONSTER2: 'MONSTER2',
 	MONSTER3: 'MONSTER3',
 	MONSTER4: 'MONSTER4',
+	SLOW_MOTION: 'SLOW_MOTION'
 };
 
 const FOOD_CELLS = [cellType.FOOD_5_POINTS, cellType.FOOD_15_POINTS, cellType.food_25_points_remain]
@@ -89,25 +94,72 @@ const monsters = [
 	},
 ];
 
-const LEFT_ARROW = 37
-const UP_ARROW = 38
-const RIGHT_ARROW = 39
-const DOWN_ARROW = 40
-
 const LEFT_MOVE = 1
 const RIGHT_MOVE = 2
 const UP_MOVE = 3
 const DOWN_MOVE = 4
 
-// TODO: 5
-const INITIAL_LIFES = 1
+const DEFAULT_DOWN_KEY = 40
+const DEFAULT_UP_KEY = 38
+const DEFAULT_LEFT_KEY = 37
+const DEFAULT_RIGHT_KEY = 39
+
+KEYS_DATA = {
+	"down": {
+		keyCode: DEFAULT_DOWN_KEY,
+		move: DOWN_MOVE,
+	},
+	"up": {
+		keyCode: DEFAULT_UP_KEY,
+		move: UP_MOVE,
+	},
+	"left": {
+		keyCode: DEFAULT_LEFT_KEY,
+		move: LEFT_MOVE,
+	},
+	"right": {
+		keyCode: DEFAULT_RIGHT_KEY,
+		move: RIGHT_MOVE,
+	}
+}
+
+const TEMP_KEYS_DATA = {
+	"down": {
+		keyCode: DEFAULT_DOWN_KEY,
+		is_waiting_for_key: false,
+		move: DOWN_MOVE,
+		button_id: "down_key"
+	},
+	"up": {
+		keyCode: DEFAULT_UP_KEY,
+		is_waiting_for_key: false,
+		move: UP_MOVE,
+		button_id: "up_key"
+	},
+	"left": {
+		keyCode: DEFAULT_LEFT_KEY,
+		is_waiting_for_key: false,
+		move: LEFT_MOVE,
+		button_id: "left_key"
+	},
+	"right": {
+		keyCode: DEFAULT_RIGHT_KEY,
+		is_waiting_for_key: false,
+		move: RIGHT_MOVE,
+		button_id: "right_key"
+	}
+}
+
+
+const INITIAL_LIFES = 5
 var current_lifes = INITIAL_LIFES
 var TOTAL_FOOD_AMOUNT = 50
 var BALL_5_COLOR = "#0000ff"
 var BALL_15_COLOR = "#ff0000"
 var BALL_25_COLOR = "#00b33c"
 var TOTAL_TIME = 120
-var MONSTERS_AMOUNT = 2
+// todo: 2
+var MONSTERS_AMOUNT = 0
 
 //users storage 
 var users_list ={};
@@ -355,6 +407,7 @@ $(document).ready(function () {
 	timer = document.getElementById('timer');
 	pill = document.getElementById('pill');
 	strawberry = document.getElementById('strawberry');
+	slow_motion = document.getElementById('slow_motion')
 
 	// Relvant for fireworks:
 	// now we will setup our basic variables for the demo
@@ -392,7 +445,17 @@ document.getElementById("settingsRandomValuesBtn").onclick = function () {
 	ball25color.value = getRandomColor()
 	totalTime.value = getRandomInt(MIN_TIME_SECONDS, MIN_TIME_SECONDS * 10)
 	monstersAmount.value = getRandomInt(MIN_MONSTERS_AMOUNT, MAX_MONSTERS_AMOUNT)
-	// TODO: default keys of arrows...
+	// TODO: default keys of arrows... - revert the UI changes
+	TEMP_KEYS_DATA.down.keyCode = DEFAULT_DOWN_KEY
+	TEMP_KEYS_DATA.up.keyCode = DEFAULT_UP_KEY
+	TEMP_KEYS_DATA.left.keyCode = DEFAULT_LEFT_KEY
+	TEMP_KEYS_DATA.right.keyCode = DEFAULT_RIGHT_KEY
+
+	document.getElementById(TEMP_KEYS_DATA.down.button_id).value = "ArrowDown"
+	document.getElementById(TEMP_KEYS_DATA.up.button_id).value = "ArrowUp"
+	document.getElementById(TEMP_KEYS_DATA.left.button_id).value = "ArrowLeft"
+	document.getElementById(TEMP_KEYS_DATA.right.button_id).value = "ArrowRight"
+
 };
 
 function getRandomInt(min, max) {
@@ -437,13 +500,37 @@ function Start() {
 	addEventListener(
 		"keydown",
 		function (e) {
-			keyDown = e.keyCode
+			for (let k in KEYS_DATA) {
+
+				// Change keyDown only if valid movement
+				if (KEYS_DATA[k].keyCode == e.keyCode) {
+					keyDown = e.keyCode
+				}
+			}
+
+
 		},
 		false
 	);
 
+	showGameSettings()
+
 	// TODO: 250
 	interval = setInterval(UpdatePosition, 250);
+}
+
+function showGameSettings() {
+	down_key_show.value = down_key.value
+	right_key_show.value = right_key.value
+	up_key_show.value = up_key.value
+	left_key_show.value = left_key.value
+
+	numOfBalls_show.value = numOfBalls.value
+	ball5color_show.value = ball5color.value
+	ball15color_show.value = ball15color.value
+	ball25color_show.value = ball25color.value
+	totalTime_show.value = totalTime.value
+	monstersAmount_show.value = monstersAmount.value
 }
 
 function init_board(food_remain, cnt, pacman_remain) {
@@ -522,6 +609,10 @@ function init_board(food_remain, cnt, pacman_remain) {
 	emptyCell = findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = cellType.PILL;
 
+	// Put slow motion pill
+	emptyCell = findRandomEmptyCell(board);
+	board[emptyCell[0]][emptyCell[1]] = cellType.SLOW_MOTION;
+
 	// Put strawberry
 	emptyCell = findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = cellType.STRAWBERRY;
@@ -541,6 +632,8 @@ function init_pacman(emptyCell) {
 
 function init_monsters() {
 
+	monsters.forEach(monster => monster.is_alive = false)
+
 	for (i = 0; i < MONSTERS_AMOUNT; i++) {
 		curr_monster = monsters[i]
 		if (curr_monster.position.prev_value) {
@@ -551,7 +644,7 @@ function init_monsters() {
 		curr_monster.position.i = curr_monster.initial_i;
 		curr_monster.position.j = curr_monster.initial_j;
 		curr_monster.position.prev_value = cellType.EMPTY;
-		curr_monster.position.is_alive = true;
+		curr_monster.is_alive = true;
 	}
 }
 
@@ -566,19 +659,50 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keyDown == UP_ARROW) {
-		return UP_MOVE;
-	}
-	if (keyDown == DOWN_ARROW) {
-		return DOWN_MOVE;
-	}
-	if (keyDown == LEFT_ARROW) {
-		return LEFT_MOVE;
-	}
-	if (keyDown == RIGHT_ARROW) {
-		return RIGHT_MOVE;
+	for (const [key, value] of Object.entries(KEYS_DATA)) {
+		if (keyDown == value.keyCode) {
+			return value.move 
+		}
 	}
 }
+
+document.getElementById("down_key").onclick = function () {
+	reset_key_downs()
+	TEMP_KEYS_DATA.down.is_waiting_for_key = true
+};
+
+document.getElementById("up_key").onclick = function () {
+	reset_key_downs()
+	TEMP_KEYS_DATA.up.is_waiting_for_key = true
+};
+
+document.getElementById("right_key").onclick = function () {
+	reset_key_downs()
+	TEMP_KEYS_DATA.right.is_waiting_for_key = true
+};
+
+document.getElementById("left_key").onclick = function () {
+	reset_key_downs()
+	TEMP_KEYS_DATA.left.is_waiting_for_key = true
+};
+
+function reset_key_downs() {
+	for (const [key, value] of Object.entries(TEMP_KEYS_DATA)) {
+		value.is_waiting_for_key = false
+	}
+}
+
+document.addEventListener("keydown", event => {
+
+	for (const [key, value] of Object.entries(TEMP_KEYS_DATA)) {
+		if (value.is_waiting_for_key) {
+			value.keyCode = event.keyCode
+			document.getElementById(value.button_id).value = event.key
+		}
+
+		value.is_waiting_for_key = false
+	}
+});
 
 function Draw(pacman_direction = RIGHT_MOVE) {
 	canvas.width = canvas.width; //clean board
@@ -643,9 +767,12 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 			else if (board[i][j] == cellType.STRAWBERRY && strawberry_position.is_alive) {
 				context.drawImage(strawberry, center.x - 20, center.y - 20, 35, 35);
 			}
+			else if (board[i][j] == cellType.SLOW_MOTION) {
+				context.drawImage(slow_motion, center.x - 20, center.y - 20, 35, 35);
+			}
 
 			monsters.forEach(monster => {
-				if (board[i][j] == monster.cellType && monster.position.is_alive) {
+				if (board[i][j] == monster.cellType && monster.is_alive) {
 					context.drawImage(monster1, center.x - 20, center.y - 20, 35, 35);
 				}
 			})
@@ -689,13 +816,21 @@ function get_pacman_view_props(move, center) {
 	};
 }
 
+function same_positions(x, y) {
+	if (x.i == y.i && x.j == y.j) {
+		return true
+	}
+	return false
+}
+
 function UpdatePosition() {
+	count_steps += 1;
 	board[pacman_position.i][pacman_position.j] = cellType.EMPTY;
 	curr_move = GetKeyPressed()
 
 	movePosition(pacman_position, curr_move, true);
 
-	if (strawberry_position.is_alive) {
+	if (!(same_positions(pacman_position, strawberry_position)) && strawberry_position.is_alive) {
 		board[strawberry_position.i][strawberry_position.j] = strawberry_position.prev_value;
 		movePosition(strawberry_position, getRandomInt(1, 4), false);
 		strawberry_position.prev_value = board[strawberry_position.i][strawberry_position.j]
@@ -703,11 +838,13 @@ function UpdatePosition() {
 	}
 
 	monsters.forEach(monster => {
-		if (monster.position.is_alive) {
-			board[monster.position.i][monster.position.j] = monster.position.prev_value;
-			moveMonster(monster.position);
-			monster.position.prev_value = board[monster.position.i][monster.position.j]
-			board[monster.position.i][monster.position.j] = monster.cellType;
+		if (!is_slow_motion || count_steps % 3 == 0) {
+			if (monster.is_alive) {
+				board[monster.position.i][monster.position.j] = monster.position.prev_value;
+				moveMonster(monster.position);
+				monster.position.prev_value = board[monster.position.i][monster.position.j]
+				board[monster.position.i][monster.position.j] = monster.cellType;
+			}
 		}
 	})
 
@@ -725,6 +862,14 @@ function UpdatePosition() {
 		TOTAL_TIME += TIME_BUNOS_SECONDS
 	} else if (board[pacman_position.i][pacman_position.j] == cellType.PILL) {
 		current_lifes += 1
+	} else if (board[pacman_position.i][pacman_position.j] == cellType.SLOW_MOTION) {
+		is_slow_motion = true
+		setTimeout(() => {
+			is_slow_motion = false
+			emptyCell = findRandomEmptyCell(board);
+			board[emptyCell[0]][emptyCell[1]] = cellType.SLOW_MOTION;
+
+		}, SLOW_MOTION_TIMEOUT)
 	} else if (board[pacman_position.i][pacman_position.j] == cellType.STRAWBERRY) {
 		score += STRAWBERRY_POINTS_VALUE
 		strawberry_position.is_alive = false
@@ -749,19 +894,22 @@ function UpdatePosition() {
 	if (amount_of_balls_remain == 0) {
 		Draw(curr_move);
 		window.clearInterval(interval);
-		window.alert("Winner!!!");
 		showFireworks()
+		setTimeout(() => window.alert("Winner!!!"), 100);
+
 	} else if (time_remain == 0) {
 		Draw(curr_move);
 		window.clearInterval(interval);
-		window.alert("You are better than " + score + " Points!");
 		showLost()
+		setTimeout(() => window.alert("You are better than " + score + " Points!"), 100);
+
 	}
 	else if (current_lifes == 0) {
 		Draw(curr_move);
 		window.clearInterval(interval);
-		window.alert("Loser!");
 		showLost()
+		setTimeout(() => window.alert("Loser!"), 100);
+
 	}
 	else {
 		Draw(curr_move);
@@ -769,12 +917,17 @@ function UpdatePosition() {
 }
 
 document.getElementById("settings_form").onsubmit = function () {
-	TOTAL_FOOD_AMOUNT = numOfBalls.value
+	TOTAL_FOOD_AMOUNT = ~~numOfBalls.value
 	BALL_5_COLOR = ball5color.value
 	BALL_15_COLOR = ball15color.value
 	BALL_25_COLOR = ball25color.value
 	TOTAL_TIME = ~~totalTime.value
-	MONSTERS_AMOUNT = monstersAmount.value
+
+	// todo:
+	MONSTERS_AMOUNT = 0
+	// MONSTERS_AMOUNT = ~~monstersAmount.value
+	
+	KEYS_DATA = JSON.parse(JSON.stringify(TEMP_KEYS_DATA))
 
 	alert("Let's play!")
 };
