@@ -34,7 +34,7 @@ var pass;
 var is_slow_motion = false;
 var count_steps = 0;
 
-const COLS = 10
+const COLUMNS = 10
 const ROWS = 10
 
 const TIME_BUNOS_SECONDS = 10
@@ -80,7 +80,7 @@ const monsters = [
 		position: monster2_position,
 		cellType: cellType.MONSTER2,
 		initial_i: ROWS - 1,
-		initial_j: COLS - 1,
+		initial_j: COLUMNS - 1,
 	},
 	{
 		position: monster3_position,
@@ -92,7 +92,7 @@ const monsters = [
 		position: monster4_position,
 		cellType: cellType.MONSTER4,
 		initial_i: 0,
-		initial_j: COLS - 1,
+		initial_j: COLUMNS - 1,
 	},
 ];
 
@@ -161,14 +161,14 @@ var BALL_15_COLOR = "#ff0000"
 var BALL_25_COLOR = "#00b33c"
 var TOTAL_TIME = 120
 // todo: 2
-var MONSTERS_AMOUNT = 0
+var MONSTERS_AMOUNT = 2
 // signIN/UP forms
 //users storage 
-var users_list ={};
+var users_list = {};
 users_list[k] = k;
 
 $(document).ready(function () {
-	
+
 	// context=canvas.getContext("2d");
 	//LOGIN
 	$("#signInForm").validate({
@@ -190,7 +190,7 @@ $(document).ready(function () {
 				validateUser: "Username or Password is not exist."
 			}
 		},
-	
+
 		submitHandler: function () {
 
 			login();
@@ -254,53 +254,54 @@ $(document).ready(function () {
 			form[0].reset();
 		},
 	});
+
 });
 
-$(function() {
+$(function () {
 
-    //SIGN UP
+	//SIGN UP
 
-    //Password must contain 6 charcters. at least one number and one letter
-    $.validator.addMethod('strongPassword', function (value, element) {
-        return this.optional(element) ||
-            value.length >= 6 &&
-            /\d/.test(value) &&
-            /[a-z]/i.test(value);
-    });
+	//Password must contain 6 charcters. at least one number and one letter
+	$.validator.addMethod('strongPassword', function (value, element) {
+		return this.optional(element) ||
+			value.length >= 6 &&
+			/\d/.test(value) &&
+			/[a-z]/i.test(value);
+	});
 
 
-    //check if username already exists
-    $.validator.addMethod('validateUniqUname', function (value, element) {
-        return !(value in useres_list);
-    });
+	//check if username already exists
+	$.validator.addMethod('validateUniqUname', function (value, element) {
+		return !(value in useres_list);
+	});
 
-    //Login
+	//Login
 
-    //check if password match user
-    $.validator.addMethod('validateUser', function (password, element) {
+	//check if password match user
+	$.validator.addMethod('validateUser', function (password, element) {
 
-        let username_input = document.getElementById("login_uname_id").value;
+		let username_input = document.getElementById("login_uname_id").value;
 
-        
 
-        if(!(username_input in useres_list)) {
-            return false;
-        }
-        else if(useres_list[username_input]==password) {
-            return true;
-        }
 
-        return false;
-    });
+		if (!(username_input in useres_list)) {
+			return false;
+		}
+		else if (useres_list[username_input] == password) {
+			return true;
+		}
 
-        //check if password match user
-    $.validator.addMethod('greaterOrEqual', function (value, element, param) {
-        return value >= param;
-    });
+		return false;
+	});
 
-    $.validator.addMethod("notEqualTo", function(value, element, param) {
-        return value != $(param).val();
-    });
+	//check if password match user
+	$.validator.addMethod('greaterOrEqual', function (value, element, param) {
+		return value >= param;
+	});
+
+	$.validator.addMethod("notEqualTo", function (value, element, param) {
+		return value != $(param).val();
+	});
 });
 
 
@@ -311,88 +312,88 @@ $(function() {
 
 const register = () => {
 
-    //get elements
-    let username = document.getElementById("singup_username").value;
-    let pass = document.getElementById("signup_psw").value;
+	//get elements
+	let username = document.getElementById("singup_username").value;
+	let pass = document.getElementById("signup_psw").value;
 
-    //insert to storage
-    users_list[username]=pass;
+	//insert to storage
+	users_list[username] = pass;
 
-    //go to SIGN IN
-    showSignin();
+	//go to SIGN IN
+	showSignin();
 };
 
 function login() {
 
 	//go to settings
-    showSettings();
+	showSettings();
 };
 
 function showAbout() {
-    var T = document.getElementById("about");
-    T.style.display = "block";
-    
-    document.getElementById("welcome").style.display="none";
-    document.getElementById("signup").style.display="none";
-    document.getElementById("signin").style.display="none";
-    document.getElementById("play").style.display="none";
-    document.getElementById("settings").style.display="none";
+	var T = document.getElementById("about");
+	T.style.display = "block";
+
+	document.getElementById("welcome").style.display = "none";
+	document.getElementById("signup").style.display = "none";
+	document.getElementById("signin").style.display = "none";
+	document.getElementById("play").style.display = "none";
+	document.getElementById("settings").style.display = "none";
 };
 
 function showWelcome() {
-    var T = document.getElementById("welcome");
-    T.style.display = "block";
-    
-    document.getElementById("about").style.display="none";
-    document.getElementById("signup").style.display="none";
-    document.getElementById("signin").style.display="none";
-    document.getElementById("play").style.display="none";
-    document.getElementById("settings").style.display="none";
+	var T = document.getElementById("welcome");
+	T.style.display = "block";
+
+	document.getElementById("about").style.display = "none";
+	document.getElementById("signup").style.display = "none";
+	document.getElementById("signin").style.display = "none";
+	document.getElementById("play").style.display = "none";
+	document.getElementById("settings").style.display = "none";
 };
 
 function showSignup() {
-    var T = document.getElementById("signup");
-    T.style.display = "block";
-    
-    document.getElementById("welcome").style.display="none";
-    document.getElementById("about").style.display="none";
-    document.getElementById("signin").style.display="none";
-    document.getElementById("play").style.display="none";
-    document.getElementById("settings").style.display="none";
+	var T = document.getElementById("signup");
+	T.style.display = "block";
+
+	document.getElementById("welcome").style.display = "none";
+	document.getElementById("about").style.display = "none";
+	document.getElementById("signin").style.display = "none";
+	document.getElementById("play").style.display = "none";
+	document.getElementById("settings").style.display = "none";
 };
 function showSignin() {
-    var T = document.getElementById("signin");
-    T.style.display = "block";
-    
-    document.getElementById("welcome").style.display="none";
-    document.getElementById("about").style.display="none";
-    document.getElementById("signup").style.display="none";
-    document.getElementById("play").style.display="none";
-    document.getElementById("settings").style.display="none";
+	var T = document.getElementById("signin");
+	T.style.display = "block";
+
+	document.getElementById("welcome").style.display = "none";
+	document.getElementById("about").style.display = "none";
+	document.getElementById("signup").style.display = "none";
+	document.getElementById("play").style.display = "none";
+	document.getElementById("settings").style.display = "none";
 };
 function showSettings() {
-    var T = document.getElementById("settings");
-    T.style.display = "block";
-    // var N = document.getElementById("secondNavbar");
-    // T.style.display = "block";
-    
-    document.getElementById("welcome").style.display="none";
-    document.getElementById("about").style.display="none";
-    document.getElementById("signup").style.display="none";
-    document.getElementById("play").style.display="none";
-    document.getElementById("signin").style.display="none";
-    document.getElementById("mainNavbar").style.display="none";
-    
+	var T = document.getElementById("settings");
+	T.style.display = "block";
+	// var N = document.getElementById("secondNavbar");
+	// T.style.display = "block";
+
+	document.getElementById("welcome").style.display = "none";
+	document.getElementById("about").style.display = "none";
+	document.getElementById("signup").style.display = "none";
+	document.getElementById("play").style.display = "none";
+	document.getElementById("signin").style.display = "none";
+	document.getElementById("mainNavbar").style.display = "none";
+
 };
 function showPlay() {
-    var T = document.getElementById("play");
-    T.style.display = "block";
-    
-    document.getElementById("welcome").style.display="none";
-    document.getElementById("about").style.display="none";
-    document.getElementById("signup").style.display="none";
-    document.getElementById("signin").style.display="none";
-    document.getElementById("settings").style.display="none";
+	var T = document.getElementById("play");
+	T.style.display = "block";
+
+	document.getElementById("welcome").style.display = "none";
+	document.getElementById("about").style.display = "none";
+	document.getElementById("signup").style.display = "none";
+	document.getElementById("signin").style.display = "none";
+	document.getElementById("settings").style.display = "none";
 };
 
 
@@ -431,34 +432,70 @@ $(document).ready(function () {
 	timerTotal = 10
 	timerTick = 0
 	mousedown = false
+
+	$("#startGameBtn").click(function () {
+		audio.play()
+		Start();
+	});
+
+	$("#settingsRandomValuesBtn").click(function () {
+		numOfBalls.value = getRandomInt(MIN_BALLS_AMOUNT, MAX_BALLS_AMOUNT)
+		ball5color.value = getRandomColor()
+		ball15color.value = getRandomColor()
+		ball25color.value = getRandomColor()
+		totalTime.value = getRandomInt(MIN_TIME_SECONDS, MIN_TIME_SECONDS * 10)
+		monstersAmount.value = getRandomInt(MIN_MONSTERS_AMOUNT, MAX_MONSTERS_AMOUNT)
+		
+		TEMP_KEYS_DATA.down.keyCode = DEFAULT_DOWN_KEY
+		TEMP_KEYS_DATA.up.keyCode = DEFAULT_UP_KEY
+		TEMP_KEYS_DATA.left.keyCode = DEFAULT_LEFT_KEY
+		TEMP_KEYS_DATA.right.keyCode = DEFAULT_RIGHT_KEY
+
+		document.getElementById(TEMP_KEYS_DATA.down.button_id).value = "ArrowDown"
+		document.getElementById(TEMP_KEYS_DATA.up.button_id).value = "ArrowUp"
+		document.getElementById(TEMP_KEYS_DATA.left.button_id).value = "ArrowLeft"
+		document.getElementById(TEMP_KEYS_DATA.right.button_id).value = "ArrowRight"
+	});
+
+	$("#down_key").click(function () {
+		reset_key_downs()
+		TEMP_KEYS_DATA.down.is_waiting_for_key = true
+	});
+
+	$("#up_key").click(function () {
+		reset_key_downs()
+		TEMP_KEYS_DATA.up.is_waiting_for_key = true
+	});
+
+	$("#right_key").click(function () {
+		reset_key_downs()
+		TEMP_KEYS_DATA.right.is_waiting_for_key = true
+	});
+
+	$("#left_key").click(function () {
+		reset_key_downs()
+		TEMP_KEYS_DATA.left.is_waiting_for_key = true
+	});
+
+	$("#settings_form").submit(function (event) {
+		// TODO:
+		TOTAL_FOOD_AMOUNT = ~~numOfBalls.value
+		BALL_5_COLOR = ball5color.value
+		BALL_15_COLOR = ball15color.value
+		BALL_25_COLOR = ball25color.value
+		TOTAL_TIME = ~~totalTime.value
+
+		// todo:
+		// MONSTERS_AMOUNT = 0
+		MONSTERS_AMOUNT = ~~monstersAmount.value
+
+		KEYS_DATA = JSON.parse(JSON.stringify(TEMP_KEYS_DATA))
+
+		alert("Let's play!")
+		event.preventDefault();
+	});
 });
 
-
-document.getElementById("startGameBtn").onclick = function () {
-	// TODO: should start game settings screen
-	audio.play()
-	Start();
-};
-
-document.getElementById("settingsRandomValuesBtn").onclick = function () {
-	numOfBalls.value = getRandomInt(MIN_BALLS_AMOUNT, MAX_BALLS_AMOUNT)
-	ball5color.value = getRandomColor()
-	ball15color.value = getRandomColor()
-	ball25color.value = getRandomColor()
-	totalTime.value = getRandomInt(MIN_TIME_SECONDS, MIN_TIME_SECONDS * 10)
-	monstersAmount.value = getRandomInt(MIN_MONSTERS_AMOUNT, MAX_MONSTERS_AMOUNT)
-	// TODO: default keys of arrows... - revert the UI changes
-	TEMP_KEYS_DATA.down.keyCode = DEFAULT_DOWN_KEY
-	TEMP_KEYS_DATA.up.keyCode = DEFAULT_UP_KEY
-	TEMP_KEYS_DATA.left.keyCode = DEFAULT_LEFT_KEY
-	TEMP_KEYS_DATA.right.keyCode = DEFAULT_RIGHT_KEY
-
-	document.getElementById(TEMP_KEYS_DATA.down.button_id).value = "ArrowDown"
-	document.getElementById(TEMP_KEYS_DATA.up.button_id).value = "ArrowUp"
-	document.getElementById(TEMP_KEYS_DATA.left.button_id).value = "ArrowLeft"
-	document.getElementById(TEMP_KEYS_DATA.right.button_id).value = "ArrowRight"
-
-};
 
 function getRandomInt(min, max) {
 	min = Math.ceil(min);
@@ -536,7 +573,7 @@ function showGameSettings() {
 }
 
 function init_board(food_remain, cnt, pacman_remain) {
-	var cnt = ROWS * COLS;
+	var cnt = ROWS * COLUMNS;
 
 	var food_remain = TOTAL_FOOD_AMOUNT;
 
@@ -550,7 +587,7 @@ function init_board(food_remain, cnt, pacman_remain) {
 
 	for (var i = 0; i < ROWS; i++) {
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
-		for (var j = 0; j < COLS; j++) {
+		for (var j = 0; j < COLUMNS; j++) {
 			if ((i == 3 && j == 3) ||
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
@@ -652,10 +689,10 @@ function init_monsters() {
 
 function findRandomEmptyCell(board) {
 	var i = Math.floor(Math.random() * ROWS);
-	var j = Math.floor(Math.random() * COLS);
+	var j = Math.floor(Math.random() * COLUMNS);
 	while (board[i][j] != cellType.EMPTY) {
 		i = Math.floor(Math.random() * ROWS);
-		j = Math.floor(Math.random() * COLS);
+		j = Math.floor(Math.random() * COLUMNS);
 	}
 	return [i, j];
 }
@@ -663,30 +700,10 @@ function findRandomEmptyCell(board) {
 function GetKeyPressed() {
 	for (const [key, value] of Object.entries(KEYS_DATA)) {
 		if (keyDown == value.keyCode) {
-			return value.move 
+			return value.move
 		}
 	}
 }
-
-document.getElementById("down_key").onclick = function () {
-	reset_key_downs()
-	TEMP_KEYS_DATA.down.is_waiting_for_key = true
-};
-
-document.getElementById("up_key").onclick = function () {
-	reset_key_downs()
-	TEMP_KEYS_DATA.up.is_waiting_for_key = true
-};
-
-document.getElementById("right_key").onclick = function () {
-	reset_key_downs()
-	TEMP_KEYS_DATA.right.is_waiting_for_key = true
-};
-
-document.getElementById("left_key").onclick = function () {
-	reset_key_downs()
-	TEMP_KEYS_DATA.left.is_waiting_for_key = true
-};
 
 function reset_key_downs() {
 	for (const [key, value] of Object.entries(TEMP_KEYS_DATA)) {
@@ -711,7 +728,7 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 	lblScore.value = score;
 	lblLifes.value = current_lifes;
 	lblTime.value = time_remain;
-	for (var i = 0; i < COLS; i++) {
+	for (var i = 0; i < COLUMNS; i++) {
 		for (var j = 0; j < ROWS; j++) {
 			var center = new Object();
 			center.x = i * 60 + 30;
@@ -897,6 +914,7 @@ function UpdatePosition() {
 		Draw(curr_move);
 		window.clearInterval(interval);
 		showFireworks()
+		console.log("winner", interval)
 		setTimeout(() => window.alert("Winner!!!"), 100);
 
 	} else if (time_remain == 0) {
@@ -918,21 +936,6 @@ function UpdatePosition() {
 	}
 }
 
-document.getElementById("settings_form").onsubmit = function () {
-	TOTAL_FOOD_AMOUNT = ~~numOfBalls.value
-	BALL_5_COLOR = ball5color.value
-	BALL_15_COLOR = ball15color.value
-	BALL_25_COLOR = ball25color.value
-	TOTAL_TIME = ~~totalTime.value
-
-	// todo:
-	MONSTERS_AMOUNT = 0
-	// MONSTERS_AMOUNT = ~~monstersAmount.value
-	
-	KEYS_DATA = JSON.parse(JSON.stringify(TEMP_KEYS_DATA))
-
-	alert("Let's play!")
-};
 function movePosition(position, direction, is_pacman_move) {
 
 	maybe_new_place =
@@ -950,7 +953,7 @@ function movePosition(position, direction, is_pacman_move) {
 	else if (direction == LEFT_MOVE && position.i > 0) {
 		maybe_new_place.i--;
 	}
-	else if (direction == RIGHT_MOVE && position.i < COLS - 1) {
+	else if (direction == RIGHT_MOVE && position.i < COLUMNS - 1) {
 		maybe_new_place.i++;
 	}
 
