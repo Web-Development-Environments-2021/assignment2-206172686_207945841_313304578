@@ -206,7 +206,7 @@ $(document).ready(function () {
 		rules: {
 			singup_username: {
 				required: true,
-				validateUsername: true
+				validateUniqUname: true
 			},
 			signup_psw: {
 				required: true,
@@ -313,8 +313,8 @@ $(function () {
 const register = () => {
 
 	//get elements
-	let username = document.getElementById("singup_username").value;
-	let pass = document.getElementById("signup_psw").value;
+	let username = document.getElementById("singup_username_id").value;
+	let pass = document.getElementById("signup_psw_id").value;
 
 	//insert to storage
 	users_list[username] = pass;
