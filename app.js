@@ -114,7 +114,7 @@ var users_list ={};
 users_list[k] = k;
 
 $(document).ready(function () {
-	localStorage.setItem('p', 'p');
+	
 
 	//LOGIN
 	$("#sign_in_form").validate({
@@ -227,12 +227,12 @@ $(function() {
 
         let username_input = document.getElementById("login_uname").value;
 
-        let storaged_password = useres_list[username_input];
+        
 
-        if(storaged_password === null||!(username_input in useres_list)) {
+        if(!(username_input in useres_list)) {
             return false;
         }
-        else if(storaged_password === password) {
+        else if(useres_list[username_input]==password) {
             return true;
         }
 
@@ -265,7 +265,7 @@ const register = () => {
     users_list[username]=pass;
 
     //go to SIGN IN
-    showSignin();
+    showAbout();
 };
 
 function login() {

@@ -22,27 +22,30 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
 </style>
 <body>
 <!-- holly add a comment -->
-    <audio id="audio" autoplay hidden>
-        <source src="resources/music/music.mp3">
-      Your browser does not support the audio element.
-    </audio>
-    <div style="display:none;">
-        <img id="timer"
-             src="resources/images/timer.png"
-             width="30" height="30">
-        <img id="pill"
-             src="resources/images/pill.jpg"
-             width="30" height="30">
-        <img id="strawberry"
-             src="resources/images/strawberry.png"
-             width="30" height="30">
-        <img id="monster1"
-             src="resources/images/monster1.png"
-             width="30" height="30">
-          <img id="lost"
-             src="resources/images/lost.jpg"
-             width="30" height="30">
-    </div>
+<audio id="audio" autoplay hidden>
+  <source src="resources/music/music.mp3">
+Your browser does not support the audio element.
+</audio>
+<div style="display:none;">
+  <img id="timer"
+       src="resources/images/timer.png"
+       width="30" height="30">
+  <img id="pill"
+       src="resources/images/pill.jpg"
+       width="30" height="30">
+  <img id="strawberry"
+       src="resources/images/strawberry.png"
+       width="30" height="30">
+  <img id="monster1"
+       src="resources/images/monster1.png"
+       width="30" height="30">
+    <img id="lost"
+       src="resources/images/lost.jpg"
+       width="30" height="30">
+    <img id="slow_motion"
+       src="resources/images/slowPill.png"
+       width="30" height="30">
+</div>
 
 <!-- before login Navbar (sit on top) -->
 <div class="w3-top w3-hide-small">
@@ -50,16 +53,20 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
     <a class="w3-bar-item w3-button" onclick="showWelcome()">WELCOME</a>
     <a id="nav_about" class="w3-bar-item w3-button" onclick="showAbout()">ABOUT</a>
   </div>
+</div>
+
 <!-- after login Navbar (sit on top) -->
+<div class="w3-top w3-hide-small">
     <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="secondNavbar" style="display:none" >
     <a class="w3-bar-item w3-button" onclick="showWelcome()">WELCOME</a>
     <a id="nav_about" class="w3-bar-item w3-button" onclick="showAbout()">ABOUT</a>
     <!-- <a href="#settings" class="w3-bar-item w3-button">SETTINGS</a> -->
     <a  class="w3-bar-item w3-button" onclick="showSettings()">PLAY</a>
   </div>
-
-
 </div>
+
+
+
   
 <!-- Header with image -->
 <header class="bgimg w3-display-container w3-grayscale-min" id="welcome">
@@ -109,7 +116,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
       <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">JOIN US</h1>
 
     <!-- SIGN UP FORM -->
-      <form id="sign_up_form"action="/action_page.php" style="border:1px solid #ccc">
+      <form id="sign_up_form" action="/action_page.php" style="border:1px solid #ccc">
         <div class="container">
             <h1>Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
@@ -161,6 +168,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
             <button 
             type="submit" class="signupbtn">Sign Up</button>
             </div>
+            
         </div>
         </form>
         <br>
@@ -180,7 +188,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
       <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Let's start</h1>
 
     <!-- SIGN IN FORM -->
-      <form id="sign_in_form"action="/action_page.php" method="post">
+      <form id="sign_in_form" action="/action_page.php" method="post">
       
         <div class="container">
           <label for="login_uname"><b>Username</b></label>
@@ -221,59 +229,54 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
 
     <form id="settings_form">
 
-        <!-- TODO: WASD vs arrows -->
-        
-              <label for="numOfBalls">Num of balls:</label>
-              <input id="numOfBalls" type="number" min="50" max="90" value="60" />
-        
-              <br>
-              <br>
-              <br>
-        
-              <label for="ball5color">5 Points ball color:</label>
-              <input type="color" id="ball5color" value="#0000ff"> 
-              
-              <br>
-              <br>
-              <br>
-        
-              <label for="ball15color">15 Points ball color:</label>
-              <input type="color" id="ball15color" value="#ff0000">
-            
-              <br>
-              <br>
-              <br>
-        
-              <label for="ball25color">25 Points ball color:</label>
-              <input type="color" id="ball25color" value="#00b33c">
-            
-              <br>
-              <br>
-              <br>
-        
-              <label for="totalTime">Total Time (seconds):</label>
-              <input id="totalTime" type="number" min="60" value="120" />
-            
-              <br>
-              <br>
-              <br>
-        
-              <label for="monstersAmount">How Many Monsters:</label>
-              <input id="monstersAmount" type="number" min="1" max="4" value="2" />
-            
-              <br>
-              <br>
-              <br>
-        
-              <button id ="settingsRandomValuesBtn" type="button">Random values</button>
-        
-              <br>
-              <br>
-              <br>
-        
-              <input type="submit">
-            
+      <label for="movementKeys">Movement kyes:</label>
+      <div>
+        Down: <input type="button" id="down_key" value="ArrowDown"/>
+        Up: <input type="button" id="up_key" value="ArrowUp"/>
+        Left: <input type="button" id="left_key" value="ArrowLeft"/>
+        Right: <input type="button" id="right_key" value="ArrowRight"/>
+      </div>
+
+      <br>
+
+      <label for="numOfBalls">Number of balls:</label>
+      <input id="numOfBalls" type="number" min="50" max="90" value="60" />
+
+      <br>
+
+      <label for="ball5color">5 Points ball color:</label>
+      <input type="color" id="ball5color" value="#0000ff"> 
+      
+      <br>
+
+      <label for="ball15color">15 Points ball color:</label>
+      <input type="color" id="ball15color" value="#ff0000">
+    
+      <br>
+
+      <label for="ball25color">25 Points ball color:</label>
+      <input type="color" id="ball25color" value="#00b33c">
+    
+      <br>
+
+      <label for="totalTime">Total Time (seconds):</label>
+      <input id="totalTime" type="number" min="60" value="120" />
+    
+      <br>
+
+      <label for="monstersAmount">How Many Monsters:</label>
+      <input id="monstersAmount" type="number" min="1" max="4" value="2" />
+    
+      <br>
+
+      <button id ="settingsRandomValuesBtn" type="button">Random values</button>
+
+      <br>
+
+      <input type="submit">
+    
     </form>
+
 
 
 </div>
@@ -283,46 +286,82 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Amatic SC", sans-serif}
 <!-- play -->
 <div class="w3-container w3-padding-64 w3-theme-l4 w3-grayscale-min w3-xlarge" id="play" >
 
-    <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">PLAY</h1>
-    <button id ="startGameBtn" type="button">Start Game</button>
-    
-    <head>
-        <script src="./jquery-3.4.1.slim.min.js"></script>
-        <script type="text/javascript" src="./app.js"></script>
-    </head>
+  <button id ="startGameBtn" type="button">Start Game</button>
+ 
 
-    <body>
+  <head>
+      <script src="./jquery-3.4.1.slim.min.js"></script>
+      <script type="text/javascript" src="./app.js"></script>
+  </head>
 
-        <style>
+  <body>
 
-            canvas{
-                background-color: rgb(162, 219, 150);
-            }
-            
-        
-        </style>
-        <div id="score">
-            <label for="lblScore">SCORE:</label>
-            <input id="lblScore" type="text" />
-        </div>
-        <br>
-        <br>
-        <div id="lifes">
-          <label for="lblLifes">LIFES:</label>
-          <input id="lblLifes" type="text" />
+      <style>
+
+          canvas{
+              background-color: lightblue;
+          }
+          
+      
+      </style>
+      <div id="score">
+          <label for="lblScore">SCORE:</label>
+          <input id="lblScore" type="text" />
       </div>
-        <br>
-        <br>
-        <div id="time">
-            <label for="lblTime">REMAINING TIME:</label>
-            <input id="lblTime" type="text" />
-        </div>
-        <br>
-        <br>
-        <div id="game">
-            <canvas id="canvas" height="600" width="600"></canvas>
-        </div>
-    </body>
+      <div id="lifes">
+        <label for="lblLifes">LIFES:</label>
+        <input id="lblLifes" type="text" />
+    </div>
+      <div id="time">
+          <label for="lblTime">REMAINING TIME:</label>
+          <input id="lblTime" type="text" />
+      </div>
+      <div id="game">
+          <canvas id="canvas" height="600" width="600"></canvas>
+          <div>
+            <label for="movementKeys">Movement kyes:</label>
+            <div>
+              Down: <input disabled type="button" id="down_key_show"/>
+              Up: <input disabled type="button" id="up_key_show" />
+              Left: <input disabled type="button" id="left_key_show"/>
+              Right: <input disabled type="button" id="right_key_show"/>
+            </div>
+
+            <br>
+
+            <label for="numOfBalls_show">Number of balls:</label>
+            <input disabled id="numOfBalls_show" />
+
+            <br>
+
+            <label for="ball5color_show">5 Points ball color:</label>
+            <input disabled type="color" id="ball5color_show"> 
+            
+            <br>
+
+            <label for="ball15color_show">15 Points ball color:</label>
+            <input disabled type="color" id="ball15color_show" >
+          
+            <br>
+
+            <label for="ball25color_show">25 Points ball color:</label>
+            <input disabled type="color" id="ball25color_show">
+          
+            <br>
+
+            <label for="totalTime_show">Total Time (seconds):</label>
+            <input disabled id="totalTime_show" />
+          
+            <br>
+
+            <label for="monstersAmount_show">How Many Monsters:</label>
+            <input disabled id="monstersAmount_show" />
+          
+            <br>
+          </div>
+      </div>
+  </body>
+
     
 
 
