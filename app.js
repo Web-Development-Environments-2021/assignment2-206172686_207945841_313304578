@@ -34,8 +34,8 @@ var pass;
 var is_slow_motion = false;
 var count_steps = 0;
 
-const COLUMNS = 10
-const ROWS = 10
+const COLUMNS = 15
+const ROWS = 15
 
 const TIME_BUNOS_SECONDS = 10
 const MIN_BALLS_AMOUNT = 50;
@@ -73,26 +73,26 @@ const monsters = [
 	{
 		position: monster1_position,
 		cellType: cellType.MONSTER1,
-		initial_i: 0,
-		initial_j: 0,
+		initial_i: 1,
+		initial_j: 1,
 	},
 	{
 		position: monster2_position,
 		cellType: cellType.MONSTER2,
-		initial_i: ROWS - 1,
-		initial_j: COLUMNS - 1,
+		initial_i: ROWS - 2,
+		initial_j: COLUMNS - 2,
 	},
 	{
 		position: monster3_position,
 		cellType: cellType.MONSTER3,
-		initial_i: ROWS - 1,
-		initial_j: 0,
+		initial_i: ROWS - 2,
+		initial_j: 1,
 	},
 	{
 		position: monster4_position,
 		cellType: cellType.MONSTER4,
-		initial_i: 0,
-		initial_j: COLUMNS - 1,
+		initial_i: 1,
+		initial_j: COLUMNS - 2,
 	},
 ];
 
@@ -161,7 +161,7 @@ var BALL_15_COLOR = "#ff0000"
 var BALL_25_COLOR = "#00b33c"
 var TOTAL_TIME = 120
 // todo: 2
-var MONSTERS_AMOUNT = 2
+var MONSTERS_AMOUNT = 1
 // signIN/UP forms
 //users storage 
 var users_list = {};
@@ -445,7 +445,7 @@ $(document).ready(function () {
 		ball25color.value = getRandomColor()
 		totalTime.value = getRandomInt(MIN_TIME_SECONDS, MIN_TIME_SECONDS * 10)
 		monstersAmount.value = getRandomInt(MIN_MONSTERS_AMOUNT, MAX_MONSTERS_AMOUNT)
-		
+
 		TEMP_KEYS_DATA.down.keyCode = DEFAULT_DOWN_KEY
 		TEMP_KEYS_DATA.up.keyCode = DEFAULT_UP_KEY
 		TEMP_KEYS_DATA.left.keyCode = DEFAULT_LEFT_KEY
@@ -573,6 +573,7 @@ function showGameSettings() {
 }
 
 function init_board(food_remain, cnt, pacman_remain) {
+
 	var cnt = ROWS * COLUMNS;
 
 	var food_remain = TOTAL_FOOD_AMOUNT;
@@ -582,19 +583,15 @@ function init_board(food_remain, cnt, pacman_remain) {
 		board[i] = new Array();
 	}
 
+	init_walls();
+
 	// init monsters
 	init_monsters();
 
 	for (var i = 0; i < ROWS; i++) {
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < COLUMNS; j++) {
-			if ((i == 3 && j == 3) ||
-				(i == 3 && j == 4) ||
-				(i == 3 && j == 5) ||
-				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)) {
-				board[i][j] = cellType.WALL;
-			} else if (!board[i][j]) {
+			if (!board[i][j]) {
 				var randomNum = Math.random();
 				// Where to put food
 				if (randomNum <= (1.0 * food_remain) / cnt) {
@@ -662,6 +659,68 @@ function init_board(food_remain, cnt, pacman_remain) {
 	strawberry_position.is_alive = true;
 }
 
+function init_walls() {
+
+	for (var i = 0; i < ROWS; i++) {
+		board[i][0] = cellType.WALL;
+		board[i][COLUMNS -1] = cellType.WALL;
+	}
+
+	for (var i = 0; i < COLUMNS; i++) {
+		board[0][i] = cellType.WALL;
+		board[ROWS - 1][i] = cellType.WALL;
+	}
+
+	board[2][2] = cellType.WALL;
+	board[3][2] = cellType.WALL;
+	board[4][2] = cellType.WALL;
+
+	board[7][0] = cellType.WALL;
+	board[7][1] = cellType.WALL;
+	board[7][2] = cellType.WALL;
+	board[7][3] = cellType.WALL;
+
+	board[4][5] = cellType.WALL;
+	board[4][6] = cellType.WALL;
+	board[4][7] = cellType.WALL;
+	board[5][7] = cellType.WALL;
+	board[6][7] = cellType.WALL;
+	board[7][7] = cellType.WALL;
+
+	board[2][12] = cellType.WALL;
+	board[3][12] = cellType.WALL;
+	board[4][12] = cellType.WALL;
+	board[4][11] = cellType.WALL;
+	board[4][10] = cellType.WALL;
+
+	board[7][11] = cellType.WALL;
+	board[7][12] = cellType.WALL;
+	board[7][13] = cellType.WALL;
+	board[7][14] = cellType.WALL;
+
+	board[10][2] = cellType.WALL;
+	board[11][2] = cellType.WALL;
+	board[11][3] = cellType.WALL;
+	board[11][4] = cellType.WALL;
+	board[11][5] = cellType.WALL;
+
+	board[9][9] = cellType.WALL;
+	board[10][9] = cellType.WALL;
+	board[11][9] = cellType.WALL;
+	board[12][9] = cellType.WALL;
+	board[12][9] = cellType.WALL;
+	board[12][10] = cellType.WALL;
+	board[12][11] = cellType.WALL;
+
+	board[9][13] = cellType.WALL;
+
+	board[7][13] = cellType.WALL;
+	board[7][14] = cellType.WALL;
+
+	board[13][3] = cellType.WALL;
+
+}
+
 function init_pacman(emptyCell) {
 	emptyCell = findRandomEmptyCell(board);
 	board[emptyCell[0]][emptyCell[1]] = cellType.PACMAN;
@@ -713,8 +772,10 @@ function reset_key_downs() {
 
 document.addEventListener("keydown", event => {
 
+	current_key_codes = Object.entries(TEMP_KEYS_DATA).map(x => x[1].keyCode)
+
 	for (const [key, value] of Object.entries(TEMP_KEYS_DATA)) {
-		if (value.is_waiting_for_key) {
+		if (value.is_waiting_for_key && !current_key_codes.includes(event.keyCode)) {
 			value.keyCode = event.keyCode
 			document.getElementById(value.button_id).value = event.key
 		}
@@ -723,76 +784,83 @@ document.addEventListener("keydown", event => {
 	}
 });
 
+
+
 function Draw(pacman_direction = RIGHT_MOVE) {
 	canvas.width = canvas.width; //clean board
+
+	cell_width = canvas.width / COLUMNS
+	cell_height = canvas.height / ROWS
+	CELL_SIZE = cell_width
+
 	lblScore.value = score;
 	lblLifes.value = current_lifes;
 	lblTime.value = time_remain;
 	for (var i = 0; i < COLUMNS; i++) {
 		for (var j = 0; j < ROWS; j++) {
 			var center = new Object();
-			center.x = i * 60 + 30;
-			center.y = j * 60 + 30;
+			center.x = i * CELL_SIZE + CELL_SIZE / 2;
+			center.y = j * CELL_SIZE + CELL_SIZE / 2;
 			if (board[i][j] == cellType.PACMAN) {
 				const { mouth_angle, eye_position } = get_pacman_view_props(pacman_direction, center);
 				context.beginPath();
-				context.arc(center.x, center.y, 30, (mouth_angle + 0.15) * Math.PI, (mouth_angle + 1.85) * Math.PI); // half circle
+				context.arc(center.x, center.y, CELL_SIZE / 2, (mouth_angle + 0.15) * Math.PI, (mouth_angle + 1.85) * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				context.arc(eye_position.x, eye_position.y, 5, 0, 2 * Math.PI); // circle
+				context.arc(eye_position.x, eye_position.y, 3, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
 			} else if (board[i][j] == cellType.FOOD_5_POINTS) {
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, CELL_SIZE / 4, 0, 2 * Math.PI); // circle
 				context.fillStyle = BALL_5_COLOR; //color
 				context.fill();
 
 				context.fillStyle = "white";
-				context.font = "16px Arial";
+				context.font = "14px Arial";
 				context.fillText("5", center.x - 5, center.y + 5);
 			}
 			else if (board[i][j] == cellType.FOOD_15_POINTS) {
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, CELL_SIZE / 3.5, 0, 2 * Math.PI); // circle
 				context.fillStyle = BALL_15_COLOR; //color
 				context.fill();
 				context.fillStyle = "white";
-				context.font = "16px Arial";
-				context.fillText("15", center.x - 10, center.y + 5);
+				context.font = "14px Arial";
+				context.fillText("15", center.x - 8, center.y + 5);
 			}
 			else if (board[i][j] == cellType.FOOD_25_POINTS) {
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, CELL_SIZE / 3, 0, 2 * Math.PI); // circle
 				context.fillStyle = BALL_25_COLOR; //color
 				context.fill();
 				context.fillStyle = "white";
-				context.font = "16px Arial";
-				context.fillText("25", center.x - 10, center.y + 5);
+				context.font = "14px Arial";
+				context.fillText("25", center.x - 8, center.y + 5);
 			} else if (board[i][j] == cellType.WALL) {
 				context.beginPath();
-				context.rect(center.x - 30, center.y - 30, 60, 60);
+				context.rect(center.x - CELL_SIZE / 2, center.y - CELL_SIZE / 2, CELL_SIZE, CELL_SIZE);
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
 			else if (board[i][j] == cellType.TIME_BUNOS) {
-				context.drawImage(timer, center.x - 20, center.y - 20, 35, 35);
+				context.drawImage(timer, center.x - 10, center.y - 12, 23, 23);
 			}
 			else if (board[i][j] == cellType.PILL) {
-				context.drawImage(pill, center.x - 20, center.y - 20, 35, 35);
+				context.drawImage(pill, center.x - 10, center.y - 12, 23, 23);
 			}
 			else if (board[i][j] == cellType.STRAWBERRY && strawberry_position.is_alive) {
-				context.drawImage(strawberry, center.x - 20, center.y - 20, 35, 35);
+				context.drawImage(strawberry, center.x - 10, center.y - 12, 23, 23);
 			}
 			else if (board[i][j] == cellType.SLOW_MOTION) {
-				context.drawImage(slow_motion, center.x - 20, center.y - 20, 35, 35);
+				context.drawImage(slow_motion, center.x - 10, center.y - 12, 23, 23);
 			}
 
 			monsters.forEach(monster => {
 				if (board[i][j] == monster.cellType && monster.is_alive) {
-					context.drawImage(monster1, center.x - 20, center.y - 20, 35, 35);
+					context.drawImage(monster1, center.x - 10, center.y - 12, 23, 23);
 				}
 			})
 		}
@@ -810,14 +878,14 @@ function get_pacman_view_props(move, center) {
 	} else if (move == DOWN_MOVE) {
 		mouth_angle = 0.5;
 		eye_position = {
-			x: center.x + 20,
+			x: center.x + 15,
 			y: center.y - 5
 		};
 	}
 	else if (move == UP_MOVE) {
 		mouth_angle = -0.5;
 		eye_position = {
-			x: center.x + 20,
+			x: center.x + 15,
 			y: center.y + 5
 		};
 	}
