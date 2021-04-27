@@ -160,7 +160,7 @@ var BALL_25_COLOR = "#00b33c"
 var TOTAL_TIME = 120
 // todo: 2
 var MONSTERS_AMOUNT = 0
-
+// signIN/UP forms
 //users storage 
 var users_list ={};
 users_list[k] = k;
@@ -169,7 +169,7 @@ $(document).ready(function () {
 	
 
 	//LOGIN
-	$("#sign_in_form").validate({
+	$("#signInForm").validate({
 		rules: {
 			login_uname: {
 				required: true,
@@ -277,7 +277,7 @@ $(function() {
     //check if password match user
     $.validator.addMethod('validateUser', function (password, element) {
 
-        let username_input = document.getElementById("login_uname").value;
+        let username_input = document.getElementById("login_uname_id").value;
 
         
 
@@ -317,7 +317,7 @@ const register = () => {
     users_list[username]=pass;
 
     //go to SIGN IN
-    showAbout();
+    showSignin();
 };
 
 function login() {
