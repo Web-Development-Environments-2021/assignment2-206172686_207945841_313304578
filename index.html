@@ -265,11 +265,19 @@
 
 <!-- SIGN IN -->
 <div id="signin" style="display:none">
-    <!-- <div class="w3-content">
-      <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Let's start</h1> -->
+    
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
 
     <!-- SIGN IN FORM -->
       <form id="signInForm" class ="cmxform" method="post">
+
+          <h1>Lets start!</h1>
       
         <!-- <div class="container"> -->
           <label for="login_uname"><b>Username</b></label>
@@ -282,25 +290,30 @@
           <br>   
           <button type="submit">Login</button>
           <button type="button" class="cancelbtn">Cancel</button>
-        <!-- </div>        -->
+        
         
       </form>
       <br>
       <br>
      
 
-    <!-- </div> -->
+    
 </div>
 
 <!-- SETTINGS -->
 
 
 <!-- ***** settings Area Starts ***** -->
-<div class="w3-container w3-padding-64 w3-theme-l4 w3-grayscale-min w3-xlarge" id="settings">
+<div id="settings" style="display: none">
 
-  <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">settings</h1>
+  <br>
+  <br>
+  <br>
+  
 
   <form id="settings_form" class ="cmxform">
+
+    <h1>ADJUST PREFERED SETTINGS</h1>
 
     <label for="movementKeys">Movement kyes:</label>
       <div>
@@ -341,12 +354,12 @@
       <input id="monstersAmount" type="number" min="1" max="4" value="2" />
     
       <br>
+      <br>
+
 
       <button id ="settingsRandomValuesBtn" type="button">Random values</button>
 
-      <br>
-
-      <input type="submit">
+      <input type="submit" onclick="showPlay()">
     
     </form>
 
