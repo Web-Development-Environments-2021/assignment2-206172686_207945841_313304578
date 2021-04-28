@@ -122,79 +122,25 @@
 </header>
 
 <!-- ABOUT -->
-<div class="w3-container w3-padding-64 w3-red w3-grayscale w3-xxlarge" id="about" style="display:none">
-    <div class="w3-content w3-center">
+<div  id="about" style="display:none">
+    
+  <div id="modal_contant">
 
-      <!-- <img src="/w3images/onepage_restaurant.jpg" style="width:100%" class="w3-margin-top w3-margin-bottom" alt="Restaurant"> -->
-      <h1><b>about</b></h1>
+    <span class="close">&times;</span>
+
+    <p>Sarit Hollander - xxxxxxxxx
       <br>
+      Gonen davidi - xxxxxxxxx
       <br>
+      Tslil Brami - 207945841
       <br>
+
+      Tamplate : W3-school
       <br>
-
-      <body>
-        
-        <!-- Trigger/Open The Modal -->
-        <button id="myBtn">for information</button>
-        
-        <!-- The Modal -->
-        <div id="myModal" class="modal" >
-        
-          <!-- Modal content -->
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Sarit Hollander - xxxxxxxxx
-              <br>
-              Gonen davidi - xxxxxxxxx
-              <br>
-              Tslil Brami - 207945841
-              <br>
-
-              Tamplate : W3-school
-              <br>
-              used j-query plugins.
-            </p>
-          </div>
-        
-        </div>
-        
-        <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
-        
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-        
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-        
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-          modal.style.display = "block";
-        }
-        
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-        </script>
-        
-      </body>
-
-    <br>
-    <br>
-    <br>
-    <br>
-
+      used j-query plugins.
+    </p>
+  </div>
       
-    </div>
 </div>
 <!-- About end -->
 
@@ -365,26 +311,43 @@
 <!-- play -->
 <div class="w3-container w3-padding-64 w3-theme-l4 w3-grayscale-min w3-xlarge" id="play" style="display: none" >
 
-  <button id ="startGameBtn" type="button">Start Game</button>
+  
 
 
   <body>
-
+    <!-- online informatiom -->
+    <div id="game_online_info">
+      <button id ="startGameBtn" type="button">Start Game</button>
+      <br>
+      <br>
+      <br>
       <div id="score">
           <label for="lblScore">SCORE:</label>
           <input id="lblScore" type="text"  disabled/>
       </div>
+      <br>
+      <br>
+      <br>
       <div id="lifes">
         <label for="lblLifes">LIFES:</label>
         <input id="lblLifes" type="text" disabled/>
-    </div>
+      </div>
+      <br>
+      <br>
+      <br>
       <div id="time">
           <label for="lblTime">REMAINING TIME:</label>
           <input id="lblTime" type="text"disabled />
       </div>
+    </div>
+      <!-- actual game  -->
       <div id="game">
           <canvas id="canvas" height="600" width="600"></canvas>
-          <div>
+      </div>
+
+      <!-- settings -->
+      <div id="show_settings_game_section" >
+
             <label for="movementKeys">Movement kyes:</label>
             <div>
               Down: <input disabled type="button" id="down_key_show"/>
@@ -394,38 +357,51 @@
             </div>
 
             <br>
+            
+            
 
             <label for="numOfBalls_show">Number of balls:</label>
             <input disabled id="numOfBalls_show" />
 
             <br>
+            
+            
+      
 
             <label for="ball5color_show">5 Points ball color:</label>
             <input disabled type="color" id="ball5color_show"> 
             
             <br>
+            
+            
 
             <label for="ball15color_show">15 Points ball color:</label>
             <input disabled type="color" id="ball15color_show" >
           
             <br>
+            
+            
 
             <label for="ball25color_show">25 Points ball color:</label>
             <input disabled type="color" id="ball25color_show">
           
             <br>
+            
+            
 
             <label for="totalTime_show">Total Time (seconds):</label>
             <input disabled id="totalTime_show" />
           
             <br>
+            
+            
 
             <label for="monstersAmount_show">How Many Monsters:</label>
             <input disabled id="monstersAmount_show" />
           
             <br>
-          </div>
       </div>
+      <!-- </div> -->
   </body>
 
     

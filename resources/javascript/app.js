@@ -340,6 +340,28 @@ function showAbout() {
 	document.getElementById("signin").style.display = "none";
 	document.getElementById("play").style.display = "none";
 	document.getElementById("settings").style.display = "none";
+
+
+   //Modal closes when user clicks Escape button
+   $(document).on(
+	'keydown', function(event) {
+   		if (event.key == "Escape") {
+			T.style.display = "none";
+   }
+   });
+   
+   //Modal closes when user clicks outside of it
+   window.onclick = function(event) {
+	if (event.target == T) {
+	  T.style.display = "none";
+	}
+  }
+
+   //Modal closes when user clicks on close botton
+   var span = document.getElementsByClassName("close")[0];
+   span.onclick = function() {
+	T.style.display = "none";
+  }
 };
 
 function showWelcome() {
@@ -396,6 +418,9 @@ function showPlay() {
 	document.getElementById("signin").style.display = "none";
 	document.getElementById("settings").style.display = "none";
 };
+
+	
+	
 
 
 
