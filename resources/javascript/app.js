@@ -498,11 +498,6 @@ $(document).ready(function () {
 	});
 });
 
-function startGame(){
-	audio.play();
-	Start();
-}
-
 
 function getRandomInt(min, max) {
 	min = Math.ceil(min);
