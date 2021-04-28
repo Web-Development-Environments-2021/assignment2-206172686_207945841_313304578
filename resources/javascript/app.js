@@ -161,7 +161,7 @@ var BALL_15_COLOR = "#ff0000"
 var BALL_25_COLOR = "#00b33c"
 var TOTAL_TIME = 120
 // todo: 2
-var MONSTERS_AMOUNT = 1
+var MONSTERS_AMOUNT =0 
 // signIN/UP forms
 //users storage 
 var users_list = {};
@@ -190,14 +190,10 @@ $(document).ready(function () {
 				validateUser: "Username or Password is not exist."
 			}
 		},
-
+		errorElement: 'div',
 		submitHandler: function () {
 
 			login();
-
-			//reset form details
-			// let form = $("#sign_in_form");
-			// form[0].reset();
 		},
 	});
 
@@ -220,9 +216,9 @@ $(document).ready(function () {
 				required: true,
 				email: true
 			},
-			// signup_bday: {
-			// 	required: true
-			// }
+			singup_birthDate: {
+				required: true
+			}
 		},
 		messages: {
 			singup_username: {
@@ -241,17 +237,14 @@ $(document).ready(function () {
 				required: "Enter your e-mail",
 				email: "Please enter a valid e-mail address."
 			},
-			// signup_bday: {
-			// 	required: "Enter a birth day."
-			// }
+			singup_birthDate: {
+				required: "Enter a birth day."
+			}
 		},
+		errorElement: 'div',
 		submitHandler: function () {
 
 			register();
-
-			//reset form details
-			let form = $("#sign_up_form");
-			form[0].reset();
 		},
 	});
 
@@ -323,9 +316,9 @@ const register = () => {
 
 const login = () => {
 
-	
+
 	document.getElementById("nav_play").style.display = 'block';
-	
+
 	//go to settings
 	showWelcome();
 	// document.getElementById("showuser").innerHTML = login_uname;
@@ -342,26 +335,26 @@ function showAbout() {
 	document.getElementById("settings").style.display = "none";
 
 
-   //Modal closes when user clicks Escape button
-   $(document).on(
-	'keydown', function(event) {
-   		if (event.key == "Escape") {
-			T.style.display = "none";
-   }
-   });
-   
-   //Modal closes when user clicks outside of it
-   window.onclick = function(event) {
-	if (event.target == T) {
-	  T.style.display = "none";
-	}
-  }
+	//Modal closes when user clicks Escape button
+	$(document).on(
+		'keydown', function (event) {
+			if (event.key == "Escape") {
+				T.style.display = "none";
+			}
+		});
 
-   //Modal closes when user clicks on close botton
-   var span = document.getElementsByClassName("close")[0];
-   span.onclick = function() {
-	T.style.display = "none";
-  }
+	//Modal closes when user clicks outside of it
+	window.onclick = function (event) {
+		if (event.target == T) {
+			T.style.display = "none";
+		}
+	}
+
+	//Modal closes when user clicks on close botton
+	var span = document.getElementsByClassName("close")[0];
+	span.onclick = function () {
+		T.style.display = "none";
+	}
 };
 
 function showWelcome() {
@@ -398,14 +391,14 @@ function showSignin() {
 function showSettings() {
 	var T = document.getElementById("settings");
 	T.style.display = "block";
-	
+
 
 	document.getElementById("welcome").style.display = "none";
 	document.getElementById("about").style.display = "none";
 	document.getElementById("signup").style.display = "none";
 	document.getElementById("play").style.display = "none";
 	document.getElementById("signin").style.display = "none";
-	
+
 
 };
 function showPlay() {
@@ -419,8 +412,8 @@ function showPlay() {
 	document.getElementById("settings").style.display = "none";
 };
 
-	
-	
+
+
 
 
 
@@ -463,7 +456,11 @@ $(document).ready(function () {
 		startGame()
 	});
 
+<<<<<<< HEAD
+	const startGame = () => {
+=======
 	const startGame = () =>  {
+>>>>>>> 4fc5ffab553206f6135ce4aba1cc00c90ee18a97
 		window.clearInterval(interval);
 		audio.play();
 		Start();
@@ -509,15 +506,12 @@ $(document).ready(function () {
 	});
 
 	$("#settings_form").submit(function (event) {
-		// TODO:
 		TOTAL_FOOD_AMOUNT = ~~numOfBalls.value
 		BALL_5_COLOR = ball5color.value
 		BALL_15_COLOR = ball15color.value
 		BALL_25_COLOR = ball25color.value
 		TOTAL_TIME = ~~totalTime.value
 
-		// todo:
-		// MONSTERS_AMOUNT = 0
 		MONSTERS_AMOUNT = ~~monstersAmount.value
 
 		KEYS_DATA = JSON.parse(JSON.stringify(TEMP_KEYS_DATA))
@@ -553,10 +547,6 @@ window.addEventListener("keydown", function (e) {
 
 function Start() {
 	stopFireworks()
-	$("#startGameBtn").click(function () {
-		audio.play()
-		Start();
-	});
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
@@ -698,7 +688,7 @@ function init_walls() {
 
 	for (var i = 0; i < ROWS; i++) {
 		board[i][0] = cellType.WALL;
-		board[i][COLUMNS -1] = cellType.WALL;
+		board[i][COLUMNS - 1] = cellType.WALL;
 	}
 
 	for (var i = 0; i < COLUMNS; i++) {
@@ -893,9 +883,9 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 				context.drawImage(slow_motion, center.x - 10, center.y - 12, 23, 23);
 			}
 
-			monsters.forEach(monster => {
+			monsters.forEach((monster, monsterIndex) => {
 				if (board[i][j] == monster.cellType && monster.is_alive) {
-					context.drawImage(monster1, center.x - 10, center.y - 12, 23, 23);
+					context.drawImage(document.getElementById('monster' + (monsterIndex + 1)), center.x - 10, center.y - 12, 32, 32);
 				}
 			})
 		}
