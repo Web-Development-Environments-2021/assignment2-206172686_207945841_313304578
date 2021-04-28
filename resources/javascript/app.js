@@ -341,7 +341,6 @@ const login = () => {
 
 function logout(){
 
-	
 	document.getElementById("loged_in_uname").innerHTML = 'guest';
 	document.getElementById("nav_logout").style.display = 'none';
 	document.getElementById("nav_play").style.display = 'none';
@@ -359,6 +358,7 @@ function logout(){
 }
 
 function showAbout() {
+	stopGame();
 	var T = document.getElementById("about");
 	T.style.display = "block";
 
@@ -392,6 +392,7 @@ function showAbout() {
 };
 
 function showWelcome() {
+	stopGame();
 	var T = document.getElementById("welcome");
 	T.style.display = "block";
 
@@ -423,6 +424,7 @@ function showSignin() {
 	document.getElementById("settings").style.display = "none";
 };
 function showSettings() {
+	stopGame();
 	var T = document.getElementById("settings");
 	T.style.display = "block";
 
@@ -490,11 +492,6 @@ $(document).ready(function () {
 		startGame()
 	});
 
-	const startGame = () =>  {
-		window.clearInterval(interval);
-		audio.play();
-		Start();
-	}
 
 	$("#settingsRandomValuesBtn").click(function () {
 		numOfBalls.value = getRandomInt(MIN_BALLS_AMOUNT, MAX_BALLS_AMOUNT)
@@ -551,6 +548,16 @@ $(document).ready(function () {
 	});
 });
 
+const startGame = () =>  {
+	window.clearInterval(interval);
+	audio.play();
+	Start();
+}
+
+const stopGame = () =>  {
+	window.clearInterval(interval);
+	audio.pause();
+}
 
 function getRandomInt(min, max) {
 	min = Math.ceil(min);
