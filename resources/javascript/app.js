@@ -538,6 +538,9 @@ $(document).ready(function () {
 		BALL_25_COLOR = ball25color.value
 		TOTAL_TIME = ~~totalTime.value
 
+		// TODO:
+		// MONSTERS_AMOUNT = 0
+
 		MONSTERS_AMOUNT = ~~monstersAmount.value
 
 		KEYS_DATA = JSON.parse(JSON.stringify(TEMP_KEYS_DATA))
@@ -615,7 +618,8 @@ function Start() {
 
 	showGameSettings()
 
-	interval = setInterval(UpdatePosition, 250);
+	// TODO:
+	interval = setInterval(UpdatePosition, 150);
 }
 
 function showGameSettings() {
