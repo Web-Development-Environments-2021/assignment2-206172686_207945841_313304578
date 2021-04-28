@@ -1,8 +1,10 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>pacman</title>
+  <title>The Best Pacman Game!</title>
+  <link rel="icon" type="image/png" sizes="15x15" href="./resources/images/Icon.png">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -10,43 +12,37 @@
   <!-- linking between project's files -->
   <script src="./resources/javascript/jquery-3.4.1.slim.min.js"></script>
   <script type="text/javascript" src="./resources/javascript/app.js"></script>
-  <link rel="stylesheet" type="text/css" href="./css/style.css" media="screen"/>
+  <link rel="stylesheet" type="text/css" href="./css/style.css" media="screen" />
   <!-- add-ons -->
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.js"></script>
 
-  
+
 
 </head>
 
 <body>
-<!-- holly add a comment -->
-    <audio id="audio" autoplay hidden>
-        <source src="resources/music/music.mp3">
-      Your browser does not support the audio element.
-    </audio>
-    <div style="display:none;">
-        <img id="timer"
-             src="resources/images/timer.png"
-             width="30" height="30">
-        <img id="pill"
-             src="resources/images/pill.jpg"
-             width="30" height="30">
-        <img id="strawberry"
-             src="resources/images/strawberry.png"
-             width="30" height="30">
-        <img id="monster1"
-             src="resources/images/monster1.png"
-             width="30" height="30">
-          <img id="lost"
-             src="resources/images/lost.jpg"
-             width="30" height="30">
-          <img id="slow_motion"
-             src="resources/images/slowPill.png"
-             width="30" height="30">
-    </div>
+  <!--TODO-->
+  <header>
+    <p id="header"> </p>
+  </header>
+  <audio id="audio" hidden>
+    <source src="resources/music/music.mp3">
+    Your browser does not support the audio element.
+  </audio>
+  <div style="display:none;">
+    <img id="timer" src="resources/images/timer.png" width="30" height="30">
+    <img id="pill" src="resources/images/pill.jpg" width="30" height="30">
+    <img id="strawberry" src="resources/images/strawberry.png" width="30" height="30">
+    <img id="monster1" src="resources/images/monster11.png" width="30" height="30">
+    <img id="monster2" src="resources/images/monster2.png" width="30" height="30">
+    <img id="monster3" src="resources/images/monster3.png" width="30" height="30">
+    <img id="monster4" src="resources/images/monster4.png" width="30" height="30">
+    <img id="lost" src="resources/images/lost.jpg" width="30" height="30">
+    <img id="slow_motion" src="resources/images/slowPill.png" width="30" height="30">
+  </div>
 
-<!-- before login Navbar (sit on top) -->
+<!-- Navbar (sit on top) -->
 <div class="w3-top w3-hide-small">
   <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="mainNavbar">
     <a class="w3-bar-item w3-button" onclick="showWelcome()">WELCOME</a>
@@ -54,213 +50,224 @@
     <a  id="nav_play" class="w3-bar-item w3-button" onclick="showSettings()" style="display: none">PLAY</a>
     <a id=hello><span>Hi </span><span id=loged_in_uname>guest</span><span>!</span></a>
     <a  id="nav_logout" class="w3-bar-item w3-button" onclick="logout()" style="display: none">LogOut</a>
+    <h6 style="float: right; font-size: 10px; font-family: Georgia, 'Times New Roman', Times, serif;" >@Tslil Brami, Gonen Davidi & Sarit Hollander</h6>
+    <img style="float: right;" src="./resources/images/Icon.png" hight="35" width="35">
   </div>
-</div>
 
 
 
 
+
+  <!-- Header with image -->
+  <header class="w3-display-container w3-grayscale-min" id="welcome">
+    <div class="w3-display-bottomleft w3-padding">
+      <!-- <span class="w3-tag w3-xlarge">Open from 10am to 12pm</span> -->
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
   
-<!-- Header with image -->
-<header class="w3-display-container w3-grayscale-min" id="welcome">
-  <div class="w3-display-bottomleft w3-padding">
-    <!-- <span class="w3-tag w3-xlarge">Open from 10am to 12pm</span> -->
-  </div>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-  <div class="w3-display-middle w3-center">
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <span class="w3-text-white w3-hide-small" style="font-size:100px">welcome to<br>PACMAN</span>
-    <span class="w3-text-white w3-hide-large w3-hide-medium" style="font-size:60px"><b>welcome to<br>PACMAN</b></span>
-    <!-- <p><img src="https://lh3.googleusercontent.com/nLWOAZ7U-YCEiDh-9g82g7n7DdbZVtlwvkla8xaai9dFtKr1hESgYVOzk5Vo06ZYqnv9Nnm22e8OpszoeR2ML43xO8nVRbBSb-W2u9GgQ0XFZEuaQoS0JxhW5p4ug644Cx4g6w7jCw=w600-h315-p-k" ></p> -->
-    <br>
-    <br>
-    <br>
-    <p><button id="signin_welcome_btn" class="w3-button w3-xxlarge w3-black" onclick="showSignin()">Sign In</button>
+    <div class="w3-display-middle w3-center">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <span class="w3-text-white w3-hide-small" style="font-size:100px">welcome to<br>PACMAN</span>
+      <span class="w3-text-white w3-hide-large w3-hide-medium" style="font-size:60px"><b>welcome to<br>PACMAN</b></span>
+      <!-- <p><img src="https://lh3.googleusercontent.com/nLWOAZ7U-YCEiDh-9g82g7n7DdbZVtlwvkla8xaai9dFtKr1hESgYVOzk5Vo06ZYqnv9Nnm22e8OpszoeR2ML43xO8nVRbBSb-W2u9GgQ0XFZEuaQoS0JxhW5p4ug644Cx4g6w7jCw=w600-h315-p-k" ></p> -->
+      <br>
+      <br>
+      <br>
+      <p><button id="signin_welcome_btn" class="w3-button w3-xxlarge w3-black" onclick="showSignin()">Sign In</button>
         <button id="signup_welcome_btn" class="w3-button w3-xxlarge w3-black" onclick="showSignup()">Sign Up</button>
-    </p>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-  
-  </div>
-</header>
-
-<!-- ABOUT -->
-<div  id="about" style="display:none">
-    
-  <div id="modal_contant">
-
-    <span class="close">&times;</span>
-
-    <p>Sarit Hollander - xxxxxxxxx
+      </p>
       <br>
-      Gonen davidi - xxxxxxxxx
       <br>
-      Tslil Brami - 207945841
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
       <br>
 
-      Tamplate : W3-school
-      <br>
-      used j-query plugins.
-    </p>
-  </div>
-      
-</div>
-<!-- About end -->
+    </div>
+  </header>
 
+  <!-- ABOUT -->
+  <div id="about" style="display:none">
 
-<!-- SIGN UP -->
-<div  id="signup" style="display:none">
- 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-      <form id="sign_up_form" class ="cmxform" >
-      
-            <h1>Sign Up</h1>
-            <p>Please fill in this form to create an account.</p>
-            <hr>
+    <div id="modal_contant">
 
-            <label for="singup_username"><b>Username</b></label>
-            <input id="singup_username_id"type="text" placeholder="Enter Username" name="singup_username" required>
-            <br>
-            <br>
-            
+      <span class="close">&times;</span>
 
-            <label for="singup_name"><b>Full Name</b></label>
-            <input type="text" placeholder="Example : Israel Israeli" name="singup_name" required>
-            <br>
-            <br>
-            
-            <label for="signup_email"><b>Email</b></label>
-            <input type="text" placeholder="Example:Israel@BGU.com" name="signup_email" required>
-            <br>
-            <br>
-            
-            <label for="signup_psw"><b>Password</b></label>
-            <input id ="signup_psw_id" type="password" placeholder="Enter Password" name="signup_psw" required>
-            <br>
-            <br>
-            
-
-            
-            
-            <div class="clearfix">
-            <button type="button" class="cancelbtn">Cancel</button>
-            <button 
-            type="submit" class="signupbtn">Sign Up</button>
-            </div>
-            
-        <!-- </div> -->
-        </form>
+      <p>Sarit Hollander - xxxxxxxxx
         <br>
+        Gonen davidi - xxxxxxxxx
         <br>
-        
+        Tslil Brami - 207945841
+        <br>
+
+        Tamplate : W3-school
+        <br>
+        used j-query plugins.
+      </p>
+    </div>
+
+  </div>
+  <!-- About end -->
+
+
+  <!-- SIGN UP -->
+  <div id="signup" style="display:none">
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <form id="sign_up_form" class="cmxform">
+
+      <h1>Sign Up</h1>
+      <p>Please fill in this form to create an account</p>
+      <hr>
+
+      <label for="singup_username"><b>Username</b></label>
+      <input id="singup_username_id" type="text" placeholder="Enter Username" name="singup_username" required>
+      <br>
+      <br>
+
+
+      <label for="singup_name"><b>Full Name</b></label>
+      <input type="text" placeholder="Example : Israel Israeli" name="singup_name" required>
+      <br>
+      <br>
+
+      <label for="singup_birthDate"><b>Date of Birth</b></label>
+      <input type="date" name="singup_birthDate" required>
+      <br>
+      <br>
+
+      <label for="signup_email"><b>Email</b></label>
+      <input type="text" placeholder="Example:Israel@BGU.com" name="signup_email" required>
+      <br>
+      <br>
+
+      <label for="signup_psw"><b>Password</b></label>
+      <input id="signup_psw_id" type="password" placeholder="Enter Password" name="signup_psw" required>
+      <br>
+      <br>
+
+
+
+
+      <div class="clearfix">
+        <!-- <button type="button" class="cancelbtn">Cancel</button> -->
+        <button type="submit" class="signupbtn">Sign Up</button>
+        <input id="reset" type="reset" value="Reset Details">
+
+      </div>
+
+      <!-- </div> -->
+    </form>
+    <br>
+    <br>
+
 
     <a class="w3-button w3-xxlarge w3-black w3-center" onclick="showSignin()">already have an account</a>
 
 
-    
-</div>
 
-<!-- SIGN IN -->
-<div id="signin" style="display:none">
-    
+  </div>
 
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+  <!-- SIGN IN -->
+  <div id="signin" style="display:none">
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
     <!-- SIGN IN FORM -->
-      <form id="signInForm" class ="cmxform" method="post">
+    <form id="signInForm" class="cmxform" method="post">
 
-          <h1>Lets start!</h1>
-      
-        <!-- <div class="container"> -->
-          <label for="login_uname"><b>Username</b></label>
-          <input id ="login_uname_id" type="text" placeholder="Enter Username" name="login_uname" required>
-          <br>
-          <br>
-          <label for="login_psw"><b>Password</b></label>
-          <input id ="login_psw_id" type="password" placeholder="Enter Password" name="login_psw" required>
-          <br>
-          <br>   
-          <button type="submit">Login</button>
-          <button type="button" class="cancelbtn">Cancel</button>
-        
-        
-      </form>
+      <h1>Lets start!</h1>
+
+      <!-- <div class="container"> -->
+      <label for="login_uname"><b>Username</b></label>
+      <input id="login_uname_id" type="text" placeholder="Enter Username" name="login_uname" required>
       <br>
       <br>
-     
+      <label for="login_psw"><b>Password</b></label>
+      <input id="login_psw_id" type="password" placeholder="Enter Password" name="login_psw" required>
+      <br>
+      <br>
+      <button type="submit">Login</button>
+      <input id="reset" type="reset" value="Cancel">
+      <!-- <button type="button" class="cancelbtn">Cancel</button> -->
 
-    
-</div>
 
-<!-- SETTINGS -->
+    </form>
+    <br>
+    <br>
 
 
-<!-- ***** settings Area Starts ***** -->
-<div id="settings" style="display: none">
 
-  <br>
-  <br>
-  <br>
-  
+  </div>
 
-  <form id="settings_form" class ="cmxform">
+  <!-- SETTINGS -->
 
-    <h1>ADJUST PREFERED SETTINGS</h1>
 
-    <label for="movementKeys">Movement kyes:</label>
+  <!-- ***** settings Area Starts ***** -->
+  <div id="settings" style="display: none">
+
+    <br>
+    <br>
+    <br>
+
+
+    <form id="settings_form" class="cmxform">
+
+      <h1>ADJUST PREFERED SETTINGS</h1>
+
+      <label for="movementKeys">Movement kyes:</label>
       <div>
-        Down: <input type="button" id="down_key" value="ArrowDown"/>
-        Up: <input type="button" id="up_key" value="ArrowUp"/>
-        Left: <input type="button" id="left_key" value="ArrowLeft"/>
-        Right: <input type="button" id="right_key" value="ArrowRight"/>
+        Down: <input type="button" id="down_key" value="ArrowDown" />
+        Up: <input type="button" id="up_key" value="ArrowUp" />
+        Left: <input type="button" id="left_key" value="ArrowLeft" />
+        Right: <input type="button" id="right_key" value="ArrowRight" />
       </div>
 
       <br>
@@ -271,156 +278,146 @@
       <br>
 
       <label for="ball5color">5 Points ball color:</label>
-      <input type="color" id="ball5color" value="#0000ff"> 
-      
+      <input type="color" id="ball5color" value="#0000ff">
+
       <br>
 
       <label for="ball15color">15 Points ball color:</label>
       <input type="color" id="ball15color" value="#ff0000">
-    
+
       <br>
 
       <label for="ball25color">25 Points ball color:</label>
       <input type="color" id="ball25color" value="#00b33c">
-    
+
       <br>
 
       <label for="totalTime">Total Time (seconds):</label>
       <input id="totalTime" type="number" min="60" value="120" />
-    
+
       <br>
 
       <label for="monstersAmount">How Many Monsters:</label>
       <input id="monstersAmount" type="number" min="1" max="4" value="2" />
-    
+
       <br>
       <br>
 
 
-      <button id ="settingsRandomValuesBtn" type="button">Random values</button>
+      <button id="settingsRandomValuesBtn" type="button">Random values</button>
 
-      <input type="submit" onclick="showPlay()">
-    
+      <input type="submit" onclick="showPlay()" value="Start Game">
+
     </form>
 
 
 
-</div>
+  </div>
 
 
 
-<!-- play -->
-<div class="w3-container w3-padding-64 w3-theme-l4 w3-grayscale-min w3-xlarge" id="play" style="display: none" >
-
-  
+  <!-- play -->
+  <div class="w3-container w3-padding-64 w3-theme-l4 w3-grayscale-min w3-xlarge" id="play" style="display: none">
 
 
-  <body>
     <!-- online informatiom -->
     <div id="game_online_info">
-      <button id ="startGameBtn" type="button">Start Game</button>
-      <br>
+      <button id="startGameBtn" type="button">New Game</button>
       <br>
       <br>
       <div id="score">
-          <label for="lblScore">SCORE:</label>
-          <input id="lblScore" type="text"  disabled/>
+        <label for="lblScore">SCORE:</label>
+        <input id="lblScore" type="text" disabled />
       </div>
-      <br>
-      <br>
       <br>
       <div id="lifes">
         <label for="lblLifes">LIFES:</label>
-        <input id="lblLifes" type="text" disabled/>
+        <input id="lblLifes" type="text" disabled />
       </div>
-      <br>
-      <br>
       <br>
       <div id="time">
-          <label for="lblTime">REMAINING TIME:</label>
-          <input id="lblTime" type="text"disabled />
+        <label for="lblTime">REMAINING TIME:</label>
+        <input id="lblTime" type="text" disabled />
       </div>
     </div>
-      <!-- actual game  -->
-      <div id="game">
-          <canvas id="canvas" height="600" width="600"></canvas>
+    <!-- actual game  -->
+    <div id="game">
+      <canvas id="canvas" height="600" width="600" style="background: black;"></canvas>
+    </div>
+
+    <!-- settings -->
+    <div id="show_settings_game_section">
+
+      <label for="movementKeys">Movement kyes:</label>
+      <div>
+        Down: <input disabled type="button" id="down_key_show" /><br>
+        Up: <input disabled type="button" id="up_key_show" /><br>
+        Left: <input disabled type="button" id="left_key_show" /><br>
+        Right: <input disabled type="button" id="right_key_show" /><br>
       </div>
 
-      <!-- settings -->
-      <div id="show_settings_game_section" >
-
-            <label for="movementKeys">Movement kyes:</label>
-            <div>
-              Down: <input disabled type="button" id="down_key_show"/>
-              Up: <input disabled type="button" id="up_key_show" />
-              Left: <input disabled type="button" id="left_key_show"/>
-              Right: <input disabled type="button" id="right_key_show"/>
-            </div>
-
-            <br>
-            
-            
-
-            <label for="numOfBalls_show">Number of balls:</label>
-            <input disabled id="numOfBalls_show" />
-
-            <br>
-            
-            
-      
-
-            <label for="ball5color_show">5 Points ball color:</label>
-            <input disabled type="color" id="ball5color_show"> 
-            
-            <br>
-            
-            
-
-            <label for="ball15color_show">15 Points ball color:</label>
-            <input disabled type="color" id="ball15color_show" >
-          
-            <br>
-            
-            
-
-            <label for="ball25color_show">25 Points ball color:</label>
-            <input disabled type="color" id="ball25color_show">
-          
-            <br>
-            
-            
-
-            <label for="totalTime_show">Total Time (seconds):</label>
-            <input disabled id="totalTime_show" />
-          
-            <br>
-            
-            
-
-            <label for="monstersAmount_show">How Many Monsters:</label>
-            <input disabled id="monstersAmount_show" />
-          
-            <br>
-      </div>
-      <!-- </div> -->
-  </body>
-
-    
+      <br>
 
 
 
-</div>
+      <label for="numOfBalls_show">Number of balls:</label>
+      <input disabled id="numOfBalls_show" />
+
+      <br>
 
 
-<!-- Footer -->
-<footer> 
+
+
+      <label for="ball5color_show">5 Points ball color:</label>
+      <input disabled type="color" id="ball5color_show">
+
+      <br>
+
+
+
+      <label for="ball15color_show">15 Points ball color:</label>
+      <input disabled type="color" id="ball15color_show">
+
+      <br>
+
+
+
+      <label for="ball25color_show">25 Points ball color:</label>
+      <input disabled type="color" id="ball25color_show">
+
+      <br>
+
+
+
+      <label for="totalTime_show">Total Time (seconds):</label>
+      <input disabled id="totalTime_show" />
+
+      <br>
+
+
+
+      <label for="monstersAmount_show">How Many Monsters:</label>
+      <input disabled id="monstersAmount_show" />
+
+      <br>
+    </div>
+    <!-- </div> -->
+
+
+
+
+
+  </div>
+
+
+  <!-- Footer -->
+  <footer style="color: white;">
     <p> made by - Sarit Hollander, Gonen Davidi, Tslil Brami</p>
     <p>contact us at - tslilbr@post.bgu.ac.il</p>
-    <p>for more information go to about.</p> 
-    
-</footer>
+    <p>for more information go to about.</p>
 
-
+  </footer>
 
 </body>
+
 </html>
