@@ -166,6 +166,7 @@ var MONSTERS_AMOUNT =0
 //users storage 
 var users_list = {};
 users_list[k] = k;
+var userToShow;
 
 $(document).ready(function () {
 
@@ -318,11 +319,44 @@ const login = () => {
 
 
 	document.getElementById("nav_play").style.display = 'block';
+	document.getElementById("nav_logout").style.display = 'block';
+
+	document.getElementById("signin_welcome_btn").disabled= true;
+	document.getElementById("signin_welcome_btn").style.backgroundColor ='#ffaaaf';
+	document.getElementById("signin_welcome_btn").style.cursor ='not-allowed';
+
+	document.getElementById("signup_welcome_btn").disabled= true;
+	document.getElementById("signup_welcome_btn").style.backgroundColor ='#ffaaaf';
+	document.getElementById("signup_welcome_btn").style.cursor ='not-allowed';
+
+	
+	
+	userToShow=document.getElementById("login_uname_id").value;
+	document.getElementById("loged_in_uname").innerHTML = userToShow;
 
 	//go to settings
-	showWelcome();
+	showSettings();
 	// document.getElementById("showuser").innerHTML = login_uname;
 };
+
+function logout(){
+
+	
+	document.getElementById("loged_in_uname").innerHTML = 'guest';
+	document.getElementById("nav_logout").style.display = 'none';
+	document.getElementById("nav_play").style.display = 'none';
+	showWelcome();
+
+	document.getElementById("signup_welcome_btn").disabled= false;
+	
+	document.getElementById("signup_welcome_btn").style.cursor ='pointer';
+
+	document.getElementById("signin_welcome_btn").disabled= false;
+	
+	document.getElementById("signin_welcome_btn").style.cursor ='pointer';
+
+
+}
 
 function showAbout() {
 	var T = document.getElementById("about");
@@ -456,11 +490,7 @@ $(document).ready(function () {
 		startGame()
 	});
 
-<<<<<<< HEAD
-	const startGame = () => {
-=======
 	const startGame = () =>  {
->>>>>>> 4fc5ffab553206f6135ce4aba1cc00c90ee18a97
 		window.clearInterval(interval);
 		audio.play();
 		Start();

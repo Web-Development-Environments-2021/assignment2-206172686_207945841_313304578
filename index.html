@@ -42,17 +42,16 @@
     <img id="slow_motion" src="resources/images/slowPill.png" width="30" height="30">
   </div>
 
-  <!-- before login Navbar (sit on top) -->
-  <div class="w3-top w3-hide-small">
-    <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="mainNavbar">
-      
-      <a class="w3-bar-item w3-button" onclick="showWelcome()">WELCOME</a>
-      <a id="nav_about" class="w3-bar-item w3-button" onclick="showAbout()">ABOUT</a>
-      <a id="nav_play" class="w3-bar-item w3-button" onclick="showSettings()" style="display: none">PLAY</a>
-      <h6 style="float: right; font-size: 10px; font-family: Georgia, 'Times New Roman', Times, serif;" >@Tslil Brami, Gonen Davidi & Sarit Hollander</h6>
-      <img style="float: right;" src="./resources/images/Icon.png" hight="35" width="35">
-      <!-- <a id=hello><span>Hello, </span><span id=showuser>guest</span><span>!</span></a> -->
-    </div>
+<!-- Navbar (sit on top) -->
+<div class="w3-top w3-hide-small">
+  <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="mainNavbar">
+    <a class="w3-bar-item w3-button" onclick="showWelcome()">WELCOME</a>
+    <a id="nav_about" class="w3-bar-item w3-button" onclick="showAbout()">ABOUT</a>
+    <a  id="nav_play" class="w3-bar-item w3-button" onclick="showSettings()" style="display: none">PLAY</a>
+    <a id=hello><span>Hi </span><span id=loged_in_uname>guest</span><span>!</span></a>
+    <a  id="nav_logout" class="w3-bar-item w3-button" onclick="logout()" style="display: none">LogOut</a>
+    <h6 style="float: right; font-size: 10px; font-family: Georgia, 'Times New Roman', Times, serif;" >@Tslil Brami, Gonen Davidi & Sarit Hollander</h6>
+    <img style="float: right;" src="./resources/images/Icon.png" hight="35" width="35">
   </div>
 
 
@@ -90,6 +89,9 @@
     <br>
     <br>
     <br>
+  
+    <br>
+    <br>
     <div class="w3-display-middle w3-center">
       <br>
       <br>
@@ -105,8 +107,8 @@
       <br>
       <br>
       <br>
-      <p><a class="w3-button w3-xxlarge w3-black" onclick="showSignin()">Sign In</a>
-        <a class="w3-button w3-xxlarge w3-black" onclick="showSignup()">Sign Up</a>
+      <p><button id="signin_welcome_btn" class="w3-button w3-xxlarge w3-black" onclick="showSignin()">Sign In</button>
+        <button id="signup_welcome_btn" class="w3-button w3-xxlarge w3-black" onclick="showSignup()">Sign Up</button>
       </p>
       <br>
       <br>
