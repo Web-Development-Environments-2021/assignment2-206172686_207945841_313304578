@@ -323,8 +323,12 @@ const register = () => {
 
 const login = () => {
 
+	
+	document.getElementById("nav_play").style.display = 'block';
+	
 	//go to settings
-	showSettings();
+	showWelcome();
+	// document.getElementById("showuser").innerHTML = login_uname;
 };
 
 function showAbout() {
@@ -336,6 +340,28 @@ function showAbout() {
 	document.getElementById("signin").style.display = "none";
 	document.getElementById("play").style.display = "none";
 	document.getElementById("settings").style.display = "none";
+
+
+   //Modal closes when user clicks Escape button
+   $(document).on(
+	'keydown', function(event) {
+   		if (event.key == "Escape") {
+			T.style.display = "none";
+   }
+   });
+   
+   //Modal closes when user clicks outside of it
+   window.onclick = function(event) {
+	if (event.target == T) {
+	  T.style.display = "none";
+	}
+  }
+
+   //Modal closes when user clicks on close botton
+   var span = document.getElementsByClassName("close")[0];
+   span.onclick = function() {
+	T.style.display = "none";
+  }
 };
 
 function showWelcome() {
@@ -372,15 +398,14 @@ function showSignin() {
 function showSettings() {
 	var T = document.getElementById("settings");
 	T.style.display = "block";
-	// var N = document.getElementById("secondNavbar");
-	// T.style.display = "block";
+	
 
 	document.getElementById("welcome").style.display = "none";
 	document.getElementById("about").style.display = "none";
 	document.getElementById("signup").style.display = "none";
 	document.getElementById("play").style.display = "none";
 	document.getElementById("signin").style.display = "none";
-	document.getElementById("mainNavbar").style.display = "none";
+	
 
 };
 function showPlay() {
@@ -393,6 +418,9 @@ function showPlay() {
 	document.getElementById("signin").style.display = "none";
 	document.getElementById("settings").style.display = "none";
 };
+
+	
+	
 
 
 

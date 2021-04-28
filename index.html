@@ -51,123 +51,111 @@
   <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="mainNavbar">
     <a class="w3-bar-item w3-button" onclick="showWelcome()">WELCOME</a>
     <a id="nav_about" class="w3-bar-item w3-button" onclick="showAbout()">ABOUT</a>
+    <a  id="nav_play" class="w3-bar-item w3-button" onclick="showSettings()" style="display: none">PLAY</a>
+    <!-- <a id=hello><span>Hello, </span><span id=showuser>guest</span><span>!</span></a> -->
   </div>
 </div>
 
-<!-- after login Navbar (sit on top) -->
-<div class="w3-top w3-hide-small">
-    <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="secondNavbar" style="display:none" >
-    <a class="w3-bar-item w3-button" onclick="showWelcome()">WELCOME</a>
-    <a id="nav_about" class="w3-bar-item w3-button" onclick="showAbout()">ABOUT</a>
-    <!-- <a href="#settings" class="w3-bar-item w3-button">SETTINGS</a> -->
-    <a  class="w3-bar-item w3-button" onclick="showSettings()">PLAY</a>
-  </div>
-</div>
 
 
 
   
 <!-- Header with image -->
-<header class="bgimg w3-display-container w3-grayscale-min" id="welcome">
+<header class="w3-display-container w3-grayscale-min" id="welcome">
   <div class="w3-display-bottomleft w3-padding">
     <!-- <span class="w3-tag w3-xlarge">Open from 10am to 12pm</span> -->
   </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
   <div class="w3-display-middle w3-center">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     <span class="w3-text-white w3-hide-small" style="font-size:100px">welcome to<br>PACMAN</span>
     <span class="w3-text-white w3-hide-large w3-hide-medium" style="font-size:60px"><b>welcome to<br>PACMAN</b></span>
     <!-- <p><img src="https://lh3.googleusercontent.com/nLWOAZ7U-YCEiDh-9g82g7n7DdbZVtlwvkla8xaai9dFtKr1hESgYVOzk5Vo06ZYqnv9Nnm22e8OpszoeR2ML43xO8nVRbBSb-W2u9GgQ0XFZEuaQoS0JxhW5p4ug644Cx4g6w7jCw=w600-h315-p-k" ></p> -->
+    <br>
+    <br>
+    <br>
     <p><a class="w3-button w3-xxlarge w3-black" onclick="showSignin()">Sign In</a>
         <a class="w3-button w3-xxlarge w3-black" onclick="showSignup()">Sign Up</a>
     </p>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+  
   </div>
 </header>
 
 <!-- ABOUT -->
-<div class="w3-container w3-padding-64 w3-red w3-grayscale w3-xxlarge" id="about" style="display:none">
-    <div class="w3-content w3-center">
+<div  id="about" style="display:none">
+    
+  <div id="modal_contant">
 
-      <!-- <img src="/w3images/onepage_restaurant.jpg" style="width:100%" class="w3-margin-top w3-margin-bottom" alt="Restaurant"> -->
-      <h1><b>about</b></h1>
+    <span class="close">&times;</span>
+
+    <p>Sarit Hollander - xxxxxxxxx
       <br>
+      Gonen davidi - xxxxxxxxx
       <br>
+      Tslil Brami - 207945841
       <br>
+
+      Tamplate : W3-school
       <br>
-
-      <body>
-        
-        <!-- Trigger/Open The Modal -->
-        <button id="myBtn">for information</button>
-        
-        <!-- The Modal -->
-        <div id="myModal" class="modal" >
-        
-          <!-- Modal content -->
-          <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Sarit Hollander - xxxxxxxxx
-              <br>
-              Gonen davidi - xxxxxxxxx
-              <br>
-              Tslil Brami - 207945841
-              <br>
-
-              Tamplate : W3-school
-              <br>
-              used j-query plugins.
-            </p>
-          </div>
-        
-        </div>
-        
-        <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
-        
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-        
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-        
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-          modal.style.display = "block";
-        }
-        
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-          modal.style.display = "none";
-        }
-        
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-          if (event.target == modal) {
-            modal.style.display = "none";
-          }
-        }
-        </script>
-        
-      </body>
-
-    <br>
-    <br>
-    <br>
-    <br>
-
+      used j-query plugins.
+    </p>
+  </div>
       
-    </div>
 </div>
 <!-- About end -->
 
 
 <!-- SIGN UP -->
-<div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge" id="signup" style="display:none">
-    <div class="w3-content">
-      <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">JOIN US</h1>
-
-    <!-- SIGN UP FORM -->
-      <form id="sign_up_form" class ="cmxform" action="/action_page.php" style="border:1px solid #ccc">
-        <div class="container">
+<div  id="signup" style="display:none">
+ 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+      <form id="sign_up_form" class ="cmxform" >
+      
             <h1>Sign Up</h1>
             <p>Please fill in this form to create an account.</p>
             <hr>
@@ -193,25 +181,8 @@
             <br>
             <br>
             
-            <!-- <label for="signup_bday">Birthday</label>
 
-                <select name="month">
-                    <option value="january">January</option>
-                    <option value="february">February</option>
-                </select>
-
-                <select name="day">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                </select>
-
-                <select name="year">
-                    <option value="1">1995</option>
-                    <option value="2">1996</option>
-                </select>
-            </label> -->
-            <br>
-            <br>
+            
             
             <div class="clearfix">
             <button type="button" class="cancelbtn">Cancel</button>
@@ -219,28 +190,35 @@
             type="submit" class="signupbtn">Sign Up</button>
             </div>
             
-        </div>
+        <!-- </div> -->
         </form>
         <br>
         <br>
-        <br>
-        <br>
+        
 
     <a class="w3-button w3-xxlarge w3-black w3-center" onclick="showSignin()">already have an account</a>
 
 
-    </div>
+    
 </div>
 
 <!-- SIGN IN -->
-<div class="w3-container w3-padding-64 w3-blue-grey w3-grayscale-min w3-xlarge" id="signin" style="display:none">
-    <div class="w3-content">
-      <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">Let's start</h1>
+<div id="signin" style="display:none">
+    
+
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
 
     <!-- SIGN IN FORM -->
-      <form id="signInForm" class ="cmxform" action="/action_page.php" method="post">
+      <form id="signInForm" class ="cmxform" method="post">
+
+          <h1>Lets start!</h1>
       
-        <div class="container">
+        <!-- <div class="container"> -->
           <label for="login_uname"><b>Username</b></label>
           <input id ="login_uname_id" type="text" placeholder="Enter Username" name="login_uname" required>
           <br>
@@ -251,34 +229,30 @@
           <br>   
           <button type="submit">Login</button>
           <button type="button" class="cancelbtn">Cancel</button>
-        </div>       
+        
         
       </form>
       <br>
       <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
+     
 
-    </div>
+    
 </div>
 
 <!-- SETTINGS -->
 
 
 <!-- ***** settings Area Starts ***** -->
-<div class="w3-container w3-padding-64 w3-theme-l4 w3-grayscale-min w3-xlarge" id="settings">
+<div id="settings" style="display: none">
 
-  <h1 class="w3-center w3-jumbo" style="margin-bottom:64px">settings</h1>
+  <br>
+  <br>
+  <br>
+  
 
   <form id="settings_form" class ="cmxform">
+
+    <h1>ADJUST PREFERED SETTINGS</h1>
 
     <label for="movementKeys">Movement kyes:</label>
       <div>
@@ -319,12 +293,12 @@
       <input id="monstersAmount" type="number" min="1" max="4" value="2" />
     
       <br>
+      <br>
+
 
       <button id ="settingsRandomValuesBtn" type="button">Random values</button>
 
-      <br>
-
-      <input type="submit" value="Start Game">
+      <input type="submit" onclick="showPlay()">
     
     </form>
 
@@ -335,28 +309,45 @@
 
 
 <!-- play -->
-<div class="w3-container w3-padding-64 w3-theme-l4 w3-grayscale-min w3-xlarge" id="play" >
+<div class="w3-container w3-padding-64 w3-theme-l4 w3-grayscale-min w3-xlarge" id="play" style="display: none" >
 
-  <button id ="startGameBtn" type="button">Start Game</button>
+  
 
 
   <body>
-
+    <!-- online informatiom -->
+    <div id="game_online_info">
+      <button id ="startGameBtn" type="button">Start Game</button>
+      <br>
+      <br>
+      <br>
       <div id="score">
           <label for="lblScore">SCORE:</label>
           <input id="lblScore" type="text"  disabled/>
       </div>
+      <br>
+      <br>
+      <br>
       <div id="lifes">
         <label for="lblLifes">LIFES:</label>
         <input id="lblLifes" type="text" disabled/>
-    </div>
+      </div>
+      <br>
+      <br>
+      <br>
       <div id="time">
           <label for="lblTime">REMAINING TIME:</label>
           <input id="lblTime" type="text"disabled />
       </div>
+    </div>
+      <!-- actual game  -->
       <div id="game">
           <canvas id="canvas" height="600" width="600"></canvas>
-          <div>
+      </div>
+
+      <!-- settings -->
+      <div id="show_settings_game_section" >
+
             <label for="movementKeys">Movement kyes:</label>
             <div>
               Down: <input disabled type="button" id="down_key_show"/>
@@ -366,38 +357,51 @@
             </div>
 
             <br>
+            
+            
 
             <label for="numOfBalls_show">Number of balls:</label>
             <input disabled id="numOfBalls_show" />
 
             <br>
+            
+            
+      
 
             <label for="ball5color_show">5 Points ball color:</label>
             <input disabled type="color" id="ball5color_show"> 
             
             <br>
+            
+            
 
             <label for="ball15color_show">15 Points ball color:</label>
             <input disabled type="color" id="ball15color_show" >
           
             <br>
+            
+            
 
             <label for="ball25color_show">25 Points ball color:</label>
             <input disabled type="color" id="ball25color_show">
           
             <br>
+            
+            
 
             <label for="totalTime_show">Total Time (seconds):</label>
             <input disabled id="totalTime_show" />
           
             <br>
+            
+            
 
             <label for="monstersAmount_show">How Many Monsters:</label>
             <input disabled id="monstersAmount_show" />
           
             <br>
-          </div>
       </div>
+      <!-- </div> -->
   </body>
 
     
@@ -408,17 +412,11 @@
 
 
 <!-- Footer -->
-<footer class="w3-center w3-black w3-padding-48 w3-xxlarge">
-
-    <!-- <img src="pacman_gif.gif" width="128" height="128"> -->
+<footer> 
+    <p> made by - Sarit Hollander, Gonen Davidi, Tslil Brami</p>
+    <p>contact us at - tslilbr@post.bgu.ac.il</p>
+    <p>for more information go to about.</p> 
     
-    <p>
-        made by - Sarit Hollander, Gonen Davidi, Tslil Brami 
-        <br>
-        contact us at - tslilbr@post.bgu.ac.il
-        <br>
-        for more information go to about.
-    </p>
 </footer>
 
 
