@@ -24,25 +24,6 @@ body {
 }
 
 
-/* .bgimg { 
-
-  background-color: black;
-  background-repeat: no-repeat;
-  background-size: cover;
-  /* background-image: url("https://lh3.googleusercontent.com/DEkhMX12O2FobE1vphaezMT_qdRrEXb8YXGi8dWoaO1gO65Ony01SuneFRwnEvjgOjjtvDcpy4uax29fM61VfdO6tSBH_ozFzzO9CLSz58zcYOKSL-WhtT-pnNIfUF_e7H3PybVMhQ=w600-h315-p-k"); */
-  /* min-height: 90%;
-} */ */
-
-
-
-/* .modal-content {
-  background-color: #da8181;
-  margin: auto;
-  padding: 20px;
-  border: 1px solid rgb(80, 78, 78);
-  width: 80%;
-} */ 
-
 #canvas{
     background-color: rgb(12, 15, 15);
 }
