@@ -456,7 +456,11 @@ $(document).ready(function () {
 		startGame()
 	});
 
+<<<<<<< HEAD
 	const startGame = () => {
+=======
+	const startGame = () =>  {
+>>>>>>> 4fc5ffab553206f6135ce4aba1cc00c90ee18a97
 		window.clearInterval(interval);
 		audio.play();
 		Start();
