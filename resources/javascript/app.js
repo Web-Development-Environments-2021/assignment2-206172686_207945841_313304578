@@ -464,7 +464,8 @@ $(document).ready(function () {
 	});
 
 	const startGame = () =>  {
-		audio.play()
+		window.clearInterval(interval);
+		audio.play();
 		Start();
 	}
 
@@ -552,10 +553,6 @@ window.addEventListener("keydown", function (e) {
 
 function Start() {
 	stopFireworks()
-	$("#startGameBtn").click(function () {
-		audio.play()
-		Start();
-	});
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
