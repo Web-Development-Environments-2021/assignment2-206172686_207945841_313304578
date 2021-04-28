@@ -2,7 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>pacman</title>
+  <title>The Best Pacman Game!</title>
+  <link rel="icon" type="image/png" sizes="15x15" href="./resources/images/Icon.png">
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -20,8 +22,11 @@
 </head>
 
 <body>
-<!-- holly add a comment -->
-    <audio id="audio" autoplay hidden>
+  <!--TODO-->
+  <header>
+    <p id="header"> Pacman game created by Tslil Brami, Gonen Davidi & Sarit Hollander</p>
+  </header>
+    <audio id="audio" hidden>
         <source src="resources/music/music.mp3">
       Your browser does not support the audio element.
     </audio>
@@ -36,7 +41,16 @@
              src="resources/images/strawberry.png"
              width="30" height="30">
         <img id="monster1"
-             src="resources/images/monster1.png"
+             src="resources/images/monster11.png"
+             width="30" height="30">
+        <img id="monster2"
+             src="resources/images/monster2.png"
+             width="30" height="30">
+        <img id="monster3"
+             src="resources/images/monster3.png"
+             width="30" height="30">
+        <img id="monster4"
+             src="resources/images/monster4.png"
              width="30" height="30">
           <img id="lost"
              src="resources/images/lost.jpg"
@@ -49,6 +63,7 @@
 <!-- before login Navbar (sit on top) -->
 <div class="w3-top w3-hide-small">
   <div class="w3-bar w3-xlarge w3-black w3-opacity w3-hover-opacity-off" id="mainNavbar">
+    <img src="./resources/images/Icon.png" hight="30" width="20">
     <a class="w3-bar-item w3-button" onclick="showWelcome()">WELCOME</a>
     <a id="nav_about" class="w3-bar-item w3-button" onclick="showAbout()">ABOUT</a>
     <a  id="nav_play" class="w3-bar-item w3-button" onclick="showSettings()" style="display: none">PLAY</a>
@@ -157,7 +172,7 @@
       <form id="sign_up_form" class ="cmxform" >
       
             <h1>Sign Up</h1>
-            <p>Please fill in this form to create an account.</p>
+            <p>Please fill in this form to create an account</p>
             <hr>
 
             <label for="singup_username"><b>Username</b></label>
@@ -170,7 +185,12 @@
             <input type="text" placeholder="Example : Israel Israeli" name="singup_name" required>
             <br>
             <br>
-            
+
+            <label for="singup_birthDate"><b>Date of Birth</b></label>
+            <input type="date" name="singup_birthDate" required>
+            <br>
+            <br>
+
             <label for="signup_email"><b>Email</b></label>
             <input type="text" placeholder="Example:Israel@BGU.com" name="signup_email" required>
             <br>
@@ -185,9 +205,11 @@
             
             
             <div class="clearfix">
-            <button type="button" class="cancelbtn">Cancel</button>
+            <!-- <button type="button" class="cancelbtn">Cancel</button> -->
             <button 
             type="submit" class="signupbtn">Sign Up</button>
+            <input id="reset" type="reset" value="Reset Details">
+
             </div>
             
         <!-- </div> -->
@@ -228,7 +250,8 @@
           <br>
           <br>   
           <button type="submit">Login</button>
-          <button type="button" class="cancelbtn">Cancel</button>
+          <input id="reset" type="reset" value="Cancel">
+          <!-- <button type="button" class="cancelbtn">Cancel</button> -->
         
         
       </form>
@@ -317,7 +340,7 @@
   <body>
     <!-- online informatiom -->
     <div id="game_online_info">
-      <button id ="startGameBtn" type="button">Start Game</button>
+      <button id ="startGameBtn" type="button">New Game</button>
       <br>
       <br>
       <br>

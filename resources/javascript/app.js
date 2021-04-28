@@ -194,10 +194,6 @@ $(document).ready(function () {
 		submitHandler: function () {
 
 			login();
-
-			//reset form details
-			// let form = $("#sign_in_form");
-			// form[0].reset();
 		},
 	});
 
@@ -220,9 +216,9 @@ $(document).ready(function () {
 				required: true,
 				email: true
 			},
-			// signup_bday: {
-			// 	required: true
-			// }
+			singup_birthDate: {
+				required: true
+			}
 		},
 		messages: {
 			singup_username: {
@@ -241,17 +237,13 @@ $(document).ready(function () {
 				required: "Enter your e-mail",
 				email: "Please enter a valid e-mail address."
 			},
-			// signup_bday: {
-			// 	required: "Enter a birth day."
-			// }
+			singup_birthDate: {
+				required: "Enter a birth day."
+			}
 		},
 		submitHandler: function () {
 
 			register();
-
-			//reset form details
-			let form = $("#sign_up_form");
-			form[0].reset();
 		},
 	});
 
@@ -888,10 +880,11 @@ function Draw(pacman_direction = RIGHT_MOVE) {
 			else if (board[i][j] == cellType.SLOW_MOTION) {
 				context.drawImage(slow_motion, center.x - 10, center.y - 12, 23, 23);
 			}
-
-			monsters.forEach(monster => {
+			
+			//TODO: change monsters
+			monsters.forEach((monster, monsterIndex) => {
 				if (board[i][j] == monster.cellType && monster.is_alive) {
-					context.drawImage(monster1, center.x - 10, center.y - 12, 23, 23);
+					context.drawImage(document.getElementById('monster' + (monsterIndex + 1)), center.x - 10, center.y - 12, 32, 32);
 				}
 			})
 		}
