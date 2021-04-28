@@ -374,8 +374,8 @@ function showSignin() {
 function showSettings() {
 	var T = document.getElementById("settings");
 	T.style.display = "block";
-	// var N = document.getElementById("secondNavbar");
-	// T.style.display = "block";
+	var N = document.getElementById("secondNavbar");
+	T.style.display = "block";
 
 	document.getElementById("welcome").style.display = "none";
 	document.getElementById("about").style.display = "none";
