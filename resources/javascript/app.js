@@ -464,7 +464,8 @@ $(document).ready(function () {
 	});
 
 	const startGame = () =>  {
-		audio.play()
+		window.clearInterval(interval);
+		audio.play();
 		Start();
 	}
 
