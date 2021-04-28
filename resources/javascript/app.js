@@ -326,6 +326,7 @@ const login = () => {
 
 	
 	document.getElementById("nav_play").style.display = 'block';
+	document.getElementById("nav_logout").style.display = 'block';
 
 	document.getElementById("signin_welcome_btn").disabled= true;
 	document.getElementById("signin_welcome_btn").style.backgroundColor ='#ffaaaf';
@@ -341,9 +342,31 @@ const login = () => {
 	document.getElementById("loged_in_uname").innerHTML = userToShow;
 
 	//go to settings
-	showWelcome();
+	showSettings();
 	// document.getElementById("showuser").innerHTML = login_uname;
 };
+
+function logout(){
+
+	
+	document.getElementById("loged_in_uname").innerHTML = 'guest';
+	document.getElementById("nav_logout").style.display = 'none';
+	document.getElementById("nav_play").style.display = 'none';
+	showWelcome();
+	userToShow=none;
+
+	$("#signin_welcome_btn").attr("disabled", false);
+
+	// document.getElementById("signup_welcome_btn").disabled= false;
+	// document.getElementById("signup_welcome_btn").style.backgroundColor ='#fa4756';
+	// document.getElementById("signup_welcome_btn").style.cursor ='pointer';
+
+	// document.getElementById("signin_welcome_btn").disabled= false;
+	//document.getElementById("signin_welcome_btn").style.backgroundColor ='#fa4756';
+	//document.getElementById("signin_welcome_btn").style.cursor ='pointer';
+
+
+}
 
 function showAbout() {
 	var T = document.getElementById("about");
