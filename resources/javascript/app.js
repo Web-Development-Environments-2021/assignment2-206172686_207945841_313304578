@@ -160,7 +160,8 @@ var BALL_5_COLOR = "#0000ff"
 var BALL_15_COLOR = "#ff0000"
 var BALL_25_COLOR = "#00b33c"
 var TOTAL_TIME = 120
-var MONSTERS_AMOUNT = 2 
+//TODO: 2
+var MONSTERS_AMOUNT = 0 
 // signIN/UP forms
 //users storage 
 var users_list = {};
