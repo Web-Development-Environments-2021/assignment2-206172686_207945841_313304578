@@ -166,6 +166,7 @@ var MONSTERS_AMOUNT = 1
 //users storage 
 var users_list = {};
 users_list[k] = k;
+var userToShow;
 
 $(document).ready(function () {
 
@@ -333,7 +334,12 @@ const login = () => {
 	document.getElementById("signup_welcome_btn").disabled= true;
 	document.getElementById("signup_welcome_btn").style.backgroundColor ='#ffaaaf';
 	document.getElementById("signup_welcome_btn").style.cursor ='not-allowed';
+
 	
+	
+	userToShow=document.getElementById("login_uname_id").value;
+	document.getElementById("loged_in_uname").innerHTML = userToShow;
+
 	//go to settings
 	showWelcome();
 	// document.getElementById("showuser").innerHTML = login_uname;
