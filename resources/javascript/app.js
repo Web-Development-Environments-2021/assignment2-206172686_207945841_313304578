@@ -325,6 +325,14 @@ const login = () => {
 
 	
 	document.getElementById("nav_play").style.display = 'block';
+
+	document.getElementById("signin_welcome_btn").disabled= true;
+	document.getElementById("signin_welcome_btn").style.backgroundColor ='#ffaaaf';
+	document.getElementById("signin_welcome_btn").style.cursor ='not-allowed';
+
+	document.getElementById("signup_welcome_btn").disabled= true;
+	document.getElementById("signup_welcome_btn").style.backgroundColor ='#ffaaaf';
+	document.getElementById("signup_welcome_btn").style.cursor ='not-allowed';
 	
 	//go to settings
 	showWelcome();
