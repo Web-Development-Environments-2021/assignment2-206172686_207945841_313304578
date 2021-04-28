@@ -460,9 +460,13 @@ $(document).ready(function () {
 	mousedown = false
 
 	$("#startGameBtn").click(function () {
+		startGame()
+	});
+
+	const startGame = () =>  {
 		audio.play()
 		Start();
-	});
+	}
 
 	$("#settingsRandomValuesBtn").click(function () {
 		numOfBalls.value = getRandomInt(MIN_BALLS_AMOUNT, MAX_BALLS_AMOUNT)
@@ -517,7 +521,7 @@ $(document).ready(function () {
 
 		KEYS_DATA = JSON.parse(JSON.stringify(TEMP_KEYS_DATA))
 
-		alert("Let's play!")
+		startGame()
 		event.preventDefault();
 	});
 });
@@ -548,6 +552,10 @@ window.addEventListener("keydown", function (e) {
 
 function Start() {
 	stopFireworks()
+	$("#startGameBtn").click(function () {
+		audio.play()
+		Start();
+	});
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
